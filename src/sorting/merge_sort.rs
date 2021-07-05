@@ -1,6 +1,4 @@
-use std::fmt::{Debug, Display};
-
-pub fn merge_sort<T: Ord + Copy + Debug>(array: &[T]) -> Vec<T> {
+pub fn merge_sort<T: Ord + Copy>(array: &[T]) -> Vec<T> {
     if array.len() < 2 {
         return array.iter().cloned().collect();
     }
@@ -13,7 +11,7 @@ pub fn merge_sort<T: Ord + Copy + Debug>(array: &[T]) -> Vec<T> {
     merge(&mut left, &mut right)
 }
 
-fn merge<T: Ord + Copy + Debug>(left: &mut Vec<T>, right: &mut Vec<T>) -> Vec<T> {
+fn merge<T: Ord + Copy>(left: &mut Vec<T>, right: &mut Vec<T>) -> Vec<T> {
     let mut result = Vec::new();
 
     for _ in 0..left.len() + right.len() {
@@ -41,7 +39,6 @@ mod tests {
     fn basic() {
         let array = [5, 4, 1, 6, 0];
         let result = merge_sort(&array);
-        println!("result");
         assert_sorted!(result);
     }
 

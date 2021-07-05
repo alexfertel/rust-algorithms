@@ -1,15 +1,17 @@
 include!("macros.rs");
 
-pub fn is_sorted<T>(array: &[T]) -> bool
+pub fn is_sorted<T>(iterator: impl IntoIterator<Item = T>) -> bool
 where
     T: PartialOrd,
 {
-    if array.is_empty() {
+    let vector: Vec<T> = iterator.into_iter().collect();
+
+    if vector.is_empty() {
         return true;
     }
 
-    for i in 0..array.len() - 1 {
-        if array[i] > array[i + 1] {
+    for i in 0..vector.len() - 1 {
+        if vector[i + 1] < vector[i] {
             return false;
         }
     }
@@ -19,11 +21,12 @@ where
 
 mod bubble_sort;
 mod insertion_sort;
+mod merge_sort;
 mod selection_sort;
 
 pub use self::bubble_sort::bubble_sort;
 pub use self::insertion_sort::insertion_sort;
-pub use self::selection_sort::selection_sort;
+pub use self::merge_sort::merge_sort;
 
 #[cfg(test)]
 mod tests {

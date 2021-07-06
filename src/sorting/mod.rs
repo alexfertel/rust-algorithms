@@ -1,6 +1,6 @@
 include!("macros.rs");
 
-pub fn is_sorted<T>(iterator: impl IntoIterator<Item = T>) -> bool
+pub fn is_sorted<T: fmt::Debug>(iterator: impl IntoIterator<Item = T>) -> bool
 where
     T: PartialOrd,
 {
@@ -12,6 +12,7 @@ where
 
     for i in 0..vector.len() - 1 {
         if vector[i + 1] < vector[i] {
+            println!("This vector is not sorted: {:#?}", vector);
             return false;
         }
     }
@@ -20,13 +21,18 @@ where
 }
 
 mod bubble_sort;
+mod heap_sort;
 mod insertion_sort;
 mod merge_sort;
 mod selection_sort;
 
+use std::fmt;
+
 pub use self::bubble_sort::bubble_sort;
+pub use self::heap_sort::heap_sort;
 pub use self::insertion_sort::insertion_sort;
 pub use self::merge_sort::merge_sort;
+pub use self::selection_sort::selection_sort;
 
 #[cfg(test)]
 mod tests {

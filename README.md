@@ -37,8 +37,8 @@ https://github.com/TheAlgorithms/Rust/blob/master/README.md.
 - [ ] Longest common subsequence
 - [ ] Longest increasing subsequence
 - [ ] K-Means Clustering
-- [ ] Coin Change
-- [ ] Rod cut
+- [x] Coin Change
+- [x] Rod cutting
 - [ ] Egg Dropping Puzzle
 
 ### Data Structures
@@ -60,9 +60,13 @@ https://github.com/TheAlgorithms/Rust/blob/master/README.md.
 ### General
 
 - [ ] Convex Hull: Graham Scan
-- [ ] N-Queens
+- [x] N-Queens
 - [ ] Graph Coloring
 - [ ] Tower of Hanoi
+
+### Ciphers
+
+- [x] Transposition
 
 ### Contributing
 

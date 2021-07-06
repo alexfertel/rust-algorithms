@@ -12,14 +12,14 @@ https://github.com/TheAlgorithms/Rust/blob/master/README.md.
 
 ### Sorting Algorithms
 
-- [ ] Bubble
+- [x] Bubble
 - [ ] Counting
-- [ ] Heap
-- [ ] Insertion
-- [ ] Merge
+- [x] Heap
+- [x] Insertion
+- [x] Merge
 - [ ] Quick
 - [ ] Radix
-- [ ] Selection
+- [x] Selection
 - [ ] Shell
 
 ### Graphs

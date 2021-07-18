@@ -21,6 +21,7 @@ where
 }
 
 mod bubble_sort;
+mod counting_sort;
 mod heap_sort;
 mod insertion_sort;
 mod merge_sort;
@@ -29,6 +30,7 @@ mod selection_sort;
 use std::fmt;
 
 pub use self::bubble_sort::bubble_sort;
+pub use self::counting_sort::counting_sort;
 pub use self::heap_sort::heap_sort;
 pub use self::insertion_sort::insertion_sort;
 pub use self::merge_sort::merge_sort;

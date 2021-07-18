@@ -1,63 +1,69 @@
+fn precompute_table(pattern: &str) -> Vec<usize> {
+    let p = pattern.as_bytes();
+
+    let mut pi = vec![0; pattern.len()];
+    let mut k = 0;
+
+    for q in 1..p.len() {
+        while k > 0 && p[k] != p[q] {
+            k = pi[k];
+        }
+
+        if p[k] == p[q] {
+            k = k + 1;
+        }
+
+        pi[q] = k;
+    }
+
+    pi
+}
+
 pub fn knuth_morris_pratt(text: &str, pattern: &str) -> Vec<usize> {
-    let mut t_i = 0;
-    let mut p_i = 0;
+    if text.is_empty() || pattern.is_empty() {
+        return vec![];
+    }
 
-    let precomputed_table = precompute_table(pattern);
+    let t = text.as_bytes();
+    let p = pattern.as_bytes();
 
-    let text = text.as_bytes();
-    let pattern = pattern.as_bytes();
-
+    let pi = precompute_table(pattern);
     let mut matches = vec![];
-    while t_i < text.len() {
-        if pattern[p_i] == text[t_i] {
-            t_i += 1;
-            p_i += 1;
-            if p_i == pattern.len() {
-                matches.push(t_i - p_i);
-                p_i = precomputed_table[p_i];
-            }
-        } else {
-            p_i = precomputed_table[p_i];
-            if p_i == 0 {
-                t_i += 1;
-                p_i += 1;
-            }
+
+    let mut q = 0;
+    for i in 1..=t.len() {
+        while q > 0 && p[q] != t[i - 1] {
+            q = pi[q - 1];
+        }
+
+        if p[q] == t[i - 1] {
+            q = q + 1;
+        }
+
+        if q == p.len() {
+            matches.push(i - p.len());
+            q = pi[q - 1];
         }
     }
 
     matches
 }
 
-fn precompute_table(pattern: &str) -> Vec<usize> {
-    let pattern = pattern.as_bytes();
-
-    let mut table = vec![0];
-    let mut pos = 1;
-    let mut cnd = 0;
-
-    while pos < pattern.len() {
-        if pattern[pos] == pattern[cnd] {
-            table[pos] = table[cnd]
-        } else {
-            table[pos] = cnd;
-            while pattern[pos] != pattern[cnd] {
-                cnd = table[cnd];
-            }
-        }
-
-        pos = pos + 1;
-        cnd = cnd + 1;
-    }
-
-    table
-}
-
 #[cfg(test)]
 mod test {
-    use super::knuth_morris_pratt;
+    use super::{knuth_morris_pratt, precompute_table};
+
+    #[test]
+    fn builds_pi_correctly() {
+        let pi = precompute_table("ababaca");
+        assert_eq!(pi, vec![0, 0, 1, 2, 3, 0, 1]);
+    }
 
     #[test]
     fn each_letter_matches() {
+        let pi = precompute_table("aaa");
+        assert_eq!(pi, vec![0, 1, 2]);
+
         let index = knuth_morris_pratt("aaa", "a");
         assert_eq!(index, vec![0, 1, 2]);
     }

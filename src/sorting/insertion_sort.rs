@@ -3,7 +3,7 @@ pub fn insertion_sort<T: Ord>(array: &mut [T]) {
         let mut j = i;
         while j > 0 && array[j] < array[j - 1] {
             array.swap(j, j - 1);
-            j = j - 1;
+            j -= 1;
         }
     }
 }

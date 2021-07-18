@@ -21,14 +21,14 @@ fn heapify<T: Ord>(array: &mut [T]) {
 }
 
 fn siftdown<T: Ord>(array: &mut [T], mut root: usize, end: usize) {
-    while 2 * root + 1 <= end {
+    while 2 * root < end {
         let child = 2 * root + 1;
         let mut swap = root;
 
         if array[swap] < array[child] {
             swap = child;
         }
-        if child + 1 <= end && array[swap] < array[child + 1] {
+        if child < end && array[swap] < array[child + 1] {
             swap = child + 1;
         }
 

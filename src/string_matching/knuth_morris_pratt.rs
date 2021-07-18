@@ -10,7 +10,7 @@ fn precompute_table(pattern: &str) -> Vec<usize> {
         }
 
         if p[k] == p[q] {
-            k = k + 1;
+            k += 1;
         }
 
         pi[q] = k;
@@ -37,7 +37,7 @@ pub fn knuth_morris_pratt(text: &str, pattern: &str) -> Vec<usize> {
         }
 
         if p[q] == t[i - 1] {
-            q = q + 1;
+            q += 1;
         }
 
         if q == p.len() {

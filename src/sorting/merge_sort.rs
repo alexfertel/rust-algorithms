@@ -1,6 +1,6 @@
 pub fn merge_sort<T: Ord + Copy>(array: &[T]) -> Vec<T> {
     if array.len() < 2 {
-        return array.iter().cloned().collect();
+        return array.to_vec();
     }
 
     let middle = array.len() / 2;
@@ -15,10 +15,10 @@ fn merge<T: Ord + Copy>(left: &mut Vec<T>, right: &mut Vec<T>) -> Vec<T> {
     let mut result = Vec::new();
 
     for _ in 0..left.len() + right.len() {
-        if left.len() == 0 {
+        if left.is_empty() {
             result.append(right);
             break;
-        } else if right.len() == 0 {
+        } else if right.is_empty() {
             result.append(left);
             break;
         } else if left[0] <= right[0] {

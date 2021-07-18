@@ -13,7 +13,7 @@ https://github.com/TheAlgorithms/Rust.
 ### Sorting Algorithms
 
 - [x] Bubble
-- [ ] Counting
+- [x] Counting
 - [x] Heap
 - [x] Insertion
 - [x] Merge

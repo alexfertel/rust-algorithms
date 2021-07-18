@@ -52,10 +52,12 @@ https://github.com/TheAlgorithms/Rust.
 - [ ] B-Tree
 - [ ] AVL Tree
 
-### Strings
+### String Matching
 
-- [ ] Knuth Morris Pratt
+- [ ] Naive
 - [ ] Rabin Carp
+- [ ] Finite Automaton
+- [x] Knuth Morris Pratt
 
 ### General
 

@@ -27,8 +27,8 @@ https://github.com/TheAlgorithms/Rust.
 - [ ] Dijkstra
 - [ ] Kruskal's Minimum Spanning Tree
 - [ ] Prim's Minimum Spanning Tree
-- [ ] BFS
-- [ ] DFS  
+- [x] BFS
+- [x] DFS  
 
 ### Dynamic Programming
 
@@ -69,6 +69,24 @@ https://github.com/TheAlgorithms/Rust.
 ### Ciphers
 
 - [x] Transposition
+
+### Bit Manipulation
+
+- [x] Bit Distance
+- [x] Bits Length
+- [x] Clear Bit
+- [x] Count Ones
+- [x] Divide By Two
+- [x] Get Bit
+- [x] Is Even
+- [x] Is Positive
+- [x] Is Power Of Two
+- [x] Multiply By Two
+- [x] Multiply Signed
+- [x] Multiply Unsigned
+- [x] Set Bit
+- [x] Twos Complement
+- [x] Update Bit
 
 ### Contributing
 

@@ -1,3 +1,4 @@
+pub mod bit_manipulation;
 pub mod ciphers;
 pub mod dynamic_programming;
 pub mod general;

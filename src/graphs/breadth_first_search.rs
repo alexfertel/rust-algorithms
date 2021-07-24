@@ -7,16 +7,14 @@ pub fn breadth_first_search(graph: &Graph, start: Vertex, end: Vertex) -> bool {
     queue.push_back(start);
 
     while let Some(v) = queue.pop_front() {
-        if !visited.insert(v) {
-            continue;
-        }
-
         if v == end {
             return true;
         }
 
         for neighbor in v.neighbors(graph).into_iter() {
-            queue.push_back(neighbor);
+            if visited.insert(neighbor) {
+                queue.push_back(neighbor);
+            }
         }
     }
 

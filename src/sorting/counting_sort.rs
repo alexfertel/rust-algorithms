@@ -1,5 +1,4 @@
 use std::collections::HashMap;
-use std::usize;
 
 pub fn counting_sort<T: Keyed + Ord + Copy>(array: &[T]) -> Vec<T> {
     let mut new_hashmap: HashMap<usize, &T> = HashMap::new();

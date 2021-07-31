@@ -1,34 +1,21 @@
-use std::collections::HashMap;
+pub fn counting_sort<T: Keyed + Ord + Copy + Default>(array: &[T]) -> Vec<T> {
+    let max: usize = array.iter().map(|item: &T| item.key()).max().unwrap_or(0);
 
-pub fn counting_sort<T: Keyed + Ord + Copy>(array: &[T]) -> Vec<T> {
-    let mut new_hashmap: HashMap<usize, &T> = HashMap::new();
-
-    for element in array {
-        new_hashmap.insert(element.key(), element);
-    }
-
-    let mut usize_array: Vec<usize> = Vec::new();
-
-    for element in array {
-        usize_array.push(element.key());
-    }
-
-    let max = usize_array.iter().max().unwrap_or(&0);
     let mut count: Vec<usize> = vec![0; max + 1];
-    let mut output: Vec<T> = vec![array[0]; array.len()];
+    let mut output: Vec<T> = vec![T::default(); array.len()];
 
-    for &element in usize_array.iter() {
-        count[element] += 1;
+    for &element in array.iter() {
+        count[element.key()] += 1;
     }
 
     for i in 1..max + 1 {
         count[i] += count[i - 1];
     }
 
-    for i in (0..usize_array.len()).rev() {
-        let j = usize_array[i];
+    for i in (0..array.len()).rev() {
+        let j = array[i].key();
         count[j] -= 1;
-        output[count[j]] = **new_hashmap.get(&usize_array[i]).unwrap();
+        output[count[j]] = array[i];
     }
 
     output
@@ -43,7 +30,7 @@ mod tests {
     use super::counting_sort;
     use super::Keyed;
 
-    #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Copy, Clone)]
+    #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Copy, Clone, Default)]
     struct Custom {
         key: usize,
     }

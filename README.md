@@ -8,6 +8,18 @@ algorithms. Contributions are welcome!
 The main goal right now is to match the current algorithms implemented in
 https://github.com/TheAlgorithms/Rust.
 
+## Setup
+
+This repo is only for educational purposes. It is meant to be used as a
+reference material. Thus, it is written as a library instead of a binary.
+
+The way to check the execution of an algorithm is running the tests,
+which you can do using:
+
+```bash
+cargo test
+```
+
 ## Algorithms
 
 ### Sorting Algorithms

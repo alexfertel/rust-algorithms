@@ -42,12 +42,18 @@ mod tests {
     use super::Queue;
 
     #[test]
-    fn fill_and_empty() {
-        let mut q = Queue::new();
+    fn starts_empty() {
+        let mut q: Queue<String> = Queue::new();
 
         assert!(q.is_empty());
+        assert_eq!(q.dequeue(), None);
         assert_eq!(q.len(), 0);
         assert_eq!(q.peek(), None);
+    }
+
+    #[test]
+    fn fills_and_empties() {
+        let mut q = Queue::new();
 
         q.enqueue(1);
         q.enqueue(2);
@@ -62,7 +68,45 @@ mod tests {
         q.dequeue();
 
         assert!(q.is_empty());
+        assert_eq!(q.dequeue(), None);
         assert_eq!(q.len(), 0);
         assert_eq!(q.peek(), None);
+    }
+
+    #[test]
+    fn alternate_mutations() {
+        let mut q = Queue::new();
+
+        q.enqueue("A");
+
+        assert!(!q.is_empty());
+        assert_eq!(q.len(), 1);
+        assert_eq!(q.peek(), Some(&"A"));
+
+        q.enqueue("B");
+
+        assert!(!q.is_empty());
+        assert_eq!(q.len(), 2);
+        assert_eq!(q.peek(), Some(&"A"));
+
+        q.dequeue();
+
+        assert!(!q.is_empty());
+        assert_eq!(q.len(), 1);
+        assert_eq!(q.peek(), Some(&"B"));
+
+        q.enqueue("C");
+        q.enqueue("D");
+
+        assert!(!q.is_empty());
+        assert_eq!(q.len(), 3);
+        assert_eq!(q.peek(), Some(&"B"));
+
+        q.dequeue();
+        q.dequeue();
+
+        assert!(!q.is_empty());
+        assert_eq!(q.len(), 1);
+        assert_eq!(q.peek(), Some(&"D"));
     }
 }

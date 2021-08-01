@@ -55,7 +55,7 @@ cargo test
 
 ### Data Structures
 
-- [ ] Queue
+- [x] Queue
 - [ ] Heap
 - [ ] Linked List
 - [ ] Graph

@@ -12,9 +12,9 @@ rust-algorithms/
     ├── Cargo.toml
     ├── CONTRIBUTING.md <-- This file
     ├── README.md
-    ├── git-config/
-    │  └── hooks/
-    │     └── pre-push
+    ├── .github/
+    │  └── workflows/
+    │     └── basic.yml
     └── src/
         ├── lib.rs
         ├── ciphers/
@@ -45,7 +45,13 @@ This file should be updated when adding a new implementation.
 
 To make changes to `rust-algorithms`, please submit a PR to the `main` branch.
 We'll review them and either merge or request changes.
-We don't have a CI setup right now, but we will in the near future.
+We have a basic CI setup that runs:
+
+```rust
+cargo check
+cargo test
+cargo fmt --all -- --check
+```
 
 ## Issues
 
@@ -55,7 +61,7 @@ to the project, file an issue.
 ## Testing
 
 You should provide rigorous tests beside the algorithm implementations. PRs without
-tests won't be merged.
+tests when appropriate won't be merged.
 
 To run the tests:
 

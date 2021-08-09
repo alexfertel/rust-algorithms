@@ -21,11 +21,7 @@ impl<T> Queue<T> {
     }
 
     pub fn peek(&self) -> Option<&T> {
-        if self.is_empty() {
-            None
-        } else {
-            Some(&self.vec[0])
-        }
+        self.vec.first()
     }
 
     pub fn dequeue(&mut self) -> Option<T> {

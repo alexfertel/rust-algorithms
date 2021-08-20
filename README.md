@@ -29,10 +29,10 @@ cargo test
 - [x] Heap
 - [x] Insertion
 - [x] Merge
-- [ ] Quick
-- [ ] Radix
+- [x] Quick
+- [x] Radix
 - [x] Selection
-- [ ] Shell
+- [x] Shell
 
 ### Graphs
 
@@ -44,14 +44,14 @@ cargo test
 
 ### Dynamic Programming
 
-- [ ] 0-1 Knapsack
-- [ ] Edit Distance
-- [ ] Longest common subsequence
+- [x] 0-1 Knapsack
+- [x] Edit Distance
+- [x] Longest common subsequence
 - [ ] Longest increasing subsequence
 - [ ] K-Means Clustering
 - [x] Coin Change
 - [x] Rod cutting
-- [ ] Egg Dropping Puzzle
+- [x] Egg Dropping Puzzle
 
 ### Data Structures
 

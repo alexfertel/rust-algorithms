@@ -36,27 +36,26 @@ pub fn radix_sort(arr: &mut [u64]) {
 
 #[cfg(test)]
 mod tests {
-    use super::super::is_sorted;
     use super::radix_sort;
 
     #[test]
     fn empty() {
         let mut a: [u64; 0] = [];
         radix_sort(&mut a);
-        assert!(is_sorted(&a));
+        assert_sorted!(&a);
     }
 
     #[test]
     fn descending() {
         let mut v = vec![201, 127, 64, 37, 24, 4, 1];
         radix_sort(&mut v);
-        assert!(is_sorted(&v));
+        assert_sorted!(&v);
     }
 
     #[test]
     fn ascending() {
         let mut v = vec![1, 4, 24, 37, 64, 127, 201];
         radix_sort(&mut v);
-        assert!(is_sorted(&v));
+        assert_sorted!(&v);
     }
 }

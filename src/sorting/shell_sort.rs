@@ -30,9 +30,7 @@ mod test {
     fn basic() {
         let mut vec = vec![3, 5, 6, 3, 1, 4];
         shell_sort(&mut vec);
-        for i in 0..vec.len() - 1 {
-            assert!(vec[i] <= vec[i + 1]);
-        }
+        assert_sorted!(vec);
     }
 
     #[test]
@@ -46,17 +44,13 @@ mod test {
     fn reverse() {
         let mut vec = vec![6, 5, 4, 3, 2, 1];
         shell_sort(&mut vec);
-        for i in 0..vec.len() - 1 {
-            assert!(vec[i] <= vec[i + 1]);
-        }
+        assert_sorted!(vec);
     }
 
     #[test]
     fn already_sorted() {
         let mut vec = vec![1, 2, 3, 4, 5, 6];
         shell_sort(&mut vec);
-        for i in 0..vec.len() - 1 {
-            assert!(vec[i] <= vec[i + 1]);
-        }
+        assert_sorted!(vec);
     }
 }

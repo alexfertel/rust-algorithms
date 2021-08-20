@@ -1,8 +1,8 @@
-/// # Egg Dropping Puzzle
+//! Egg Dropping Puzzle
 
 /// `egg_drop(eggs, floors)` returns the least number of egg droppings
-///     required to determine the highest floor from which an egg will not
-///     break upon dropping
+/// required to determine the highest floor from which an egg will not
+/// break upon dropping.
 ///
 /// Assumptions: n > 0
 pub fn egg_drop(eggs: u32, floors: u32) -> u32 {

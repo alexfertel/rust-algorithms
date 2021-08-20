@@ -1,4 +1,4 @@
-/// Longest common subsequence via Dynamic Programming
+//! Longest common subsequence
 
 /// longest_common_subsequence(a, b) returns the longest common subsequence
 /// between the strings a and b.

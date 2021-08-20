@@ -3,7 +3,7 @@
 use std::cmp::min;
 
 /// edit_distance(str_a, str_b) returns the edit distance between the two
-/// strings This edit distance is defined as being 1 point per insertion,
+/// strings. This edit distance is defined as being 1 point per insertion,
 /// substitution, or deletion which must be made to make the strings equal.
 ///
 /// This function iterates over the bytes in the string, so it may not behave
@@ -14,11 +14,11 @@ use std::cmp::min;
 /// - time complexity: O(nm),
 /// - space complexity: O(nm),
 ///
-/// where n and m are lengths of `str_a` and `str_b`
+/// where n and m are the lengths of `str_a` and `str_b`.
 pub fn edit_distance(str_a: &str, str_b: &str) -> u32 {
     // distances[i][j] = distance between a[..i] and b[..j]
     let mut distances = vec![vec![0; str_b.len() + 1]; str_a.len() + 1];
-    // Initialize cases in which one string is empty
+    // Initialize cases in which one string is empty.
     for j in 0..=str_b.len() {
         distances[0][j] = j as u32;
     }
@@ -49,11 +49,11 @@ pub fn edit_distance(str_a: &str, str_b: &str) -> u32 {
 /// - time complexity: O(nm),
 /// - space complexity: O(n),
 ///
-/// where n and m are lengths of `str_a` and `str_b`
+/// where n and m are the lengths of `str_a` and `str_b`.
 pub fn edit_distance_se(str_a: &str, str_b: &str) -> u32 {
     let (str_a, str_b) = (str_a.as_bytes(), str_b.as_bytes());
     let (m, n) = (str_a.len(), str_b.len());
-    let mut distances: Vec<u32> = vec![0; n + 1]; // the dynamic programming matrix (only 1 row stored)
+    let mut distances: Vec<u32> = vec![0; n + 1]; // The dynamic programming matrix (only 1 row stored).
     let mut s: u32; // distances[i - 1][j - 1] or distances[i - 1][j]
     let mut c: u32; // distances[i][j - 1] or distances[i][j]
     let mut char_a: u8; // str_a[i - 1] the i-th character in str_a; only needs to be computed once per row
@@ -87,7 +87,7 @@ pub fn edit_distance_se(str_a: &str, str_b: &str) -> u32 {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use super::{edit_distance, edit_distance_se};
 
     #[test]
     fn equal_strings() {

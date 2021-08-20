@@ -21,6 +21,7 @@ fn _partition<T: Ord>(array: &mut [T], lo: isize, hi: isize) -> isize {
     array.swap(i as usize, pivot as usize);
     i
 }
+
 fn _quick_sort<T: Ord>(array: &mut [T], lo: isize, hi: isize) {
     if lo < hi {
         let p = _partition(array, lo, hi);
@@ -28,6 +29,7 @@ fn _quick_sort<T: Ord>(array: &mut [T], lo: isize, hi: isize) {
         _quick_sort(array, p + 1, hi);
     }
 }
+
 pub fn quick_sort<T: Ord>(array: &mut [T]) {
     let len = array.len();
     _quick_sort(array, 0, (len - 1) as isize);

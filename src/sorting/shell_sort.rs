@@ -24,7 +24,7 @@ pub fn shell_sort<T: Ord + Copy>(values: &mut Vec<T>) {
 
 #[cfg(test)]
 mod test {
-    use super::*;
+    use super::shell_sort;
 
     #[test]
     fn basic() {

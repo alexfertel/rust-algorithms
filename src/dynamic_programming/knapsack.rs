@@ -88,7 +88,7 @@ pub fn knapsack(w: usize, weights: Vec<usize>, values: Vec<usize>) -> (usize, us
 #[cfg(test)]
 mod tests {
     // Took test datasets from https://people.sc.fsu.edu/~jburkardt/datasets/bin_packing/bin_packing.html
-    use super::*;
+    use super::knapsack;
 
     #[test]
     fn test_p02() {

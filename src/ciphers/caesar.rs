@@ -46,7 +46,7 @@ pub fn caesar(cipher: &str, shift: u8) -> String {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use super::caesar;
 
     #[test]
     fn empty() {

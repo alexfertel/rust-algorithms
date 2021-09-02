@@ -6,7 +6,29 @@
 //! Rotate each ascii character by shift. The most basic example is ROT 13, which rotates 'a' to
 //! 'n'. This implementation does not rotate unicode characters.
 
-/// Caesar cipher to rotate cipher text by shift and return an owned String.
+/// Encrypts a given [`&str`] using Caesar cipher.
+///
+/// See [Caesar cipher](https://en.wikipedia.org/wiki/Caesar_cipher) for more information.
+///
+/// # Arguments
+///
+/// `cipher` - String to transform.
+///
+/// `shift` - Amount to right-shift.
+///
+/// # Returns
+///
+/// An owned [`String`]
+///
+/// # Panic
+///
+/// This function won't panic
+///
+/// # Examples
+/// ```
+/// # use rust_algorithms::ciphers::caesar;
+/// let encoded = caesar("one sheep two sheep", 3);
+/// ```
 pub fn caesar(cipher: &str, shift: u8) -> String {
     cipher
         .chars()

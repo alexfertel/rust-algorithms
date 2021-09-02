@@ -29,6 +29,7 @@
 /// ```
 /// # use rust_algorithms::ciphers::caesar;
 /// let encoded = caesar("one sheep two sheep", 3);
+/// assert_eq!(encoded, "rqh vkhhs wzr vkhhs")
 /// ```
 pub fn caesar(cipher: &str, shift: u8) -> String {
     cipher

@@ -2,11 +2,12 @@
 //! Based on cipher_crypt::caesar
 //!
 //! # Algorithm
-//!
-//! Rotate each ascii character by shift. The most basic example is ROT 13, which rotates 'a' to
-//! 'n'. This implementation does not rotate unicode characters.
 
 /// Encrypts a given [`&str`] using Caesar cipher.
+///
+/// Rotate each ascii character by shift.
+/// The most basic example is ROT 13, which rotates 'a' to 'n'.
+/// This implementation does not rotates unicode characters.
 ///
 /// See [Caesar cipher](https://en.wikipedia.org/wiki/Caesar_cipher) for more information.
 ///

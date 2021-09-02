@@ -82,6 +82,7 @@ cargo test
 ### Ciphers
 
 - [x] Transposition
+- [x] Caesar cipher
 
 ### Bit Manipulation
 

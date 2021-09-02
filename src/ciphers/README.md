@@ -27,4 +27,19 @@ top to bottom and left to right.
 
 ###### Source: [Wikipedia](https://en.wikipedia.org/wiki/Transposition_cipher)
 
+### [ROT13](./rot13.rs)
+![alt text][rot13]
+
+**ROT13** or **"rotate by 13 places"**, sometimes hyphenated **ROT-13** is a simple letter substitution cipher that replaces a letter with the 13th letter after it in the alphabet.<br>
+Because there are 26 letters (2×13) in the basic Latin alphabet, ROT13 is its own inverse; that is, to undo ROT13, the same algorithm is applied, so the same action can be used for encoding and decoding.<br>
+The algorithm provides virtually no cryptographic security, and is often cited as a canonical example of weak encryption.
+
+The transformation can be done using a lookup table, such as the following:
+
+| Input  | ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz |
+| Output | NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm |
+
+###### Source: [Wikipedia](https://en.wikipedia.org/wiki/ROT13)
+
 [caesar]: https://upload.wikimedia.org/wikipedia/commons/4/4a/Caesar_cipher_left_shift_of_3.svg
+[rot13]: https://upload.wikimedia.org/wikipedia/commons/3/33/ROT13_table_with_example.svg

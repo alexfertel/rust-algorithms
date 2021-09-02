@@ -36,8 +36,10 @@ The algorithm provides virtually no cryptographic security, and is often cited a
 
 The transformation can be done using a lookup table, such as the following:
 
+```
 | Input  | ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz |
 | Output | NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm |
+```
 
 ###### Source: [Wikipedia](https://en.wikipedia.org/wiki/ROT13)
 

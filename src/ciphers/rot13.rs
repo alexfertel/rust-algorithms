@@ -2,6 +2,34 @@
 //!
 //! # Algorithm
 
+/// Encrypts a given [`&str`] using ROT13 cipher.
+///
+/// See [ROT13](https://en.wikipedia.org/wiki/ROT13) for more information.
+///
+/// Replaces each character with the 13th letter after it in the alphabet.
+/// Rot13 is a special case of [Caesar cipher](https://en.wikipedia.org/wiki/Caesar_cipher)
+///
+/// The most basic example is ROT 13, which rotates 'a' to 'n'.
+/// This implementation does not rotate unicode characters.
+///
+/// # Arguments
+///
+/// `text` - String to transform.
+///
+/// # Returns
+///
+/// An owned [`String`]
+///
+/// # Panic
+///
+/// This function won't panic
+///
+/// # Examples
+/// ```
+/// # use rust_algorithms::ciphers::rot13;
+/// let encoded = rot13("hello world");
+/// assert_eq!(encoded, "URYYB JBEYQ");
+/// ```
 pub fn rot13(text: &str) -> String {
     let to_enc = text.to_uppercase();
     to_enc

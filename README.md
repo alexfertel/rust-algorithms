@@ -83,6 +83,7 @@ cargo test
 
 - [x] Transposition
 - [x] Caesar cipher
+- [x] ROT13
 
 ### Bit Manipulation
 

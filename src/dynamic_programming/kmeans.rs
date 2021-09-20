@@ -1,12 +1,13 @@
-// Macro to implement kmeans for both f64 and f32 without writing everything
-// twice or importing the `num` crate
+// Macro to implement kmeans for both `f64` and `f32` without writing everything
+// twice or importing the `num` crate.
+
 macro_rules! impl_kmeans {
     ($kind: ty, $modname: ident) => {
-        // Since we can't overload methods in rust, we have to use namespacing
+        // Since we can't overload methods in Rust, we have to use namespacing
         pub mod $modname {
             use std::$modname::INFINITY;
 
-            /// computes sum of squared deviation between two identically sized vectors
+            /// Computes sum of squared deviation between two identically sized vectors
             /// `x`, and `y`.
             fn distance(x: &[$kind], y: &[$kind]) -> $kind {
                 x.iter()
@@ -37,7 +38,7 @@ macro_rules! impl_kmeans {
                     .collect()
             }
 
-            /// Recompute the centroids given the current clustering
+            /// Recompute the centroids given the current clustering.
             fn recompute_centroids(
                 xs: &[Vec<$kind>],
                 clustering: &[usize],
@@ -46,7 +47,7 @@ macro_rules! impl_kmeans {
                 let ndims = xs[0].len();
 
                 // NOTE: Kind of inefficient because we sweep all the data from each of the
-                // k centroids.
+                // `k` centroids.
                 (0..k)
                     .map(|cluster_ix| {
                         let mut centroid: Vec<$kind> = vec![0.0; ndims];
@@ -64,13 +65,13 @@ macro_rules! impl_kmeans {
                     .collect()
             }
 
-            /// Assign the N D-dimensional data, `xs`, to `k` clusters using K-Means clustering
+            /// Assign the N D-dimensional data, `xs`, to `k` clusters using K-Means clustering.
             pub fn kmeans(xs: Vec<Vec<$kind>>, k: usize) -> Vec<usize> {
                 assert!(xs.len() >= k);
 
-                // Rather than pulling in a dependency to radomly select the staring
-                // points for the centroids, we're going to deterministally choose them by
-                // slecting evenly spaced points in `xs`
+                // Rather than pulling in a dependency to randomly select the starting
+                // points for the centroids, we're going to deterministically choose them by
+                // selecting evenly spaced points in `xs`
                 let n_per_cluster: usize = xs.len() / k;
                 let centroids: Vec<Vec<$kind>> =
                     (0..k).map(|j| xs[j * n_per_cluster].clone()).collect();
@@ -81,13 +82,13 @@ macro_rules! impl_kmeans {
                     let centroids = recompute_centroids(&xs, &clustering, k);
                     let new_clustering = nearest_centroids(&xs, &centroids);
 
-                    // loop until the clustering doesn't change after the new centroids are computed
+                    // Loop until the clustering doesn't change after the new centroids are computed
                     if new_clustering
                         .iter()
                         .zip(clustering.iter())
                         .all(|(&za, &zb)| za == zb)
                     {
-                        // We need to use `return` to break out of the `loop`
+                        // We need to use `return` to break out of the `loop`.
                         return clustering;
                     } else {
                         clustering = new_clustering;
@@ -98,7 +99,7 @@ macro_rules! impl_kmeans {
     };
 }
 
-// generate code for kmeans for f32 and f64 data
+// Generate code for kmeans for both `f32` and `f64` data.
 impl_kmeans!(f64, f64);
 impl_kmeans!(f32, f32);
 

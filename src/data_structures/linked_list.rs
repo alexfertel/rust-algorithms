@@ -72,7 +72,7 @@ impl<T> LinkedList<T> {
                         self.count = 0;
                         self.tail.take();
                     }
-                }; // TODO - try to create an error for this
+                }; // TODO - Create an error for this.
                 Ok(Rc::try_unwrap(pointer).ok().unwrap().into_inner().value)
             }
             None => Err(LinkedListError::EmptyList),

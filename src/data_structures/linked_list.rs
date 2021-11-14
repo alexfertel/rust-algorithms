@@ -45,7 +45,7 @@ impl<T> LinkedList<T> {
     pub fn count(&self) -> u32 {
         self.count
     }
-    // TODO - try to use pattern matching
+    // TODO - Use pattern matching.
     pub fn add_last(&mut self, value: T) {
         if self.count == 0 {
             self.count += 1;

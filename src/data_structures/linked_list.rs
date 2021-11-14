@@ -105,7 +105,7 @@ impl<T> LinkedList<T> {
                 .into_inner()
                 .value);
         };
-        // TODO - try to do this without use a rc pointer for iterate, maybe
+        // TODO - Do this without using an RC pointer to iterate.
         // use ref
         let mut pointer = self.start.take().unwrap();
         self.start = Some(Rc::clone(&pointer));

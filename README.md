@@ -71,6 +71,7 @@ cargo test
 - [ ] Rabin Carp
 - [ ] Finite Automaton
 - [x] Knuth Morris Pratt
+- [x] Reversing text
 
 ### General
 
@@ -84,6 +85,8 @@ cargo test
 - [x] Transposition
 - [x] Caesar cipher
 - [x] ROT13
+- [x] Vigenere
+- [x] Morse
 
 ### Bit Manipulation
 

@@ -108,6 +108,7 @@ fn _decode_part(string: &str) -> String {
 ///
 /// Given a morse code, return the corresponding message.
 /// If the code is invalid, the undecipherable part of the code is replaced by `_`.
+#[cfg(test)]
 pub fn decode(string: &str) -> Result<String, io::Error> {
     if !_check_all_parts(string) {
         return Err(io::Error::new(
@@ -200,7 +201,6 @@ mod tests {
     fn test_decode() {
         let message = ".... . .-.. .-.. --- / -- --- .-. ... .";
         let cipher = decode(message).unwrap();
-
-        assert_eq!(cipher,"HELLO MORSE");
+        assert_eq!(cipher, "HELLO MORSE");
     }
 }

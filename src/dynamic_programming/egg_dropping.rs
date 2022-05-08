@@ -8,7 +8,7 @@
 pub fn egg_drop(eggs: u32, floors: u32) -> u32 {
     assert!(eggs > 0);
 
-    // Explicity handle edge cases (optional)
+    // Explicitly handle edge cases (optional)
     if eggs == 1 || floors == 0 || floors == 1 {
         return floors;
     }

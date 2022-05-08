@@ -1,7 +1,7 @@
 /// Checks if given position on board is safe
 ///
 /// This function is part of the nqueens algorithms and checks
-/// if given positon on the chess board is safe to place a queen.
+/// if given position on the chess board is safe to place a queen.
 ///
 /// See [nqueens problem](https://de.wikipedia.org/wiki/Damenproblem) for the theoretical background.
 ///
@@ -13,7 +13,7 @@
 ///
 /// # Returns
 ///
-/// * `bool` - true if posititon safe, false otherwise
+/// * `bool` - true if position safe, false otherwise
 ///
 /// # Panic
 ///

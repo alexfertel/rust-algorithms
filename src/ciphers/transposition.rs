@@ -1,4 +1,4 @@
-//! Transpositon Cipher
+//! Transposition Cipher
 //!
 //! # Algorithm
 

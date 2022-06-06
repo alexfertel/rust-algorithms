@@ -1,5 +1,5 @@
 /// ## Linear Search algorithm
-/// Iterating over the array linearly and returns in index value of the element in the array
+/// Iterating over the array linearly and returns the index value of the target element in the array
 /// 
 /// Time complexcity = O(N) where `N` is the length of the array
 /// 

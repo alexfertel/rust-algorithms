@@ -6,3 +6,4 @@ pub mod general;
 pub mod graphs;
 pub mod sorting;
 pub mod string_matching;
+pub mod searching;

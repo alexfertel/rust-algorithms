@@ -24,7 +24,7 @@ cargo test
 
 ### Searching Algorithms
 - [x] Linear
-- [] Binary
+- [ ] Binary
 
 ### Sorting Algorithms
 

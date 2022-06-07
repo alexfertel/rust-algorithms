@@ -1,7 +1,7 @@
 /// ## Linear Search algorithm
 /// Iterating over the array linearly and returns the index value of the target element in the array
 /// 
-/// Time complexcity = O(N) where `N` is the length of the array
+/// Time complexcity = O(N/2) where `N` is the length of the array
 /// 
 /// ## Arguments
 /// `array` - The array where you want to find
@@ -15,12 +15,38 @@
 /// 
 
 pub fn linear_search<T: PartialEq>(array: &[T], item: &T) -> Option<usize> {
+    // Time complexcity = O(N)
     // iterating over the given array using `iter` method and for extracting the index using `enumerate` method
-    for (index, element) in array.iter().enumerate(){
+    // for (index, element) in array.iter().enumerate(){
         // checking if the target item is the same array element
-        if item == element {
+    //     if item == element {
             // return the index number of the the array as an option
-            return Some(index)
+    //         return Some(index)
+    //     }
+    // }
+
+    /*
+         0  1  2  3   4   5
+        [1, 2, 9, 11, 68, 92] taget = 9
+        i                 i not hit   (start = 0, end = 6-1-0 = 5)
+            i          i    not hit   (start = 1, end = 6-1-1 = 4)
+               i   i        hit(start)(start = 2, end = 6-1-2 = 3)
+    */
+
+    // Time complexcity = O(N/2)
+    // iterating over the array till half of the array
+    for i in 0..(array.len()/2){
+        // searching in left half of the array
+        // comparing array[i] with target item
+        if array[i] == *item{
+            // if found then return the index
+            return Some(i)
+        }
+        // searching in the right half of the array
+        // comparing array[array,len() - 1 - i] with target item
+        else if array[array.len() - 1 - i] == *item{
+            // if found then return the index
+            return Some(array.len() - 1 - i)
         }
     }
     // return None if item not found in the array

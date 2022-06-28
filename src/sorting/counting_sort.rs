@@ -47,12 +47,7 @@ mod tests {
         }
     }
 
-    #[test]
-    fn basic() {
-        let array = [5, 4, 1, 6, 0];
-        let output = counting_sort(&array);
-        assert_sorted!(&output);
-    }
+    sorting_tests!(counting_sort);
 
     #[test]
     fn basic_struct() {
@@ -69,13 +64,6 @@ mod tests {
     }
 
     #[test]
-    fn repeated_elements() {
-        let array = [5, 5, 1, 6, 1, 0, 2, 6];
-        let output = counting_sort(&array);
-        assert_sorted!(&output);
-    }
-
-    #[test]
     fn repeated_elements_struct() {
         let array = [
             Custom { key: 5 },
@@ -87,13 +75,6 @@ mod tests {
             Custom { key: 2 },
             Custom { key: 6 },
         ];
-        let output = counting_sort(&array);
-        assert_sorted!(&output);
-    }
-
-    #[test]
-    fn pre_sorted() {
-        let array = [1, 2, 3, 4, 5, 6];
         let output = counting_sort(&array);
         assert_sorted!(&output);
     }

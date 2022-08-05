@@ -25,6 +25,14 @@ pub struct LinkedList<T> {
     length: usize,
 }
 
+impl<T> Iterator for LinkedList<T> {
+    type Item = Link<T>;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        self.pop_front()
+    }
+}
+
 impl<T> LinkedList<T> {
     pub fn new() -> Self {
         Self {
@@ -63,6 +71,29 @@ impl<T> LinkedList<T> {
             None => {
                 self.head = Some(Rc::clone(&new_tail));
                 self.tail = Some(new_tail);
+            }
+        }
+        self.length += 1;
+    }
+
+    pub fn push_nth(&mut self, val: T, index: usize) {
+        let new_link = create_link(val);
+        match self.peek_nth(index) {
+            Some(nth) => {
+                nth.borrow_mut().next = Some(Rc::clone(&new_link));
+
+                match nth.borrow_mut().next.take() {
+                    Some(next) => {
+                        new_link.borrow_mut().next = Some(next);
+                    },
+                    None => {
+                        self.tail = Some(Rc::clone(&new_link));
+                    }
+                }
+            },
+            None => {
+                self.head = Some(Rc::clone(&new_link));
+                self.tail = Some(new_link);
             }
         }
         self.length += 1;
@@ -109,20 +140,53 @@ impl<T> LinkedList<T> {
         }
     }
 
-    pub fn peek_front(&self) -> Option<&Link<T>> {
-        if self.head.is_some() {
-            return self.head.as_ref();
+    pub fn pop_nth(&mut self, index: usize) -> Option<Link<T>> {
+        if index >= self.len() {
+            return None;
+        } else if index == 0 {
+            return self.pop_front();
+        }
+        else if index == self.len() - 1 {
+            return self.pop_back();
         }
 
-        None
+        let nth = self.peek_nth(index);
+
+        self.peek_nth(index - 1).unwrap().borrow_mut().next = self.peek_nth(index + 1);
+        self.length -= 1;
+        nth
     }
 
-    pub fn peek_back(&self) -> Option<&Link<T>> {
-        if self.tail.is_some() {
-            return self.tail.as_ref();
+    pub fn peek_front(&self) -> Option<Link<T>> {
+        match &self.head {
+            Some(head) => Some(Rc::clone(head)),
+            None => None,
+        }
+    }
+
+    pub fn peek_back(&self) -> Option<Link<T>> {
+        match &self.tail {
+            Some(tail) => Some(Rc::clone(tail)),
+            None => None,
+        }
+    }
+
+    pub fn peek_nth(&mut self, index: usize) -> Option<Link<T>> {
+        if index >= self.len() || index == 0 {
+            return self.peek_front();
+        } else if index == self.len() - 1 {
+            return self.peek_back();
         }
 
-        None
+        let mut pointer = self.head.take().unwrap();
+        self.head = Some(Rc::clone(&pointer));
+
+        for _ in 0..index {
+            let next = pointer.borrow_mut().next.take();
+            pointer = next.unwrap();
+        }
+
+        Some(pointer)
     }
 }
 
@@ -130,47 +194,93 @@ impl<T> LinkedList<T> {
 mod test {
     use super::{create_link, LinkedList};
 
-    fn create_list_from_vec<T>(vec: Vec<T>) -> LinkedList<T> {
+    fn create_list<T>(arr: &[T]) -> LinkedList<T>
+    where
+        T: Clone,
+    {
         let mut list = LinkedList::new();
-        for num in vec {
-            list.push_back(num);
+        for num in arr.iter() {
+            list.push_back((*num).clone());
         }
         list
     }
 
     #[test]
     fn push_front_test() {
-        let mut test_list = create_list_from_vec(vec![1, 2]);
+        let mut test_list = create_list(&[1, 2]);
         let mut empty_list: LinkedList<i32> = LinkedList::new();
         test_list.push_front(0);
         empty_list.push_front(0);
-        assert_eq!(create_list_from_vec(vec![0, 1, 2]), test_list);
-        assert_eq!(create_list_from_vec(vec![0]), empty_list);
+        assert_eq!(create_list(&[0, 1, 2]), test_list);
+        assert_eq!(create_list(&[0]), empty_list);
     }
 
     #[test]
     fn push_back_test() {
-        let mut test_list = create_list_from_vec(vec![0, 1]);
+        let mut test_list = create_list(&[0, 1]);
         let mut empty_list: LinkedList<i32> = LinkedList::new();
         test_list.push_back(2);
         empty_list.push_back(0);
-        assert_eq!(create_list_from_vec(vec![0, 1, 2]), test_list);
-        assert_eq!(create_list_from_vec(vec![0]), empty_list);
+        assert_eq!(create_list(&[0, 1, 2]), test_list);
+        assert_eq!(create_list(&[0]), empty_list);
     }
 
     #[test]
     fn pop_front_test() {
-        let mut test_list = create_list_from_vec(vec![0, 1, 2]);
+        let mut test_list = create_list(&[0, 1, 2]);
         assert_eq!(Some(create_link(0)), test_list.pop_front());
-        assert_eq!(create_list_from_vec(vec![1, 2]), test_list);
+        assert_eq!(create_list(&[1, 2]), test_list);
         assert_eq!(None, LinkedList::<i32>::new().pop_front());
     }
 
     #[test]
     fn pop_back_test() {
-        let mut test_list = create_list_from_vec(vec![0, 1, 2]);
+        let mut test_list = create_list(&[0, 1, 2]);
         assert_eq!(Some(create_link(2)), test_list.pop_back());
-        assert_eq!(create_list_from_vec(vec![0, 1]), test_list);
+        assert_eq!(create_list(&[0, 1]), test_list);
         assert_eq!(None, LinkedList::<i32>::new().pop_back());
+    }
+
+    #[test] 
+    fn pop_nth_test() {
+        let mut test_list = create_list(&[0, 1, 2]);
+        assert_eq!(create_list(&[1, 2]).peek_front(), test_list.pop_nth(1));
+        assert_eq!(None, LinkedList::<i32>::new().pop_nth(1));
+    }
+
+    #[test]
+    fn peek_front_test() {
+        let test_list = create_list(&[0, 1, 2]);
+        let link = create_link(0);
+
+        link.borrow_mut().next = Some(create_link(1));
+        link.borrow_mut().next.as_ref().unwrap().borrow_mut().next = Some(create_link(2));
+
+        assert_eq!(Some(link), test_list.peek_front());
+        assert_eq!(None, LinkedList::<i32>::new().peek_front());
+    }
+
+    #[test]
+    fn peek_back_test() {
+        let test_list = create_list(&[0, 1, 2]);
+        assert_eq!(Some(create_link(2)), test_list.peek_back());
+        assert_eq!(None, LinkedList::<i32>::new().peek_back());
+    }
+
+    #[test]
+    fn peek_nth_test() {
+        let mut test_list = create_list(&[0, 1, 2]);
+        assert_eq!(create_list(&[1, 2]).peek_front(), test_list.peek_nth(1));
+        assert_eq!(None, LinkedList::<i32>::new().peek_nth(1));
+    }
+
+    #[test]
+    fn iter_test() {
+        let arr = &[0, 1, 2];
+        let test = create_list(arr);
+
+        for (i, node) in test.into_iter().enumerate() {
+            assert_eq!(node.borrow().val, arr[i])
+        }
     }
 }

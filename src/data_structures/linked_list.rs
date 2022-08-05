@@ -1,4 +1,4 @@
-use std::{rc::Rc, cell::RefCell};
+use std::{cell::RefCell, rc::Rc};
 
 type Link<T> = Rc<RefCell<ListNode<T>>>;
 
@@ -27,7 +27,11 @@ pub struct LinkedList<T> {
 
 impl<T> LinkedList<T> {
     pub fn new() -> Self {
-        Self { head: None, tail: None, length: 0 }
+        Self {
+            head: None,
+            tail: None,
+            length: 0,
+        }
     }
 
     pub fn len(&self) -> usize {
@@ -40,7 +44,7 @@ impl<T> LinkedList<T> {
             Some(link) => {
                 new_head.borrow_mut().next = Some(link);
                 self.head = Some(new_head);
-            },
+            }
             None => {
                 self.head = Some(Rc::clone(&new_head));
                 self.tail = Some(new_head);
@@ -55,7 +59,7 @@ impl<T> LinkedList<T> {
             Some(link) => {
                 link.borrow_mut().next = Some(Rc::clone(&new_tail));
                 self.tail = Some(new_tail);
-            },
+            }
             None => {
                 self.head = Some(Rc::clone(&new_tail));
                 self.tail = Some(new_tail);
@@ -70,8 +74,8 @@ impl<T> LinkedList<T> {
                 self.head = head.borrow_mut().next.take();
                 self.length -= 1;
                 Some(head)
-            },
-            None => None
+            }
+            None => None,
         }
     }
 
@@ -83,12 +87,10 @@ impl<T> LinkedList<T> {
 
                 for _ in 0..self.length {
                     let temp_ptr = match &new_tail.borrow().next {
-                        Some(val) => {
-                            match &val.borrow().next {
-                                Some(_) => Some(Rc::clone(&val)),
-                                None => {
-                                    break;
-                                }
+                        Some(val) => match &val.borrow().next {
+                            Some(_) => Some(Rc::clone(&val)),
+                            None => {
+                                break;
                             }
                         },
                         None => {
@@ -102,8 +104,8 @@ impl<T> LinkedList<T> {
                 self.tail = Some(new_tail);
                 self.length -= 1;
                 Some(tail)
-            },
-            None => None
+            }
+            None => None,
         }
     }
 
@@ -126,7 +128,7 @@ impl<T> LinkedList<T> {
 
 #[cfg(test)]
 mod test {
-    use super::{LinkedList, create_link};
+    use super::{create_link, LinkedList};
 
     fn create_list_from_vec<T>(vec: Vec<T>) -> LinkedList<T> {
         let mut list = LinkedList::new();

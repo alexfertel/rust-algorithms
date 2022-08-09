@@ -35,24 +35,5 @@ fn merge<T: Ord + Copy>(left: &mut Vec<T>, right: &mut Vec<T>) -> Vec<T> {
 mod tests {
     use super::merge_sort;
 
-    #[test]
-    fn basic() {
-        let array = [5, 4, 1, 6, 0];
-        let result = merge_sort(&array);
-        assert_sorted!(result);
-    }
-
-    #[test]
-    fn repeated_elements() {
-        let mut array = [5, 5, 1, 6, 1, 0, 2, 6];
-        let result = merge_sort(&mut array);
-        assert_sorted!(result);
-    }
-
-    #[test]
-    fn pre_sorted() {
-        let mut array = [1, 2, 3, 4, 5, 6];
-        let result = merge_sort(&mut array);
-        assert_sorted!(result);
-    }
+    sorting_tests!(merge_sort);
 }

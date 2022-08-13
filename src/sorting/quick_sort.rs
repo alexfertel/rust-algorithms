@@ -1,38 +1,35 @@
-fn _partition<T: Ord>(array: &mut [T], lo: isize, hi: isize) -> isize {
-    let pivot = hi as usize;
-    let mut i = lo - 1;
-    let mut j = hi;
-
-    loop {
-        i += 1;
-        while array[i as usize] < array[pivot] {
-            i += 1;
-        }
-        j -= 1;
-        while j >= 0 && array[j as usize] > array[pivot] {
-            j -= 1;
-        }
-        if i >= j {
-            break;
-        } else {
-            array.swap(i as usize, j as usize);
-        }
-    }
-    array.swap(i as usize, pivot as usize);
-    i
-}
-
-fn _quick_sort<T: Ord>(array: &mut [T], lo: isize, hi: isize) {
-    if lo < hi {
-        let p = _partition(array, lo, hi);
-        _quick_sort(array, lo, p - 1);
-        _quick_sort(array, p + 1, hi);
-    }
-}
-
 pub fn quick_sort<T: Ord>(array: &mut [T]) {
-    let len = array.len();
-    _quick_sort(array, 0, (len - 1) as isize);
+    match array.len() {
+        0 | 1 => return,
+        _ => {}
+    }
+
+    let (pivot, rest) = array.split_first_mut().expect("array is non-empty");
+    let mut left = 0;
+    let mut right = rest.len() - 1;
+    while left <= right {
+        if &rest[left] <= pivot {
+            left += 1;
+        } else if &rest[right] > pivot {
+            if right == 0 {
+                break;
+            }
+            right -= 1;
+        } else {
+            rest.swap(left, right);
+            left += 1;
+            if right == 0 {
+                break;
+            }
+            right -= 1;
+        }
+    }
+
+    array.swap(0, left);
+
+    let (left, right) = array.split_at_mut(left);
+    quick_sort(left);
+    quick_sort(&mut right[1..]);
 }
 
 #[cfg(test)]

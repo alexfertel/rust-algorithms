@@ -85,12 +85,12 @@ impl<T> LinkedList<T> {
                 match nth.borrow_mut().next.take() {
                     Some(next) => {
                         new_link.borrow_mut().next = Some(next);
-                    },
+                    }
                     None => {
                         self.tail = Some(Rc::clone(&new_link));
                     }
                 }
-            },
+            }
             None => {
                 self.head = Some(Rc::clone(&new_link));
                 self.tail = Some(new_link);
@@ -145,8 +145,7 @@ impl<T> LinkedList<T> {
             return None;
         } else if index == 0 {
             return self.pop_front();
-        }
-        else if index == self.len() - 1 {
+        } else if index == self.len() - 1 {
             return self.pop_back();
         }
 
@@ -241,7 +240,7 @@ mod test {
         assert_eq!(None, LinkedList::<i32>::new().pop_back());
     }
 
-    #[test] 
+    #[test]
     fn pop_nth_test() {
         let mut test_list = create_list(&[0, 1, 2]);
         assert_eq!(create_list(&[1, 2]).peek_front(), test_list.pop_nth(1));

@@ -78,7 +78,7 @@ cargo test
 - [ ] Convex Hull: Graham Scan
 - [x] N-Queens
 - [ ] Graph Coloring
-- [ ] Tower of Hanoi
+- [x] Tower of Hanoi
 
 ### Ciphers
 

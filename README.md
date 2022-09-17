@@ -58,7 +58,7 @@ cargo test
 - [x] Queue
 - [x] Stack
 - [x] Heap
-- [ ] Linked List
+- [x] Linked List
 - [ ] Graph
 - [ ] Trie
 - [ ] Binary Search Tree

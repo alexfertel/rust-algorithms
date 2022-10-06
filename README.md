@@ -36,7 +36,7 @@ cargo test
 
 ### Graphs
 
-- [ ] Dijkstra
+- [x] Dijkstra
 - [ ] Kruskal's Minimum Spanning Tree
 - [ ] Prim's Minimum Spanning Tree
 - [x] BFS

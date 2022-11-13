@@ -1,5 +1,12 @@
+// It sorts the array by repeatedly comparing the
+// adjacent elements and swapping them if they are
+// in the wrong order.
+// Time complexity is O(N^2)
+// Auxiliary space is O(1)
+
 pub fn bubble_sort<T: Ord>(array: &mut [T]) {
     for i in 0..array.len() {
+        // Last i elements are already in place.
         for j in 0..array.len() - 1 - i {
             if array[j] > array[j + 1] {
                 array.swap(j, j + 1);
@@ -12,24 +19,5 @@ pub fn bubble_sort<T: Ord>(array: &mut [T]) {
 mod tests {
     use super::bubble_sort;
 
-    #[test]
-    fn basic() {
-        let mut array = [5, 4, 1, 6, 0];
-        bubble_sort(&mut array);
-        assert_sorted!(&array);
-    }
-
-    #[test]
-    fn repeated_elements() {
-        let mut array = [5, 5, 1, 6, 1, 0, 2, 6];
-        bubble_sort(&mut array);
-        assert_sorted!(&array);
-    }
-
-    #[test]
-    fn pre_sorted() {
-        let mut array = [1, 2, 3, 4, 5, 6];
-        bubble_sort(&mut array);
-        assert_sorted!(&array);
-    }
+    sorting_tests!(bubble_sort, inplace);
 }

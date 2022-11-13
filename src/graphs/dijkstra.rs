@@ -4,11 +4,11 @@ use std::ops::Add;
 
 type Graph<V, E> = BTreeMap<V, BTreeMap<V, E>>;
 
-// performs Dijsktra's algorithm on the given graph from the given start
-// the graph is a positively-weighted undirected graph
+// Performs Dijsktra's algorithm on the given `graph` from the given `start`.
+// `graph` is a positively-weighted undirected graph.
 //
-// returns a map that for each reachable vertex associates the distance and the predecessor
-// since the start has no predecessor but is reachable, map[start] will be None
+// Returns a map that for each reachable vertex associates its distance to its predecessor.
+// Since the start has no predecessor but is reachable, `map[start]` will be `None`.
 pub fn dijkstra<V: Ord + Copy, E: Ord + Copy + Add<Output = E>>(
     graph: &Graph<V, E>,
     start: &V,

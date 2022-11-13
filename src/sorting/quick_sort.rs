@@ -1,62 +1,50 @@
-pub fn partition<T: PartialOrd>(array: &mut [T], lo: isize, hi: isize) -> isize {
-    let pivot = hi as usize;
-    let mut i = lo - 1;
-    let mut j = hi;
-
-    loop {
-        i += 1;
-        while array[i as usize] < array[pivot] {
-            i += 1;
-        }
-        j -= 1;
-        while j >= 0 && array[j as usize] > array[pivot] {
-            j -= 1;
-        }
-        if i >= j {
-            break;
-        } else {
-            array.swap(i as usize, j as usize);
-        }
-    }
-    array.swap(i as usize, pivot as usize);
-    i
-}
-
-fn _quick_sort<T: Ord>(array: &mut [T], lo: isize, hi: isize) {
-    if lo < hi {
-        let p = partition(array, lo, hi);
-        _quick_sort(array, lo, p - 1);
-        _quick_sort(array, p + 1, hi);
-    }
-}
+/// QuickSort is a Divide and Conquer algorithm. It picks an element as
+/// a pivot and partitions the given array around the picked pivot.
+/// There are many different versions of quickSort that pick pivot in different ways.
+/// parameters takes an array
+/// The key process in quickSort is a partition().
+/// The target of partitions is, given an array and an element x of an array as the pivot,
+/// put x at its correct position in a sorted array and put all smaller elements (smaller than x) before x,
+/// and put all greater elements (greater than x) after x. All this should be done in linear time.
+/// Quicksort's  time complexity is O(n*logn) .
 
 pub fn quick_sort<T: Ord>(array: &mut [T]) {
-    let len = array.len();
-    _quick_sort(array, 0, (len - 1) as isize);
+    match array.len() {
+        0 | 1 => return,
+        _ => {}
+    }
+
+    let (pivot, rest) = array.split_first_mut().expect("array is non-empty");
+    let mut left = 0;
+    let mut right = rest.len() - 1;
+    while left <= right {
+        if &rest[left] <= pivot {
+            left += 1;
+        } else if &rest[right] > pivot {
+            if right == 0 {
+                break;
+            }
+            right -= 1;
+        } else {
+            rest.swap(left, right);
+            left += 1;
+            if right == 0 {
+                break;
+            }
+            right -= 1;
+        }
+    }
+
+    array.swap(0, left);
+
+    let (left, right) = array.split_at_mut(left);
+    quick_sort(left);
+    quick_sort(&mut right[1..]);
 }
 
 #[cfg(test)]
 mod tests {
     use super::quick_sort;
 
-    #[test]
-    fn basic() {
-        let mut array = [5, 4, 1, 6, 0];
-        quick_sort(&mut array);
-        assert_sorted!(&array);
-    }
-
-    #[test]
-    fn repeated_elements() {
-        let mut array = [5, 5, 1, 6, 1, 0, 2, 6];
-        quick_sort(&mut array);
-        assert_sorted!(&array);
-    }
-
-    #[test]
-    fn pre_sorted() {
-        let mut array = [1, 2, 3, 4, 5, 6];
-        quick_sort(&mut array);
-        assert_sorted!(&array);
-    }
+    sorting_tests!(quick_sort, inplace);
 }

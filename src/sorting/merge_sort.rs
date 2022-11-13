@@ -1,13 +1,18 @@
+// The Merge Sort algorithm is a sorting algorithm that is based on the Divide and Conquer paradigm.
+
+// The Time complexity is `O(nlog(n))` where n is the length of the array.
+
+// Auxillary Space required is `O(n)` Since all the elements are copied to the auxillary space.
 pub fn merge_sort<T: Ord + Copy>(array: &[T]) -> Vec<T> {
     if array.len() < 2 {
         return array.to_vec();
     }
-
+    // Get the middle element of the array.
     let middle = array.len() / 2;
-
+    // Divide the array into left and right halves.
     let mut left = merge_sort(&array[..middle]);
     let mut right = merge_sort(&array[middle..]);
-
+    // Call merge function using parameters as both left array and right array.
     merge(&mut left, &mut right)
 }
 
@@ -35,24 +40,5 @@ fn merge<T: Ord + Copy>(left: &mut Vec<T>, right: &mut Vec<T>) -> Vec<T> {
 mod tests {
     use super::merge_sort;
 
-    #[test]
-    fn basic() {
-        let array = [5, 4, 1, 6, 0];
-        let result = merge_sort(&array);
-        assert_sorted!(result);
-    }
-
-    #[test]
-    fn repeated_elements() {
-        let mut array = [5, 5, 1, 6, 1, 0, 2, 6];
-        let result = merge_sort(&mut array);
-        assert_sorted!(result);
-    }
-
-    #[test]
-    fn pre_sorted() {
-        let mut array = [1, 2, 3, 4, 5, 6];
-        let result = merge_sort(&mut array);
-        assert_sorted!(result);
-    }
+    sorting_tests!(merge_sort);
 }

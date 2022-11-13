@@ -36,7 +36,7 @@ rust-algorithms/
 ```
 
 The different classes of algorithms live under the `src` directory.
-Under each class live the files that contain the algorithms and the appropriate tests.
+Under each class live the files that contain the algorithms and their appropriate tests.
 Also, each class has a `mod.rs` file that exports the algorithm implementations.
 This file should be updated when adding a new implementation.
 `src/lib.rs` exports each class and should be updated if you add a new class.

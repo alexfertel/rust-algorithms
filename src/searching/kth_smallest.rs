@@ -1,5 +1,28 @@
-use crate::sorting::partition;
 use std::cmp::{Ordering, PartialOrd};
+
+pub fn partition<T: PartialOrd>(arr: &mut [T], lo: isize, hi: isize) -> isize {
+    let pivot = hi as usize;
+    let mut i = lo - 1;
+    let mut j = hi;
+
+    loop {
+        i += 1;
+        while arr[i as usize] < arr[pivot] {
+            i += 1;
+        }
+        j -= 1;
+        while j >= 0 && arr[j as usize] > arr[pivot] {
+            j -= 1;
+        }
+        if i >= j {
+            break;
+        } else {
+            arr.swap(i as usize, j as usize);
+        }
+    }
+    arr.swap(i as usize, pivot as usize);
+    i
+}
 
 /// Returns k-th smallest element of an array, i.e. its order statistics.
 /// Time complexity is O(n^2) in the worst case, but only O(n) on average.

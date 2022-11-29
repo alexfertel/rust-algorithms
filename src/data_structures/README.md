@@ -101,9 +101,9 @@ __Source to read:__
 
 #### Queue Properties
 - If the underlying data structure of a queue is a linked list:
-  - enqueue: O(n-i)
+  - enqueue: O(1)
   - peek: O(1)
-  - dequeue: O(n-i)*
+  - dequeue: O(1)*
   - search O(1)
 
 *Depends on capacity, if capacity is gone over for vector it is reallocated to different point in memory which can reduce efficiency

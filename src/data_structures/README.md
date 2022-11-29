@@ -81,3 +81,33 @@ __Source to read:__
 [doubly-linked-list]: https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Doubly-linked-list.svg/610px-Doubly-linked-list.svg.png
 
 [stack]: https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Lifo_stack.png/700px-Lifo_stack.png
+
+### [Queue](./queue.rs)
+
+- A queue is a `linear` data structure that is open at both ends with operations performed in *First in first out* (FIFO) or *Last in Last out* (LILO)
+- A queue is considered a list where all additions are made on one end and all deletions on the opposite end to adhere to the FIFO principle
+
+#### Queue principles
+- The `front` is considered the location where the first entry will be removed from the queue
+- The `rear` is considered the location of the latest entry and will be the last entry removed from the queue
+
+![image](https://media.geeksforgeeks.org/wp-content/uploads/20220805131014/fifo.png)
+
+#### Queue Methods
+- `Enqueue()`:  items are added to the rear, returns the value of the node or item added
+- `Dequeue()`:  items are removed from the front, returns the value of the node or item removed
+- `Peek()`: returns the value of the front, throws an exception if empty
+- `isEmpty()`: check if there is a node or item in queue returns a boolean
+
+#### Queue Properties
+- If the underlying data structure of a queue is a linked list:
+  - enqueue: O(n-i)
+  - peek: O(1)
+  - dequeue: O(n-i)*
+  - search O(1)
+
+*Depends on capacity, if capacity is gone over for vector it is reallocated to different point in memory which can reduce efficiency
+
+### Sources:
+- [Rust Docs](https://doc.rust-lang.org/std/collections/index.html)
+- [GeeksforGeeks](https://www.geeksforgeeks.org/queue-data-structure/)

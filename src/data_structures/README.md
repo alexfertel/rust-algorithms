@@ -104,7 +104,7 @@ __Source to read:__
   - enqueue: O(1)
   - peek: O(1)
   - dequeue: O(1)*
-  - search O(1)
+  - search O(n)
 
 *Depends on capacity, if capacity is gone over for vector it is reallocated to different point in memory which can reduce efficiency
 

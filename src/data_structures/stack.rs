@@ -1,29 +1,38 @@
+// a vector-based implementation of the stack data type
 pub struct Stack<T> {
     vec: Vec<T>,
 }
 
 impl<T> Stack<T> {
+    // a constructor that returns an instance of Stack<T> backed by an empty Vec<T>
     pub fn new() -> Self {
         Stack { vec: Vec::new() }
     }
 
+    // mutates the stack by adding an item of type T and returns true
     pub fn push(&mut self, item: T) -> bool {
         self.vec.push(item);
         true
     }
 
+    // returns the number of elements in the stack
     pub fn len(&self) -> usize {
         self.vec.len()
     }
 
+    // returns true if stack is empty else false
     pub fn is_empty(&self) -> bool {
         self.vec.is_empty()
     }
 
+    // returns a Some<&T> if stack is non-empty else None
+    // &T is an immutable reference to an element of type T
     pub fn peek(&self) -> Option<&T> {
         self.vec.last()
     }
 
+    // mutates the stack by removing and returning a Some<T>
+    // if stack is non-empty else None
     pub fn pop(&mut self) -> Option<T> {
         self.vec.pop()
     }

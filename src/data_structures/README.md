@@ -77,6 +77,18 @@ __Source to read:__
 * [Stack Implementation and complexity](https://medium.com/@kaichimomose/stack-implementation-and-complexity-c176924e6a6b)
 
 
+### [Stack (vector impl)](./stack.rs)
+
+When backed by a vector (or other contiguous data structure), a stack can keep tabs of its size and change that size.
+
+__Properties__
+* Push O(1)
+* Pop O(1)
+* Peek O(1)
+
+__Sources to read:__
+* [Stack (abstract data type)](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)#Array)
+
 
 [doubly-linked-list]: https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Doubly-linked-list.svg/610px-Doubly-linked-list.svg.png
 

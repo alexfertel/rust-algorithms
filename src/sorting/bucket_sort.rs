@@ -36,6 +36,8 @@ mod tests {
     use super::super::is_sorted;
     use super::*;
 
+    sorting_tests!(bucket_sort);
+
     #[test]
     fn empty() {
         let arr: [usize; 0] = [];
@@ -51,29 +53,8 @@ mod tests {
     }
 
     #[test]
-    fn already_sorted() {
-        let arr: [usize; 3] = [10, 9, 105];
-        let res = bucket_sort(&arr);
-        assert!(is_sorted(&res));
-    }
-
-    #[test]
-    fn basic() {
-        let arr: [usize; 4] = [35, 53, 1, 0];
-        let res = bucket_sort(&arr);
-        assert!(is_sorted(&res));
-    }
-
-    #[test]
     fn odd_number_of_elements() {
         let arr: Vec<usize> = vec![1, 21, 5, 11, 58];
-        let res = bucket_sort(&arr);
-        assert!(is_sorted(&res));
-    }
-
-    #[test]
-    fn repeated_elements() {
-        let arr: Vec<usize> = vec![542, 542, 542, 542];
         let res = bucket_sort(&arr);
         assert!(is_sorted(&res));
     }

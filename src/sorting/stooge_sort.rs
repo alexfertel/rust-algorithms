@@ -27,14 +27,7 @@ pub fn stooge_sort<T: Ord>(arr: &mut [T]) {
 mod test {
     use super::*;
 
-    #[test]
-    fn basic() {
-        let mut vec = vec![3, 5, 6, 3, 1, 4];
-        stooge_sort(&mut vec);
-        for i in 0..vec.len() - 1 {
-            assert!(vec[i] <= vec[i + 1]);
-        }
-    }
+    sorting_tests!(stooge_sort, inplace);
 
     #[test]
     fn empty() {
@@ -46,15 +39,6 @@ mod test {
     #[test]
     fn reverse() {
         let mut vec = vec![6, 5, 4, 3, 2, 1];
-        stooge_sort(&mut vec);
-        for i in 0..vec.len() - 1 {
-            assert!(vec[i] <= vec[i + 1]);
-        }
-    }
-
-    #[test]
-    fn already_sorted() {
-        let mut vec = vec![1, 2, 3, 4, 5, 6];
         stooge_sort(&mut vec);
         for i in 0..vec.len() - 1 {
             assert!(vec[i] <= vec[i + 1]);

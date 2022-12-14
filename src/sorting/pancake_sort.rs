@@ -28,17 +28,7 @@ where
 mod tests {
     use super::*;
 
-    #[test]
-    fn basic() {
-        let res = pancake_sort(&mut vec![6, 5, -8, 3, 2, 3]);
-        assert_eq!(res, vec![-8, 2, 3, 3, 5, 6]);
-    }
-
-    #[test]
-    fn already_sorted() {
-        let res = pancake_sort(&mut vec!["a", "b", "c"]);
-        assert_eq!(res, vec!["a", "b", "c"]);
-    }
+    sorting_tests!(pancake_sort, inplace);
 
     #[test]
     fn odd_number_of_elements() {

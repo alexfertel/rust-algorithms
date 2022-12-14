@@ -23,6 +23,8 @@ pub fn comb_sort<T: Ord>(arr: &mut [T]) {
 mod tests {
     use super::*;
 
+    sorting_tests!(comb_sort, inplace);
+
     #[test]
     fn descending() {
         //descending

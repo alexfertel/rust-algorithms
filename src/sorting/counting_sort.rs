@@ -30,6 +30,8 @@ mod tests {
     use super::counting_sort;
     use super::Keyed;
 
+    sorting_tests!(counting_sort);
+
     #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Copy, Clone, Default)]
     struct Custom {
         key: usize,
@@ -46,8 +48,6 @@ mod tests {
             *self
         }
     }
-
-    sorting_tests!(counting_sort);
 
     #[test]
     fn basic_struct() {

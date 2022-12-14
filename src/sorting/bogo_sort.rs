@@ -49,25 +49,7 @@ pub fn bogo_sort<T: Ord>(arr: &mut [T]) {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use super::bogo_sort;
 
-    #[test]
-    fn random_array() {
-        let mut arr = [1, 8, 3, 2, 7, 4, 6, 5];
-        bogo_sort(&mut arr);
-
-        for i in 0..arr.len() - 1 {
-            assert!(arr[i] <= arr[i + 1]);
-        }
-    }
-
-    #[test]
-    fn sorted_array() {
-        let mut arr = [1, 2, 3, 4, 5, 6, 7, 8];
-        bogo_sort(&mut arr);
-
-        for i in 0..arr.len() - 1 {
-            assert!(arr[i] <= arr[i + 1]);
-        }
-    }
+    sorting_tests!(bogo_sort, inplace);
 }

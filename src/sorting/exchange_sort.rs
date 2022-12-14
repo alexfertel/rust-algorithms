@@ -15,6 +15,9 @@ pub fn exchange_sort(arr: &mut [i32]) {
 mod tests {
     use super::super::is_sorted;
     use super::*;
+
+    sorting_tests!(exchange_sort, inplace);
+
     #[test]
     fn it_works() {
         let mut arr1 = [6, 5, 4, 3, 2, 1];

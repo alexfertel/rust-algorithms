@@ -38,6 +38,8 @@ pub fn radix_sort(arr: &mut [u64]) {
 mod tests {
     use super::radix_sort;
 
+    sorting_tests!(radix_sort, inplace);
+
     #[test]
     fn empty() {
         let mut a: [u64; 0] = [];

@@ -1,3 +1,5 @@
+/* NOTE: maybe it'd be a good idea to standardize the function signatures as well?
+ * since with this signature, the `sorting_tests` macro doesn't work */
 pub fn shell_sort<T: Ord + Copy>(values: &mut Vec<T>) {
     // shell sort works by swiping the value at a given gap and decreasing the gap to 1
     fn insertion<T: Ord + Copy>(values: &mut Vec<T>, start: usize, gap: usize) {

@@ -37,7 +37,7 @@ mod tests {
     use super::*;
 
     sorting_tests!(cycle_sort, inplace);
-    
+
     #[test]
     fn it_works() {
         let mut arr1 = [6, 5, 4, 3, 2, 1];

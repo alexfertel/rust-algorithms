@@ -38,12 +38,7 @@ pub fn cocktail_shaker_sort<T: Ord>(arr: &mut [T]) {
 mod tests {
     use super::*;
 
-    #[test]
-    fn basic() {
-        let mut arr = vec![5, 2, 1, 3, 4, 6];
-        cocktail_shaker_sort(&mut arr);
-        assert_eq!(arr, vec![1, 2, 3, 4, 5, 6]);
-    }
+    sorting_tests!(cocktail_shaker_sort, inplace);
 
     #[test]
     fn empty() {
@@ -57,12 +52,5 @@ mod tests {
         let mut arr = vec![1];
         cocktail_shaker_sort(&mut arr);
         assert_eq!(arr, vec![1]);
-    }
-
-    #[test]
-    fn pre_sorted() {
-        let mut arr = vec![1, 2, 3, 4, 5, 6];
-        cocktail_shaker_sort(&mut arr);
-        assert_eq!(arr, vec![1, 2, 3, 4, 5, 6]);
     }
 }

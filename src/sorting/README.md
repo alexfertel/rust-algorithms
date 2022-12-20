@@ -1,3 +1,29 @@
+### [Bogo Sort](./bogo_sort.rs)
+
+From [Wikipedia][bogosort-wiki]: In computer science, bogosort (also known as permutation sort, stupid sort, slowsort or bozosort) is a sorting algorithm based on the generate and test paradigm. The function successively generates permutations of its input until it finds one that is sorted. It is not considered useful for sorting, but may be used for educational purposes, to contrast it with more efficient algorithms.
+
+Two versions of this algorithm exist: a deterministic version that enumerates all permutations until it hits a sorted one,and a randomized version that randomly permutes its input. An analogy for the working of the latter version is to sort a deck of cards by throwing the deck into the air, picking the cards up at random, and repeating the process until the deck is sorted. Its name is a portmanteau of the words bogus and sort.
+
+[bogosort-wiki]:https://en.wikipedia.org/wiki/Bogosort
+
+### [Bucket_Sort](./bucket_sort.rs)
+
+From [Wikipedia][bucketsort-wiki]: Bucket sort, or bin sort, is a sorting algorithm that works by distributing the elements of an array into a number of buckets. Each bucket is then sorted individually, either using a different sorting algorithm, or by recursively applying the bucket sorting algorithm. It is a distribution sort, a generalization of pigeonhole sort that allows multiple keys per bucket, and is a cousin of radix sort in the most-to-least significant digit flavor. Bucket sort can be implemented with comparisons and therefore can also be considered a comparison sort algorithm. The computational complexity depends on the algorithm used to sort each bucket, the number of buckets to use, and whether the input is uniformly distributed.
+
+Bucket sort works as follows:
+
+Set up an array of initially empty "buckets".
+Scatter: Go over the original array, putting each object in its bucket.
+Sort each non-empty bucket.
+Gather: Visit the buckets in order and put all elements back into the original array.
+
+Optimization:
+A common optimization is to put the unsorted elements of the buckets back in the original array first, then run insertion sort over the complete array; because insertion sort's runtime is based on how far each element is from its final position, the number of comparisons remains relatively small, and the memory hierarchy is better exploited by storing the list contiguously in memory.
+
+If the input distribution is known or can be estimated, buckets can often be chosen which contain constant density (rather than merely having constant size). This allows O(n) average time complexity even without uniformly distributed input.
+
+[bucketsort-wiki]: https://en.wikipedia.org/wiki/Bucket_sort
+
 ### [Bubble Sort](./bubble_sort.rs)
 
 Bubble Sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in the wrong order.

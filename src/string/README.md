@@ -48,3 +48,8 @@ to find an exact match of a pattern string in a text.
 From [Wikipedia][hamming-distance-wiki]: In information theory, the Hamming distance between two strings of equal length is the number of positions at which the corresponding symbols are different. In other words, it measures the minimum number of substitutions required to change one string into the other, or the minimum number of errors that could have transformed one string into the other. In a more general context, the Hamming distance is one of several string metrics for measuring the edit distance between two sequences. It is named after the American mathematician Richard Hamming.
 
 [hamming-distance-wiki]: https://en.wikipedia.org/wiki/Hamming_distance
+
+### [Reverse](./reverse.rs)
+From [IBM][reverse-function-IBM]: The REVERSE function accepts a character expression as its argument, and returns a string of the same length, but with the ordinal positions of every logical character reversed.
+
+[reverse-function-IBM]: https://www.ibm.com/docs/en/informix-servers/12.10?topic=functions-reverse-function

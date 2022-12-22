@@ -40,10 +40,11 @@ mod selection_sort;
 mod shell_sort;
 mod stooge_sort;
 mod tim_sort;
+mod traits;
 
 use std::fmt;
 
-pub use self::bogo_sort::bogo_sort;
+pub use self::bogo_sort::BogoSort;
 pub use self::bubble_sort::bubble_sort;
 pub use self::bucket_sort::bucket_sort;
 pub use self::cocktail_shaker_sort::cocktail_shaker_sort;

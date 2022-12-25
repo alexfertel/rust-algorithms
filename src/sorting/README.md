@@ -53,6 +53,29 @@ __Sources to read:__
 * [Geeksforgeeks](https://www.geeksforgeeks.org/bubble-sort/)
 * [Programiz](https://www.programiz.com/dsa/bubble-sort)
 
+### [Cocktail_Shaker_Sort](./cocktail_shaker_sort.rs)
+
+Cocktail Shaker Sort, also called bidirectional bubble sort, iterates through a list from top to bottom and then from bottom to top. It is highly performant when the items in the list are partially sorted. The complexity of any list is O(n^2), but it approaches O(n) if the distance of each item from its final position in the ordered list is relatively small.
+
+__Sources to read:__
+* [Wikipedia](https://en.wikipedia.org/wiki/Cocktail_shaker_sort)
+* [Geeksforgeeks](https://www.geeksforgeeks.org/quick-sort/)
+* [Baeldung](https://www.baeldung.com/cs/cocktail-sort)
+
+### [Comb_Sort](./comb_sort.rs)
+
+Comb Sort is another optimization of Bubble Sort, and achieves this by eliminating small values towards the end of the list. It also uses a shrink-factor (k), which is used in the inner loop of Bubble Sort that performs the swapping of elements. The gap between elements that are compared in Bubble Sort is always 1, but the Comb Sort allows for the gap to be larger than 1 and then shrink by (k) for each iteration. (k) highly affects the efficiency of the algorithm, and is ideal at 1.3.
+
+__Properties__
+* Best time Complexity : O(n)
+* Worst time Complexity: O(n^2)
+
+__Sources to read:__
+* [Wikipedia](https://en.wikipedia.org/wiki/Comb_sort)
+* [Geeksforgeeks](https://www.geeksforgeeks.org/comb-sort/)
+* [javatpoint](https://www.javatpoint.com/comb-sort)
+
+
 ### [Quick Sort](./quick_sort.rs)
 
 QuickSort is a Divide and Conquer algorithm. It picks an element as a pivot and partitions the given array around the picked pivot. There are 4 common ways of selecting a pivot:
@@ -74,6 +97,7 @@ __Sources to read:__
 * [Wikipedia](https://en.wikipedia.org/wiki/Quicksort)
 * [Geeksforgeeks](https://www.geeksforgeeks.org/quick-sort/)
 * [Mygreatlearning](https://www.mygreatlearning.com/blog/quick-sort-algorithm/)
+
 
 ### [Selection Sort](./selection_sort.rs)
 

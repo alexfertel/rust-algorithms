@@ -1,7 +1,11 @@
-pub trait Sort<T: Ord> {
-    fn sort(arr: &[T]) -> [T];
+pub trait Sorter<T> {
+    fn sort(arr: &[T]) -> [T]
+    where
+        T: Ord + Copy;
 }
 
-pub trait SortMutable<T: Ord> {
-    fn sort(arr: &mut [T]);
+pub trait MutableSorter<T> {
+    fn sort(arr: &mut [T])
+    where
+        T: Ord;
 }

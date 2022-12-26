@@ -1,10 +1,10 @@
-use super::traits::SortMutable;
+use super::traits::MutableSorter;
 use crate::math::PCG32;
 use std::time::{SystemTime, UNIX_EPOCH};
 
 const DEFAULT: u64 = 4294967296;
 
-pub struct BogoSort();
+pub struct BogoSort;
 
 impl BogoSort {
     fn is_sorted<T: Ord>(arr: &[T], len: usize) -> bool {
@@ -37,8 +37,11 @@ impl BogoSort {
     }
 }
 
-impl<T: Ord> SortMutable<T> for BogoSort {
-    fn sort(arr: &mut [T]) {
+impl<T> MutableSorter<T> for BogoSort {
+    fn sort(arr: &mut [T])
+    where
+        T: Ord,
+    {
         let seed = match SystemTime::now().duration_since(UNIX_EPOCH) {
             Ok(duration) => duration.as_millis() as u64,
             Err(_) => DEFAULT,
@@ -55,7 +58,7 @@ impl<T: Ord> SortMutable<T> for BogoSort {
 
 #[cfg(test)]
 mod tests {
-    use super::super::traits::SortMutable;
+    use super::super::traits::MutableSorter;
     use super::BogoSort;
 
     sorting_tests!(BogoSort::sort, inplace);

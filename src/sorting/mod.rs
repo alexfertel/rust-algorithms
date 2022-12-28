@@ -45,7 +45,7 @@ mod traits;
 use std::fmt;
 
 pub use self::bogo_sort::BogoSort;
-pub use self::bubble_sort::bubble_sort;
+pub use self::bubble_sort::BubbleSort;
 pub use self::bucket_sort::bucket_sort;
 pub use self::cocktail_shaker_sort::cocktail_shaker_sort;
 pub use self::comb_sort::comb_sort;

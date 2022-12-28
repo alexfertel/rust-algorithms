@@ -34,6 +34,13 @@ macro_rules! sorting_tests {
             $sorter(&mut array);
             assert_sorted!(&array);
         }
+
+        #[test]
+        fn descending() {
+            let mut array = [6, 5, 4, 3, 2, 1];
+            $sorter(&mut array);
+            assert_sorted!(&array);
+        }
     };
 
     ($sorter: expr) => {

@@ -48,13 +48,6 @@ mod tests {
     }
 
     #[test]
-    fn descending() {
-        let mut v = vec![201, 127, 64, 37, 24, 4, 1];
-        radix_sort(&mut v);
-        assert_sorted!(&v);
-    }
-
-    #[test]
     fn ascending() {
         let mut v = vec![1, 4, 24, 37, 64, 127, 201];
         radix_sort(&mut v);

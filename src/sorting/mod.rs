@@ -48,7 +48,7 @@ pub use self::bogo_sort::BogoSort;
 pub use self::bubble_sort::BubbleSort;
 pub use self::bucket_sort::bucket_sort;
 pub use self::cocktail_shaker_sort::cocktail_shaker_sort;
-pub use self::comb_sort::comb_sort;
+pub use self::comb_sort::CombSort;
 pub use self::counting_sort::counting_sort;
 pub use self::cycle_sort::cycle_sort;
 pub use self::exchange_sort::exchange_sort;

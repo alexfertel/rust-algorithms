@@ -24,7 +24,7 @@ pub use self::avl_tree::AVLTree;
 pub use self::b_tree::BTree;
 pub use self::binary_search_tree::BinarySearchTree;
 pub use self::fenwick_tree::FenwickTree;
-pub use self::graph::{DirectedGraph, UndirectedGraph};
+pub use self::graph::{DirectedGraph, Graph, UndirectedGraph};
 pub use self::rb_tree::RBTree;
 pub use self::segment_tree::SegmentTree;
 pub use self::stack_using_singly_linked_list::Stack as SllStack;

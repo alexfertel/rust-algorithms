@@ -109,7 +109,7 @@ cargo test
 
 - [x] [Convex Hull: Graham Scan](./src/general/convex_hull.rs)
 - [x] [N-Queens Problem](./src/general/nqueens.rs)
-- [ ] Graph Coloring
+- [x] [Graph Coloring](./src/general/graph_coloring.rs)
 - [x] [Tower of Hanoi](./src/general/hanoi.rs)
 - [x] [Kmeans](./src/general/kmeans.rs)
 - [x] [Two Sum](./src/general/two_sum.rs)

@@ -95,7 +95,7 @@ cargo test
 
 ### Strings
 
-- [ ] Naive
+- [x] [Naive](./src/string/naive.rs)
 - [ ] Finite Automaton
 - [x] [Aho-Corasick Algorithm](./src/string/aho_corasick.rs)
 - [x] [Burrows-Wheeler transform](./src/string/burrows_wheeler_transform.rs)

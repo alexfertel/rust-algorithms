@@ -1,9 +1,10 @@
-use super::traits::MutableSorter;
+use crate::sorting::traits::{InplaceSorter, Sorter};
+
 
 pub struct CombSort;
 
-impl<T> MutableSorter<T> for CombSort {
-    fn sort(arr: &mut [T])
+impl<T> InplaceSorter<T> for CombSort {
+    fn sort_inplace(arr: &mut [T])
     where
         T: Ord,
     {
@@ -28,10 +29,24 @@ impl<T> MutableSorter<T> for CombSort {
     }
 }
 
+
+impl<T> Sorter<T> for CombSort
+where
+    T: Ord + Copy,
+{
+    fn sort(arr: &[T]) -> Vec<T> {
+        let mut arr = arr.to_vec();
+        CombSort::sort_inplace(&mut arr);
+        arr
+    }
+}
+
+
 #[cfg(test)]
 mod tests {
-    use super::CombSort;
-    use super::MutableSorter;
+    use crate::sorting::CombSort;
+    use crate::sorting::traits::{InplaceSorter, Sorter};
 
-    sorting_tests!(CombSort::sort, inplace);
+    sorting_tests!(CombSort::sort, comb_sort);
+    sorting_tests!(CombSort::sort_inplace, comb_sort_inplace, inplace);
 }

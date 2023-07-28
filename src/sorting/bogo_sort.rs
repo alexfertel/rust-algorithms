@@ -1,8 +1,8 @@
-use super::traits::MutableSorter;
+use crate::sorting::traits::{Sorter, InplaceSorter};
 use crate::math::PCG32;
 use std::time::{SystemTime, UNIX_EPOCH};
 
-const DEFAULT: u64 = 4294967296;
+const DEFAULT: u64 = u64::pow(2, 32);
 
 pub struct BogoSort;
 
@@ -37,8 +37,8 @@ impl BogoSort {
     }
 }
 
-impl<T> MutableSorter<T> for BogoSort {
-    fn sort(arr: &mut [T])
+impl<T> InplaceSorter<T> for BogoSort {
+    fn sort_inplace(arr: &mut [T])
     where
         T: Ord,
     {
@@ -56,10 +56,22 @@ impl<T> MutableSorter<T> for BogoSort {
     }
 }
 
+impl<T> Sorter<T> for BogoSort {
+    fn sort(arr: &[T]) -> Vec<T>
+    where
+        T: Ord + Copy,
+    {
+        let mut arr_copy = arr.to_vec();
+        BogoSort::sort_inplace(&mut arr_copy);
+        arr_copy
+    }
+}
+
 #[cfg(test)]
 mod tests {
-    use super::super::traits::MutableSorter;
-    use super::BogoSort;
+    use crate::sorting::BogoSort;
+    use crate::sorting::traits::{InplaceSorter, Sorter};
 
-    sorting_tests!(BogoSort::sort, inplace);
+    sorting_tests!(BogoSort::sort, bogo_sort);
+    sorting_tests!(BogoSort::sort_inplace, bogo_sort_inplace, inplace);
 }

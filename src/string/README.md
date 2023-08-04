@@ -56,7 +56,7 @@ From [IBM][reverse-function-IBM]: The REVERSE function accepts a character expre
 
 ### [Z Algorithm](./z_algorithm.rs)
 
-This algorithm finds any instances of a text pattern within a larger text in linear time. Let text length be n and pattern be m, then total time to compute is O(m + n) with linear space complexity. The Z-algorithm is identical to the Knuth Morris Pratt algorithm but in time and space complexity, but serves as a simpler example.
+This algorithm finds instances of a text pattern within a larger text in linear time. Let the text length be `n` and pattern be `m`, then the total time to compute is `O(m + n)` with linear space complexity. The Z-algorithm is identical to the Knuth Morris Pratt algorithm in time and space complexity, but serves as a simpler example.
 In this algorithm, we construct a Z array.
 
 __Properties__

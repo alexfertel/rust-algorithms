@@ -7,11 +7,11 @@ use crate::sorting::traits::{Sorter, InplaceSorter};
 /// Auxiliary space is O(1)
 pub struct BubbleSort;
 
-impl<T> InplaceSorter<T> for BubbleSort {
-    fn sort_inplace(array: &mut [T])
+impl<T> InplaceSorter<T> for BubbleSort
     where
         T: Ord,
     {
+    fn sort_inplace(array: &mut [T]) {
         for i in 0..array.len() {
             // Last i elements are already in place.
             for j in 0..array.len() - 1 - i {
@@ -23,14 +23,20 @@ impl<T> InplaceSorter<T> for BubbleSort {
     }
 }
 
-impl<T> Sorter<T> for BubbleSort {
-    fn sort(array: &[T]) -> Vec<T>
+impl<T> Sorter<T> for BubbleSort
     where
-        T: Ord + Copy,
+        T: Ord + Clone,
     {
-        let mut arr = array.to_vec();
-        BubbleSort::sort_inplace(&mut arr);
-        arr
+    fn sort(array: &[T]) -> Vec<T> {
+        for i in 0..array.len() {
+            // Last i elements are already in place.
+            for j in 0..array.len() - 1 - i {
+                if array[j] > array[j + 1] {
+                    array.swap(j, j + 1);
+                }
+            }
+        }
+        array.to_vec()
     }
 }
 

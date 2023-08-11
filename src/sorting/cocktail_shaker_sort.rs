@@ -46,12 +46,46 @@ where
 
 impl<T> Sorter<T> for CocktailShakerSort
 where
-    T: Ord + Copy,
+    T: Ord + Clone,
 {
     fn sort(arr: &[T]) -> Vec<T> {
-        let mut arr = arr.to_vec();
-        CocktailShakerSort::sort_inplace(&mut arr);
-        arr
+        let len = arr.len();
+
+        if len == 0 {
+            return vec![];
+        }
+
+        let mut vec = arr.to_vec();
+
+        loop {
+            let mut swapped = false;
+
+            for i in 0..(len - 1).clamp(0, len) {
+                if vec[i] > vec[i + 1] {
+                    vec.swap(i, i + 1);
+                    swapped = true;
+                }
+            }
+
+            if !swapped {
+                break;
+            }
+
+            swapped = false;
+
+            for i in (0..(len - 1).clamp(0, len)).rev() {
+                if vec[i] > vec[i + 1] {
+                    vec.swap(i, i + 1);
+                    swapped = true;
+                }
+            }
+
+            if !swapped {
+                break;
+            }
+        }
+
+        vec
     }
 }
 

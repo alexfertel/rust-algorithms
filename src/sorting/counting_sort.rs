@@ -47,4 +47,7 @@ where
 mod tests {
     use crate::sorting::CountingSort;
     use crate::sorting::traits::{InplaceSorter, Sorter};
+
+    sorting_tests!(CountingSort::sort, counting_sort);
+    //sorting_tests!(CountingSort::sort_inplace, counting_sort_inplace, inplace);
 }

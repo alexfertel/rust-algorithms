@@ -46,11 +46,9 @@ where
     T: Ord + Copy + Into<usize>,
 {
     fn sort(arr: &[T]) -> Vec<T>
-    where
-        T: Ord + Copy,
     {
         let mut arr = arr.to_vec();
-        BucketSort::sort_inplace(&mut arr);
+        Self::sort_inplace(&mut arr);
         arr
     }
 }
@@ -60,4 +58,7 @@ where
 mod tests {
     use crate::sorting::BucketSort;
     use crate::sorting::traits::{InplaceSorter, Sorter};
+
+    sorting_tests!(BucketSort::sort, bucket_sort);
+    // sorting_tests!(BucketSort::sort_inplace, bucket_sort_inplace, inplace);
 }

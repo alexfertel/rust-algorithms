@@ -37,10 +37,10 @@ impl BogoSort {
     }
 }
 
-impl<T> InplaceSorter<T> for BogoSort {
+impl<T> InplaceSorter<T> for BogoSort
+where T: Ord,
+{
     fn sort_inplace(arr: &mut [T])
-    where
-        T: Ord,
     {
         let seed = match SystemTime::now().duration_since(UNIX_EPOCH) {
             Ok(duration) => duration.as_millis() as u64,
@@ -56,14 +56,24 @@ impl<T> InplaceSorter<T> for BogoSort {
     }
 }
 
-impl<T> Sorter<T> for BogoSort {
-    fn sort(arr: &[T]) -> Vec<T>
+impl<T> Sorter<T> for BogoSort 
     where
-        T: Ord + Copy,
+        T: Ord + Clone,
     {
-        let mut arr_copy = arr.to_vec();
-        BogoSort::sort_inplace(&mut arr_copy);
-        arr_copy
+    fn sort(arr: &[T]) -> Vec<T> {
+        let seed = match SystemTime::now().duration_since(UNIX_EPOCH) {
+            Ok(duration) => duration.as_millis() as u64,
+            Err(_) => DEFAULT,
+        };
+
+        let mut random_generator = PCG32::new_default(seed);
+
+        let mut vec = arr.to_vec();
+        let arr_length = vec.len();
+        while !BogoSort::is_sorted(&vec, arr_length) {
+            BogoSort::permute_randomly(&mut vec, arr_length, &mut random_generator);
+        }
+        vec
     }
 }
 

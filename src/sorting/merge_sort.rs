@@ -28,32 +28,32 @@ fn merge_sort<T: Ord + Copy>(array: &[T]) -> Vec<T> {
     if array.len() < 2 {
         return array.to_vec();
     }
-    // Get the middle element of the array.
     let middle = array.len() / 2;
-    // Divide the array into left and right halves.
-    let mut left = merge_sort(&array[..middle]);
-    let mut right = merge_sort(&array[middle..]);
-    // Call merge function using parameters as both left array and right array.
-    merge(&mut left, &mut right)
+    let left = merge_sort(&array[..middle]);
+    let right = merge_sort(&array[middle..]);
+    merge(&left, &right)
 }
 
-fn merge<T: Ord + Copy>(left: &mut Vec<T>, right: &mut Vec<T>) -> Vec<T> {
-    let mut result = Vec::new();
+fn merge<T: Ord + Copy>(left: &[T], right: &[T]) -> Vec<T> {
+    let mut result = Vec::with_capacity(left.len() + right.len());
+    let mut left_iter = left.iter();
+    let mut right_iter = right.iter();
 
-    for _ in 0..left.len() + right.len() {
-        if left.is_empty() {
-            result.append(right);
-            break;
-        } else if right.is_empty() {
-            result.append(left);
-            break;
-        } else if left[0] <= right[0] {
-            result.push(left.remove(0));
+    let mut left_next = left_iter.next();
+    let mut right_next = right_iter.next();
+
+    while let (Some(left_val), Some(right_val)) = (left_next, right_next) {
+        if left_val <= right_val {
+            result.push(*left_val);
+            left_next = left_iter.next();
         } else {
-            result.push(right.remove(0));
+            result.push(*right_val);
+            right_next = right_iter.next();
         }
     }
 
+    result.extend(left_next);
+    result.extend(right_next);
     result
 }
 

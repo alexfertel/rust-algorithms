@@ -53,3 +53,12 @@ From [Wikipedia][hamming-distance-wiki]: In information theory, the Hamming dist
 From [IBM][reverse-function-IBM]: The REVERSE function accepts a character expression as its argument, and returns a string of the same length, but with the ordinal positions of every logical character reversed.
 
 [reverse-function-IBM]: https://www.ibm.com/docs/en/informix-servers/12.10?topic=functions-reverse-function
+
+### [Z Algorithm](./z_algorithm.rs)
+
+This algorithm finds instances of a text pattern within a larger text in linear time. Let the text length be `n` and pattern be `m`, then the total time to compute is `O(m + n)` with linear space complexity. The Z-algorithm is identical to the Knuth Morris Pratt algorithm in time and space complexity, but serves as a simpler example.
+In this algorithm, we construct a Z array.
+
+__Properties__
+* Case-performance = O(m + n)
+* Case space complexity  O(w)

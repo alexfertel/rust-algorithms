@@ -1,3 +1,5 @@
+use crate::sorting::traits::{InplaceSorter, Sorter};
+
 /// QuickSort is a Divide and Conquer algorithm. It picks an element as
 /// a pivot and partitions the given array around the picked pivot.
 /// There are many different versions of quickSort that pick pivot in different ways.
@@ -7,8 +9,29 @@
 /// put x at its correct position in a sorted array and put all smaller elements (smaller than x) before x,
 /// and put all greater elements (greater than x) after x. All this should be done in linear time.
 /// Quicksort's  time complexity is O(n*logn) .
+pub struct QuickSort;
 
-pub fn quick_sort<T: Ord>(array: &mut [T]) {
+impl<T> InplaceSorter<T> for QuickSort
+where
+    T: Ord,
+{
+    fn sort_inplace(array: &mut [T]) {
+        quick_sort(array);
+    }
+}
+
+impl<T> Sorter<T> for QuickSort
+where
+    T: Ord + Copy,
+{
+    fn sort(array: &[T]) -> Vec<T> {
+        let mut vec = array.to_vec();
+        quick_sort(&mut vec);
+        vec
+    }
+}
+
+fn quick_sort<T: Ord>(array: &mut [T]) {
     match array.len() {
         0 | 1 => return,
         _ => {}
@@ -44,7 +67,9 @@ pub fn quick_sort<T: Ord>(array: &mut [T]) {
 
 #[cfg(test)]
 mod tests {
-    use super::quick_sort;
+    use crate::sorting::traits::{InplaceSorter, Sorter};
+    use crate::sorting::QuickSort;
 
-    sorting_tests!(quick_sort, inplace);
+    sorting_tests!(QuickSort::sort, quick_sort);
+    sorting_tests!(QuickSort::sort_inplace, quick_sort_inplace, inplace);
 }

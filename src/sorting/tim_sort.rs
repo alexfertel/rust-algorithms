@@ -1,4 +1,27 @@
+use crate::sorting::traits::{InplaceSorter, Sorter};
 use std::cmp;
+
+pub struct TimSort;
+
+impl<T> InplaceSorter<T> for TimSort
+where
+    T: Ord + Clone + Default + Eq + Copy,
+{
+    fn sort_inplace(array: &mut [T]) {
+        tim_sort(array);
+    }
+}
+
+impl<T> Sorter<T> for TimSort
+where
+    T: Ord + Clone + Default + Eq + Copy,
+{
+    fn sort(array: &[T]) -> Vec<T> {
+        let mut vec = array.to_vec();
+        tim_sort(&mut vec);
+        vec
+    }
+}
 
 static MIN_MERGE: usize = 32;
 
@@ -11,7 +34,7 @@ fn min_run_length(mut n: usize) -> usize {
     n + r
 }
 
-fn insertion_sort(arr: &mut Vec<i32>, left: usize, right: usize) -> &Vec<i32> {
+fn insertion_sort<T: Ord + Copy>(arr: &mut [T], left: usize, right: usize) -> &[T] {
     for i in (left + 1)..(right + 1) {
         let temp = arr[i];
         let mut j = (i - 1) as i32;
@@ -25,11 +48,16 @@ fn insertion_sort(arr: &mut Vec<i32>, left: usize, right: usize) -> &Vec<i32> {
     arr
 }
 
-fn merge(arr: &mut Vec<i32>, l: usize, m: usize, r: usize) -> &Vec<i32> {
+fn merge<T: Default + Clone + Eq + Ord + Copy>(
+    arr: &mut [T],
+    l: usize,
+    m: usize,
+    r: usize,
+) -> &[T] {
     let len1 = m - l + 1;
     let len2 = r - m;
-    let mut left = vec![0; len1 as usize];
-    let mut right = vec![0; len2 as usize];
+    let mut left = vec![T::default(); len1 as usize];
+    let mut right = vec![T::default(); len2 as usize];
 
     left[..len1].clone_from_slice(&arr[l..(len1 + l)]);
 
@@ -66,7 +94,7 @@ fn merge(arr: &mut Vec<i32>, l: usize, m: usize, r: usize) -> &Vec<i32> {
     arr
 }
 
-pub fn tim_sort(arr: &mut Vec<i32>, n: usize) {
+fn _tim_sort<T: Ord + Eq + Default + Clone + Copy>(arr: &mut [T], n: usize) {
     let min_run = min_run_length(MIN_MERGE) as usize;
 
     let mut i = 0;
@@ -91,41 +119,16 @@ pub fn tim_sort(arr: &mut Vec<i32>, n: usize) {
     }
 }
 
+fn tim_sort<T: Ord + Eq + Default + Clone + Copy>(arr: &mut [T]) {
+    let n = arr.len();
+    _tim_sort(arr, n);
+}
+
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use crate::sorting::traits::{InplaceSorter, Sorter};
+    use crate::sorting::TimSort;
 
-    #[test]
-    fn basic() {
-        let mut array = vec![-2, 7, 15, -14, 0, 15, 0, 7, -7, -4, -13, 5, 8, -14, 12];
-        let arr_len = array.len();
-        tim_sort(&mut array, arr_len);
-        for i in 0..array.len() - 1 {
-            assert!(array[i] <= array[i + 1]);
-        }
-    }
-
-    #[test]
-    fn empty() {
-        let mut array = Vec::<i32>::new();
-        let arr_len = array.len();
-        tim_sort(&mut array, arr_len);
-        assert_eq!(array, vec![]);
-    }
-
-    #[test]
-    fn one_element() {
-        let mut array = vec![3];
-        let arr_len = array.len();
-        tim_sort(&mut array, arr_len);
-        assert_eq!(array, vec![3]);
-    }
-
-    #[test]
-    fn pre_sorted() {
-        let mut array = vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-        let arr_len = array.len();
-        tim_sort(&mut array, arr_len);
-        assert_eq!(array, vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-    }
+    sorting_tests!(TimSort::sort, tim_sort);
+    sorting_tests!(TimSort::sort_inplace, tim_sort_inplace, inplace);
 }

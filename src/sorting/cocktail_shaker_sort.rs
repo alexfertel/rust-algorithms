@@ -1,6 +1,5 @@
 use crate::sorting::traits::{InplaceSorter, Sorter};
 
-
 pub struct CocktailShakerSort;
 
 impl<T> InplaceSorter<T> for CocktailShakerSort
@@ -46,54 +45,24 @@ where
 
 impl<T> Sorter<T> for CocktailShakerSort
 where
-    T: Ord + Clone,
+    T: Ord + Copy,
 {
     fn sort(arr: &[T]) -> Vec<T> {
-        let len = arr.len();
-
-        if len == 0 {
-            return vec![];
-        }
-
         let mut vec = arr.to_vec();
-
-        loop {
-            let mut swapped = false;
-
-            for i in 0..(len - 1).clamp(0, len) {
-                if vec[i] > vec[i + 1] {
-                    vec.swap(i, i + 1);
-                    swapped = true;
-                }
-            }
-
-            if !swapped {
-                break;
-            }
-
-            swapped = false;
-
-            for i in (0..(len - 1).clamp(0, len)).rev() {
-                if vec[i] > vec[i + 1] {
-                    vec.swap(i, i + 1);
-                    swapped = true;
-                }
-            }
-
-            if !swapped {
-                break;
-            }
-        }
-
+        CocktailShakerSort::sort_inplace(&mut vec);
         vec
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::sorting::CocktailShakerSort;
     use crate::sorting::traits::{InplaceSorter, Sorter};
+    use crate::sorting::CocktailShakerSort;
 
     sorting_tests!(CocktailShakerSort::sort, cocktail_shaker_sort);
-    sorting_tests!(CocktailShakerSort::sort_inplace, cocktail_shaker_sort_inplace, inplace);
+    sorting_tests!(
+        CocktailShakerSort::sort_inplace,
+        cocktail_shaker_sort_inplace,
+        inplace
+    );
 }

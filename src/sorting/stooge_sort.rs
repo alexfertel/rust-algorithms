@@ -1,3 +1,27 @@
+use crate::sorting::traits::{InplaceSorter, Sorter};
+
+pub struct StoogeSort;
+
+impl<T> InplaceSorter<T> for StoogeSort
+where
+    T: Ord,
+{
+    fn sort_inplace(array: &mut [T]) {
+        stooge_sort(array);
+    }
+}
+
+impl<T> Sorter<T> for StoogeSort
+where
+    T: Ord + Copy,
+{
+    fn sort(array: &[T]) -> Vec<T> {
+        let mut vec = array.to_vec();
+        stooge_sort(&mut vec);
+        vec
+    }
+}
+
 fn _stooge_sort<T: Ord>(arr: &mut [T], start: usize, end: usize) {
     if arr[start] > arr[end] {
         arr.swap(start, end);
@@ -14,7 +38,7 @@ fn _stooge_sort<T: Ord>(arr: &mut [T], start: usize, end: usize) {
     _stooge_sort(arr, start, end - k);
 }
 
-pub fn stooge_sort<T: Ord>(arr: &mut [T]) {
+fn stooge_sort<T: Ord>(arr: &mut [T]) {
     let len = arr.len();
     if len == 0 {
         return;
@@ -25,23 +49,9 @@ pub fn stooge_sort<T: Ord>(arr: &mut [T]) {
 
 #[cfg(test)]
 mod test {
-    use super::*;
+    use crate::sorting::traits::{InplaceSorter, Sorter};
+    use crate::sorting::StoogeSort;
 
-    sorting_tests!(stooge_sort, inplace);
-
-    #[test]
-    fn empty() {
-        let mut vec: Vec<i32> = vec![];
-        stooge_sort(&mut vec);
-        assert_eq!(vec, vec![]);
-    }
-
-    #[test]
-    fn reverse() {
-        let mut vec = vec![6, 5, 4, 3, 2, 1];
-        stooge_sort(&mut vec);
-        for i in 0..vec.len() - 1 {
-            assert!(vec[i] <= vec[i + 1]);
-        }
-    }
+    sorting_tests!(StoogeSort::sort, stooge_sort);
+    sorting_tests!(StoogeSort::sort_inplace, stooge_sort_inplace, inplace);
 }

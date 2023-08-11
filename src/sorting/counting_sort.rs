@@ -1,12 +1,10 @@
 use crate::sorting::traits::{InplaceSorter, Sorter};
 
-
 pub struct CountingSort;
-
 
 impl<T> InplaceSorter<T> for CountingSort
 where
-    T: Into<usize> + Ord + Copy + Default
+    T: Into<usize> + Ord + Copy + Default,
 {
     fn sort_inplace(arr: &mut [T]) {
         let max: usize = arr.iter().map(|item: &T| (*item).into()).max().unwrap_or(0);
@@ -45,8 +43,8 @@ where
 
 #[cfg(test)]
 mod tests {
-    use crate::sorting::CountingSort;
     use crate::sorting::traits::{InplaceSorter, Sorter};
+    use crate::sorting::CountingSort;
 
     sorting_tests!(CountingSort::sort, counting_sort);
     //sorting_tests!(CountingSort::sort_inplace, counting_sort_inplace, inplace);

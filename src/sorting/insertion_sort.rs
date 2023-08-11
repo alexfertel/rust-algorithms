@@ -27,22 +27,29 @@ where
 
 impl<T> Sorter<T> for InsertionSort
 where
-    T: Ord + Copy,
+    T: Ord + Clone,
 {
-    fn sort(array: &[T]) -> Vec<T>
-    where
-        T: Ord + Copy,
-    {
-        let mut arr = array.to_vec();
-        InsertionSort::sort_inplace(&mut arr);
-        arr
+    fn sort(array: &[T]) -> Vec<T> {
+        let mut vec = array.to_vec();
+        for i in 0..vec.len() {
+            let mut j = i;
+            // Move elements of arr[0..i-1],
+            // that are greater than key, to one
+            // position ahead of their
+            // current position.
+            while j > 0 && vec[j] < vec[j - 1] {
+                vec.swap(j, j - 1);
+                j -= 1;
+            }
+        }
+        vec
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::sorting::InsertionSort;
     use crate::sorting::traits::{InplaceSorter, Sorter};
+    use crate::sorting::InsertionSort;
 
     sorting_tests!(InsertionSort::sort, insertion_sort);
     sorting_tests!(InsertionSort::sort_inplace, insertion_sort_inplace, inplace);

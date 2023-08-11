@@ -39,52 +39,21 @@ where
     }
 }
 
-
 impl<T> Sorter<T> for CycleSort
 where
-    T: Ord + Clone,
+    T: Ord + Copy,
 {
     fn sort(arr: &[T]) -> Vec<T> {
         let mut vec = arr.to_vec();
-        
-        for cycle_start in 0..vec.len() {
-            let mut item = vec[cycle_start].clone();
-            let mut pos = cycle_start;
-            for i in vec.iter().skip(cycle_start + 1) {
-                if *i < item {
-                    pos += 1;
-                }
-            }
-            if pos == cycle_start {
-                continue;
-            }
-            while item == vec[pos] {
-                pos += 1;
-            }
-            std::mem::swap(&mut vec[pos], &mut item);
-            while pos != cycle_start {
-                pos = cycle_start;
-                for i in vec.iter().skip(cycle_start + 1) {
-                    if *i < item {
-                        pos += 1;
-                    }
-                }
-                while item == vec[pos] {
-                    pos += 1;
-                }
-                std::mem::swap(&mut vec[pos], &mut item);
-            }
-        }
-
+        CycleSort::sort_inplace(&mut vec);
         vec
     }
 }
 
-
 #[cfg(test)]
 mod tests {
-    use crate::sorting::CycleSort;
     use crate::sorting::traits::{InplaceSorter, Sorter};
+    use crate::sorting::CycleSort;
 
     sorting_tests!(CycleSort::sort, cycle_sort);
     sorting_tests!(CycleSort::sort_inplace, cycle_sort_inplace, inplace);

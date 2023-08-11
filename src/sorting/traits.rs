@@ -4,10 +4,8 @@ pub trait Sorter<T> {
         T: Ord + Copy;
 }
 
-
 pub trait InplaceSorter<T> {
     fn sort_inplace(arr: &mut [T])
     where
         T: Ord + Copy;
 }
-

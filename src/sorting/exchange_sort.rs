@@ -39,8 +39,8 @@ where
 
 #[cfg(test)]
 mod tests {
-    use crate::sorting::ExchangeSort;
     use crate::sorting::traits::{InplaceSorter, Sorter};
+    use crate::sorting::ExchangeSort;
 
     sorting_tests!(ExchangeSort::sort, exchange_sort);
     sorting_tests!(ExchangeSort::sort_inplace, exchange_sort_inplace, inplace);

@@ -1,5 +1,5 @@
-use crate::sorting::traits::{Sorter, InplaceSorter};
 use crate::sorting::insertion_sort::InsertionSort;
+use crate::sorting::traits::{InplaceSorter, Sorter};
 
 /// Sort a slice using bucket sort algorithm.
 ///
@@ -40,24 +40,21 @@ where
     }
 }
 
-
 impl<T> Sorter<T> for BucketSort
 where
     T: Ord + Copy + Into<usize>,
 {
-    fn sort(arr: &[T]) -> Vec<T>
-    {
+    fn sort(arr: &[T]) -> Vec<T> {
         let mut arr = arr.to_vec();
         Self::sort_inplace(&mut arr);
         arr
     }
 }
 
-
 #[cfg(test)]
 mod tests {
-    use crate::sorting::BucketSort;
     use crate::sorting::traits::{InplaceSorter, Sorter};
+    use crate::sorting::BucketSort;
 
     sorting_tests!(BucketSort::sort, bucket_sort);
     // sorting_tests!(BucketSort::sort_inplace, bucket_sort_inplace, inplace);

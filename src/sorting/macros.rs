@@ -15,14 +15,14 @@ macro_rules! sorting_tests {
         paste::paste! {
             #[test]
             fn [< basic_ $mod_name _inplace>]() {
-                let mut array = [5, 4, 1, 6, 0];
+                let mut array: [usize; 5] = [5, 4, 1, 6, 0];
                 $sorter(&mut array);
                 assert_sorted!(&array);
             }
 
             #[test]
             fn [< repeated_elements_ $mod_name _inplace>]() {
-                let mut array = [5, 5, 1, 6, 1, 0, 2, 6];
+                let mut array: [usize; 8] = [5, 5, 1, 6, 1, 0, 2, 6];
                 $sorter(&mut array);
                 assert_sorted!(&array);
             }

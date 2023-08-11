@@ -57,5 +57,5 @@ mod tests {
     use crate::sorting::BucketSort;
 
     sorting_tests!(BucketSort::sort, bucket_sort);
-    // sorting_tests!(BucketSort::sort_inplace, bucket_sort_inplace, inplace);
+    sorting_tests!(BucketSort::sort_inplace, bucket_sort_inplace, inplace);
 }

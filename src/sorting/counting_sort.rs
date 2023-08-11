@@ -47,5 +47,5 @@ mod tests {
     use crate::sorting::CountingSort;
 
     sorting_tests!(CountingSort::sort, counting_sort);
-    //sorting_tests!(CountingSort::sort_inplace, counting_sort_inplace, inplace);
+    sorting_tests!(CountingSort::sort_inplace, counting_sort_inplace, inplace);
 }

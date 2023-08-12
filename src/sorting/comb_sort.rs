@@ -31,8 +31,7 @@ impl<T> Sorter<T> for CombSort
 where
     T: Ord + Copy,
 {
-    fn sort_inplace(arr: &mut [T])
-    {
+    fn sort_inplace(arr: &mut [T]) {
         comb_sort(arr);
     }
 }

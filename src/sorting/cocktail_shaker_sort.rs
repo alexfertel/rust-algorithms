@@ -36,7 +36,6 @@ fn cocktail_shaker_sort<T: Ord>(arr: &mut [T]) {
     }
 }
 
-
 pub struct CocktailShakerSort;
 
 impl<T> Sorter<T> for CocktailShakerSort

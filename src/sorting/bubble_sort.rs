@@ -20,7 +20,7 @@ pub struct BubbleSort;
 
 impl<T> Sorter<T> for BubbleSort
 where
-    T: Ord + Copy
+    T: Ord + Copy,
 {
     fn sort_inplace(array: &mut [T]) {
         bubble_sort(array);

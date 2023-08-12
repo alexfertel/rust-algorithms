@@ -30,7 +30,6 @@ where
     }
 }
 
-
 #[cfg(test)]
 mod tests {
     use crate::sorting::traits::Sorter;

@@ -7,4 +7,3 @@ pub trait Sorter<T: Ord + Copy> {
         arr
     }
 }
-

@@ -1,5 +1,3 @@
-// Convenience macros.
-
 macro_rules! assert_sorted {
     ($iter:expr) => {
         assert!($crate::sorting::is_sorted($iter));
@@ -13,56 +11,123 @@ macro_rules! assert_not_sorted {
 }
 
 macro_rules! sorting_tests {
-    ($sorter: expr, inplace) => {
-        #[test]
-        fn basic() {
-            let mut array = [5, 4, 1, 6, 0];
-            $sorter(&mut array);
-            assert_sorted!(&array);
-        }
+    ($sorter: expr, $mod_name: ident, inplace) => {
+        paste::paste! {
+            #[test]
+            fn [< basic_ $mod_name _inplace>]() {
+                let mut array: [usize; 5] = [5, 4, 1, 6, 0];
+                $sorter(&mut array);
+                assert_sorted!(&array);
+            }
 
-        #[test]
-        fn repeated_elements() {
-            let mut array = [5, 5, 1, 6, 1, 0, 2, 6];
-            $sorter(&mut array);
-            assert_sorted!(&array);
-        }
+            #[test]
+            fn [< repeated_elements_ $mod_name _inplace>]() {
+                let mut array: [usize; 8] = [5, 5, 1, 6, 1, 0, 2, 6];
+                $sorter(&mut array);
+                assert_sorted!(&array);
+            }
 
-        #[test]
-        fn pre_sorted() {
-            let mut array = [1, 2, 3, 4, 5, 6];
-            $sorter(&mut array);
-            assert_sorted!(&array);
-        }
+            #[test]
+            fn [< pre_sorted_ $mod_name _inplace>]() {
+                let mut array: [usize; 6] = [1, 2, 3, 4, 5, 6];
+                $sorter(&mut array);
+                assert_sorted!(&array);
+            }
 
-        #[test]
-        fn descending() {
-            let mut array = [6, 5, 4, 3, 2, 1];
-            $sorter(&mut array);
-            assert_sorted!(&array);
+            #[test]
+            fn [< descending_ $mod_name _inplace>]() {
+                let mut array: [usize; 6] = [6, 5, 4, 3, 2, 1];
+                $sorter(&mut array);
+                assert_sorted!(&array);
+            }
+
+            #[test]
+            fn [< empty_ $mod_name _inplace>]() {
+                let mut array: [usize; 0] = [];
+                $sorter(&mut array);
+                assert_sorted!(&array);
+            }
+
+            #[test]
+            fn [< one_element_ $mod_name _inplace>]() {
+                let mut array: [usize; 1] = [4];
+                $sorter(&mut array);
+                assert_sorted!(&array);
+            }
+
+            #[test]
+            fn [< two_elements_ $mod_name _inplace>]() {
+                let mut array: [usize; 2] = [4, 1];
+                $sorter(&mut array);
+                assert_sorted!(&array);
+            }
+
+            #[test]
+            fn [< odd_number_of_elements_ $mod_name _inplace>]() {
+                let mut array: [usize; 5] = [1, 21, 5, 11, 58];
+                $sorter(&mut array);
+                assert_sorted!(&array);
+            }
         }
     };
 
-    ($sorter: expr) => {
-        #[test]
-        fn basic() {
-            let array = [5, 4, 1, 6, 0];
-            let output = $sorter(&array);
-            assert_sorted!(&output);
-        }
+    ($sorter: expr, $mod_name: ident) => {
+        paste::paste! {
+            #[test]
+            fn [< basic_ $mod_name >]() {
+                let array: [usize; 5] = [5, 4, 1, 6, 0];
+                let output = $sorter(&array);
+                assert_sorted!(&output);
+            }
 
-        #[test]
-        fn repeated_elements() {
-            let array = [5, 5, 1, 6, 1, 0, 2, 6];
-            let output = $sorter(&array);
-            assert_sorted!(&output);
-        }
+            #[test]
+            fn [< repeated_elements_ $mod_name >]() {
+                let array: [usize; 8] = [5, 5, 1, 6, 1, 0, 2, 6];
+                let output = $sorter(&array);
+                assert_sorted!(&output);
+            }
 
-        #[test]
-        fn pre_sorted() {
-            let array = [1, 2, 3, 4, 5, 6];
-            let output = $sorter(&array);
-            assert_sorted!(&output);
+            #[test]
+            fn [< pre_sorted_ $mod_name >]() {
+                let array: [usize; 6] = [1, 2, 3, 4, 5, 6];
+                let output = $sorter(&array);
+                assert_sorted!(&output);
+            }
+
+            #[test]
+            fn [< descending_ $mod_name >]() {
+                let array: [usize; 6] = [6, 5, 4, 3, 2, 1];
+                let output = $sorter(&array);
+                assert_sorted!(&output);
+            }
+
+            #[test]
+            fn [< empty_ $mod_name >]() {
+                let array: [usize; 0] = [];
+                let output = $sorter(&array);
+                assert_sorted!(&output);
+            }
+
+            #[test]
+            fn [< one_element_ $mod_name >]() {
+                let array: [usize; 1] = [4];
+                let output = $sorter(&array);
+                assert_sorted!(&output);
+            }
+
+            #[test]
+            fn [< two_elements_ $mod_name >]() {
+                let array: [usize; 2] = [4, 1];
+                let output = $sorter(&array);
+                assert_sorted!(&output);
+            }
+
+            #[test]
+            fn [< odd_number_of_elements_ $mod_name >]() {
+                let array: [usize; 5] = [1, 21, 5, 11, 58];
+                let output = $sorter(&array);
+                assert_sorted!(&output);
+            }
         }
     };
 }

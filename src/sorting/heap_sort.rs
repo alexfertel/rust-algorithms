@@ -1,4 +1,6 @@
-pub fn heap_sort<T: Ord>(array: &mut [T]) {
+use crate::sorting::traits::Sorter;
+
+fn heap_sort<T: Ord>(array: &mut [T]) {
     if array.len() < 2 {
         return;
     }
@@ -41,9 +43,22 @@ fn siftdown<T: Ord>(array: &mut [T], mut root: usize, end: usize) {
     }
 }
 
+pub struct HeapSort;
+
+impl<T> Sorter<T> for HeapSort
+where
+    T: Ord + Copy,
+{
+    fn sort_inplace(arr: &mut [T]) {
+        heap_sort(arr);
+    }
+}
+
 #[cfg(test)]
 mod tests {
-    use super::heap_sort;
+    use crate::sorting::traits::Sorter;
+    use crate::sorting::HeapSort;
 
-    sorting_tests!(heap_sort, inplace);
+    sorting_tests!(HeapSort::sort, heap_sort);
+    sorting_tests!(HeapSort::sort_inplace, heap_sort_inplace, inplace);
 }

@@ -1,44 +1,62 @@
-// The Merge Sort algorithm is a sorting algorithm that is based on the Divide and Conquer paradigm.
+use crate::sorting::traits::Sorter;
 
-// The Time complexity is `O(nlog(n))` where n is the length of the array.
-
-// Auxillary Space required is `O(n)` Since all the elements are copied to the auxillary space.
 pub fn merge_sort<T: Ord + Copy>(array: &[T]) -> Vec<T> {
     if array.len() < 2 {
         return array.to_vec();
     }
+    // Get the middle element of the array.
     let middle = array.len() / 2;
-    let left = merge_sort(&array[..middle]);
-    let right = merge_sort(&array[middle..]);
-    merge(&left, &right)
+    // Divide the array into left and right halves.
+    let mut left = merge_sort(&array[..middle]);
+    let mut right = merge_sort(&array[middle..]);
+    // Call merge function using parameters as both left array and right array.
+    merge(&mut left, &mut right)
 }
 
-fn merge<T: Ord + Copy>(left: &[T], right: &[T]) -> Vec<T> {
-    let mut result = Vec::with_capacity(left.len() + right.len());
-    let mut left_iter = left.iter();
-    let mut right_iter = right.iter();
+fn merge<T: Ord + Copy>(left: &mut Vec<T>, right: &mut Vec<T>) -> Vec<T> {
+    let mut result = Vec::new();
 
-    let mut left_next = left_iter.next();
-    let mut right_next = right_iter.next();
-
-    while let (Some(left_val), Some(right_val)) = (left_next, right_next) {
-        if left_val <= right_val {
-            result.push(*left_val);
-            left_next = left_iter.next();
+    for _ in 0..left.len() + right.len() {
+        if left.is_empty() {
+            result.append(right);
+            break;
+        } else if right.is_empty() {
+            result.append(left);
+            break;
+        } else if left[0] <= right[0] {
+            result.push(left.remove(0));
         } else {
-            result.push(*right_val);
-            right_next = right_iter.next();
+            result.push(right.remove(0));
         }
     }
 
-    result.extend(left_next);
-    result.extend(right_next);
     result
+}
+
+// The Merge Sort algorithm is a sorting algorithm that is based on the Divide and Conquer paradigm.
+// The Time complexity is `O(nlog(n))` where n is the length of the array.
+// Auxillary Space required is `O(n)` Since all the elements are copied to the auxillary space.
+pub struct MergeSort;
+
+impl<T> Sorter<T> for MergeSort
+where
+    T: Ord + Copy,
+{
+    fn sort_inplace(array: &mut [T]) {
+        let result = merge_sort(array);
+        array.copy_from_slice(&result);
+    }
+
+    fn sort(array: &[T]) -> Vec<T> {
+        merge_sort(array)
+    }
 }
 
 #[cfg(test)]
 mod tests {
-    use super::merge_sort;
+    use crate::sorting::traits::Sorter;
+    use crate::sorting::MergeSort;
 
-    sorting_tests!(merge_sort);
+    sorting_tests!(MergeSort::sort, merge_sort);
+    sorting_tests!(MergeSort::sort_inplace, merge_sort, inplace);
 }

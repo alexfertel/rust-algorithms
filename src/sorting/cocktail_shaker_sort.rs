@@ -1,4 +1,6 @@
-pub fn cocktail_shaker_sort<T: Ord>(arr: &mut [T]) {
+use crate::sorting::traits::Sorter;
+
+fn cocktail_shaker_sort<T: Ord>(arr: &mut [T]) {
     let len = arr.len();
 
     if len == 0 {
@@ -34,23 +36,26 @@ pub fn cocktail_shaker_sort<T: Ord>(arr: &mut [T]) {
     }
 }
 
+pub struct CocktailShakerSort;
+
+impl<T> Sorter<T> for CocktailShakerSort
+where
+    T: Ord + Copy,
+{
+    fn sort_inplace(arr: &mut [T]) {
+        cocktail_shaker_sort(arr);
+    }
+}
+
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use crate::sorting::traits::Sorter;
+    use crate::sorting::CocktailShakerSort;
 
-    sorting_tests!(cocktail_shaker_sort, inplace);
-
-    #[test]
-    fn empty() {
-        let mut arr = Vec::<i32>::new();
-        cocktail_shaker_sort(&mut arr);
-        assert_eq!(arr, vec![]);
-    }
-
-    #[test]
-    fn one_element() {
-        let mut arr = vec![1];
-        cocktail_shaker_sort(&mut arr);
-        assert_eq!(arr, vec![1]);
-    }
+    sorting_tests!(CocktailShakerSort::sort, cocktail_shaker_sort);
+    sorting_tests!(
+        CocktailShakerSort::sort_inplace,
+        cocktail_shaker_sort,
+        inplace
+    );
 }

@@ -46,24 +46,24 @@ use std::fmt;
 
 pub use self::bogo_sort::BogoSort;
 pub use self::bubble_sort::BubbleSort;
-pub use self::bucket_sort::bucket_sort;
-pub use self::cocktail_shaker_sort::cocktail_shaker_sort;
+pub use self::bucket_sort::BucketSort;
+pub use self::cocktail_shaker_sort::CocktailShakerSort;
 pub use self::comb_sort::CombSort;
-pub use self::counting_sort::counting_sort;
-pub use self::cycle_sort::cycle_sort;
-pub use self::exchange_sort::exchange_sort;
-pub use self::gnome_sort::gnome_sort;
-pub use self::heap_sort::heap_sort;
-pub use self::insertion_sort::insertion_sort;
-pub use self::merge_sort::merge_sort;
-pub use self::odd_even_sort::odd_even_sort;
-pub use self::pancake_sort::pancake_sort;
-pub use self::quick_sort::quick_sort;
-pub use self::radix_sort::radix_sort;
-pub use self::selection_sort::selection_sort;
-pub use self::shell_sort::shell_sort;
-pub use self::stooge_sort::stooge_sort;
-pub use self::tim_sort::tim_sort;
+pub use self::counting_sort::CountingSort;
+pub use self::cycle_sort::CycleSort;
+pub use self::exchange_sort::ExchangeSort;
+pub use self::gnome_sort::GnomeSort;
+pub use self::heap_sort::HeapSort;
+pub use self::insertion_sort::InsertionSort;
+pub use self::merge_sort::MergeSort;
+pub use self::odd_even_sort::OddEvenSort;
+pub use self::pancake_sort::PancakeSort;
+pub use self::quick_sort::QuickSort;
+pub use self::radix_sort::RadixSort;
+pub use self::selection_sort::SelectionSort;
+pub use self::shell_sort::ShellSort;
+pub use self::stooge_sort::StoogeSort;
+pub use self::tim_sort::TimSort;
 
 #[cfg(test)]
 mod tests {

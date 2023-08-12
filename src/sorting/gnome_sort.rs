@@ -1,10 +1,6 @@
-use std::cmp;
+use crate::sorting::traits::Sorter;
 
-pub fn gnome_sort<T>(arr: &[T]) -> Vec<T>
-where
-    T: cmp::PartialEq + cmp::PartialOrd + Clone,
-{
-    let mut arr = arr.to_vec();
+fn gnome_sort<T: Ord>(arr: &mut [T]) {
     let mut i: usize = 1;
     let mut j: usize = 2;
 
@@ -21,30 +17,24 @@ where
             }
         }
     }
-    arr
+}
+
+pub struct GnomeSort;
+
+impl<T> Sorter<T> for GnomeSort
+where
+    T: Ord + Copy,
+{
+    fn sort_inplace(arr: &mut [T]) {
+        gnome_sort(arr);
+    }
 }
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use crate::sorting::traits::Sorter;
+    use crate::sorting::GnomeSort;
 
-    sorting_tests!(gnome_sort);
-
-    #[test]
-    fn odd_number_of_elements() {
-        let res = gnome_sort(&vec!["d", "a", "c", "e", "b"]);
-        assert_eq!(res, vec!["a", "b", "c", "d", "e"]);
-    }
-
-    #[test]
-    fn one_element() {
-        let res = gnome_sort(&vec![3]);
-        assert_eq!(res, vec![3]);
-    }
-
-    #[test]
-    fn empty() {
-        let res = gnome_sort(&Vec::<u8>::new());
-        assert_eq!(res, vec![]);
-    }
+    sorting_tests!(GnomeSort::sort, gnome_sort);
+    sorting_tests!(GnomeSort::sort_inplace, gnome_sort, inplace);
 }

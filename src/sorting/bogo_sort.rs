@@ -2,7 +2,7 @@ use crate::math::PCG32;
 use crate::sorting::traits::{InplaceSorter, Sorter};
 use std::time::{SystemTime, UNIX_EPOCH};
 
-const DEFAULT: u64 = u64::pow(2, 32);
+const DEFAULT: u64 = 2 << 32 // 2 ^ 32
 
 pub struct BogoSort;
 

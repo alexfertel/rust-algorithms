@@ -1,28 +1,4 @@
-use crate::sorting::traits::{InplaceSorter, Sorter};
-
-// The Merge Sort algorithm is a sorting algorithm that is based on the Divide and Conquer paradigm.
-// The Time complexity is `O(nlog(n))` where n is the length of the array.
-// Auxillary Space required is `O(n)` Since all the elements are copied to the auxillary space.
-pub struct MergeSort;
-
-impl<T> InplaceSorter<T> for MergeSort
-where
-    T: Ord + Copy,
-{
-    fn sort_inplace(array: &mut [T]) {
-        let result = merge_sort(array);
-        array.copy_from_slice(&result);
-    }
-}
-
-impl<T> Sorter<T> for MergeSort
-where
-    T: Ord + Copy,
-{
-    fn sort(array: &[T]) -> Vec<T> {
-        merge_sort(array)
-    }
-}
+use crate::sorting::traits::Sorter;
 
 pub fn merge_sort<T: Ord + Copy>(array: &[T]) -> Vec<T> {
     if array.len() < 2 {
@@ -57,11 +33,30 @@ fn merge<T: Ord + Copy>(left: &mut Vec<T>, right: &mut Vec<T>) -> Vec<T> {
     result
 }
 
+// The Merge Sort algorithm is a sorting algorithm that is based on the Divide and Conquer paradigm.
+// The Time complexity is `O(nlog(n))` where n is the length of the array.
+// Auxillary Space required is `O(n)` Since all the elements are copied to the auxillary space.
+pub struct MergeSort;
+
+impl<T> Sorter<T> for MergeSort
+where
+    T: Ord + Copy,
+{
+    fn sort_inplace(array: &mut [T]) {
+        let result = merge_sort(array);
+        array.copy_from_slice(&result);
+    }
+
+    fn sort(array: &[T]) -> Vec<T> {
+        merge_sort(array)
+    }
+}
+
 #[cfg(test)]
 mod tests {
-    use crate::sorting::traits::{InplaceSorter, Sorter};
+    use crate::sorting::traits::Sorter;
     use crate::sorting::MergeSort;
 
     sorting_tests!(MergeSort::sort, merge_sort);
-    sorting_tests!(MergeSort::sort_inplace, merge_sort_inplace, inplace);
+    sorting_tests!(MergeSort::sort_inplace, merge_sort, inplace);
 }

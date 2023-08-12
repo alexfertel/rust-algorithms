@@ -1,29 +1,8 @@
-use crate::sorting::traits::{InplaceSorter, Sorter};
-use std::cmp;
+use crate::sorting::traits::Sorter;
 
-pub struct PancakeSort;
-
-impl<T> InplaceSorter<T> for PancakeSort
+fn pancake_sort<T: Ord + Clone>(arr: &mut [T]) -> Vec<T>
 where
-    T: cmp::PartialEq + cmp::Ord + cmp::PartialOrd + Clone,
-{
-    fn sort_inplace(arr: &mut [T]) {
-        pancake_sort(arr);
-    }
-}
-
-impl<T> Sorter<T> for PancakeSort
-where
-    T: cmp::PartialEq + cmp::Ord + cmp::PartialOrd + Clone,
-{
-    fn sort(arr: &[T]) -> Vec<T> {
-        pancake_sort(&mut arr.to_vec())
-    }
-}
-
-fn pancake_sort<T>(arr: &mut [T]) -> Vec<T>
-where
-    T: cmp::PartialEq + cmp::Ord + cmp::PartialOrd + Clone,
+    T: Ord + Clone,
 {
     let len = arr.len();
     if len < 2 {
@@ -45,11 +24,26 @@ where
     arr.to_vec()
 }
 
+pub struct PancakeSort;
+
+impl<T> Sorter<T> for PancakeSort
+where
+    T: Ord + Copy + Clone,
+{
+    fn sort_inplace(arr: &mut [T]) {
+        pancake_sort(arr);
+    }
+
+    fn sort(arr: &[T]) -> Vec<T> {
+        pancake_sort(&mut arr.to_vec())
+    }
+}
+
 #[cfg(test)]
 mod tests {
-    use crate::sorting::traits::{InplaceSorter, Sorter};
+    use crate::sorting::traits::Sorter;
     use crate::sorting::PancakeSort;
 
     sorting_tests!(PancakeSort::sort, pancake_sort);
-    sorting_tests!(PancakeSort::sort_inplace, pancake_sort_inplace, inplace);
+    sorting_tests!(PancakeSort::sort_inplace, pancake_sort, inplace);
 }

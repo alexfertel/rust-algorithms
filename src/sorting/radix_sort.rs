@@ -1,33 +1,4 @@
-use crate::sorting::traits::{InplaceSorter, Sorter};
-
-/// Sorts the elements of `arr` in-place using radix sort.
-///
-/// Time complexity is `O((n + b) * logb(k))`, where `n` is the number of elements,
-/// `b` is the base (the radix), and `k` is the largest element.
-/// When `n` and `b` are roughly the same maginitude, this algorithm runs in linear time.
-///
-/// Space complexity is `O(n + b)`.
-pub struct RadixSort;
-
-impl<T> InplaceSorter<T> for RadixSort
-where
-    T: Ord + Copy + From<usize> + Into<usize>,
-{
-    fn sort_inplace(arr: &mut [T]) {
-        radix_sort(arr);
-    }
-}
-
-impl<T> Sorter<T> for RadixSort
-where
-    T: Ord + Copy + From<usize> + Into<usize>,
-{
-    fn sort(arr: &[T]) -> Vec<T> {
-        let mut vec = arr.to_vec();
-        radix_sort(&mut vec);
-        vec
-    }
-}
+use crate::sorting::traits::Sorter;
 
 fn radix_sort<T>(arr: &mut [T])
 where
@@ -65,11 +36,29 @@ where
     }
 }
 
+/// Sorts the elements of `arr` in-place using radix sort.
+///
+/// Time complexity is `O((n + b) * logb(k))`, where `n` is the number of elements,
+/// `b` is the base (the radix), and `k` is the largest element.
+/// When `n` and `b` are roughly the same maginitude, this algorithm runs in linear time.
+///
+/// Space complexity is `O(n + b)`.
+pub struct RadixSort;
+
+impl<T> Sorter<T> for RadixSort
+where
+    T: Ord + Copy + From<usize> + Into<usize>,
+{
+    fn sort_inplace(arr: &mut [T]) {
+        radix_sort(arr);
+    }
+}
+
 #[cfg(test)]
 mod tests {
-    use crate::sorting::traits::{InplaceSorter, Sorter};
+    use crate::sorting::traits::Sorter;
     use crate::sorting::RadixSort;
 
     sorting_tests!(RadixSort::sort, radix_sort);
-    sorting_tests!(RadixSort::sort_inplace, radix_sort_inplace, inplace);
+    sorting_tests!(RadixSort::sort_inplace, radix_sort, inplace);
 }

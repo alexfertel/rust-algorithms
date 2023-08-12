@@ -1,26 +1,4 @@
-use crate::sorting::traits::{InplaceSorter, Sorter};
-
-pub struct OddEvenSort;
-
-impl<T> InplaceSorter<T> for OddEvenSort
-where
-    T: Ord,
-{
-    fn sort_inplace(array: &mut [T]) {
-        odd_even_sort(array);
-    }
-}
-
-impl<T> Sorter<T> for OddEvenSort
-where
-    T: Ord + Clone,
-{
-    fn sort(array: &[T]) -> Vec<T> {
-        let mut array = array.to_vec();
-        odd_even_sort(&mut array);
-        array
-    }
-}
+use crate::sorting::traits::Sorter;
 
 fn odd_even_sort<T: Ord>(arr: &mut [T]) {
     let len = arr.len();
@@ -48,11 +26,22 @@ fn odd_even_sort<T: Ord>(arr: &mut [T]) {
     }
 }
 
+pub struct OddEvenSort;
+
+impl<T> Sorter<T> for OddEvenSort
+where
+    T: Ord + Copy,
+{
+    fn sort_inplace(array: &mut [T]) {
+        odd_even_sort(array);
+    }
+}
+
 #[cfg(test)]
 mod tests {
-    use crate::sorting::traits::{InplaceSorter, Sorter};
+    use crate::sorting::traits::Sorter;
     use crate::sorting::OddEvenSort;
 
     sorting_tests!(OddEvenSort::sort, odd_even_sort);
-    sorting_tests!(OddEvenSort::sort_inplace, odd_even_sort_inplace, inplace);
+    sorting_tests!(OddEvenSort::sort_inplace, odd_even_sort, inplace);
 }

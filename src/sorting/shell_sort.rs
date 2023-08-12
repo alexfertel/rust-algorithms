@@ -1,29 +1,5 @@
-use crate::sorting::traits::{InplaceSorter, Sorter};
+use crate::sorting::traits::Sorter;
 
-pub struct ShellSort;
-
-impl<T> InplaceSorter<T> for ShellSort
-where
-    T: Ord + Copy,
-{
-    fn sort_inplace(array: &mut [T]) {
-        shell_sort(array);
-    }
-}
-
-impl<T> Sorter<T> for ShellSort
-where
-    T: Ord + Copy,
-{
-    fn sort(array: &[T]) -> Vec<T> {
-        let mut vec = array.to_vec();
-        shell_sort(&mut vec);
-        vec
-    }
-}
-
-/* NOTE: maybe it'd be a good idea to standardize the function signatures as well?
- * since with this signature, the `sorting_tests` macro doesn't work */
 pub fn shell_sort<T: Ord + Copy>(values: &mut [T]) {
     // shell sort works by swiping the value at a given gap and decreasing the gap to 1
     fn insertion<T: Ord + Copy>(values: &mut [T], start: usize, gap: usize) {
@@ -48,11 +24,22 @@ pub fn shell_sort<T: Ord + Copy>(values: &mut [T]) {
     }
 }
 
+pub struct ShellSort;
+
+impl<T> Sorter<T> for ShellSort
+where
+    T: Ord + Copy,
+{
+    fn sort_inplace(array: &mut [T]) {
+        shell_sort(array);
+    }
+}
+
 #[cfg(test)]
 mod test {
-    use crate::sorting::traits::{InplaceSorter, Sorter};
+    use crate::sorting::traits::Sorter;
     use crate::sorting::ShellSort;
 
     sorting_tests!(ShellSort::sort, shell_sort);
-    sorting_tests!(ShellSort::sort_inplace, shell_sort_inplace, inplace);
+    sorting_tests!(ShellSort::sort_inplace, shell_sort, inplace);
 }

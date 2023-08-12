@@ -1,26 +1,4 @@
-use crate::sorting::traits::{InplaceSorter, Sorter};
-
-pub struct StoogeSort;
-
-impl<T> InplaceSorter<T> for StoogeSort
-where
-    T: Ord,
-{
-    fn sort_inplace(array: &mut [T]) {
-        stooge_sort(array);
-    }
-}
-
-impl<T> Sorter<T> for StoogeSort
-where
-    T: Ord + Copy,
-{
-    fn sort(array: &[T]) -> Vec<T> {
-        let mut vec = array.to_vec();
-        stooge_sort(&mut vec);
-        vec
-    }
-}
+use crate::sorting::traits::Sorter;
 
 fn _stooge_sort<T: Ord>(arr: &mut [T], start: usize, end: usize) {
     if arr[start] > arr[end] {
@@ -47,11 +25,22 @@ fn stooge_sort<T: Ord>(arr: &mut [T]) {
     _stooge_sort(arr, 0, len - 1);
 }
 
+pub struct StoogeSort;
+
+impl<T> Sorter<T> for StoogeSort
+where
+    T: Ord + Copy,
+{
+    fn sort_inplace(array: &mut [T]) {
+        stooge_sort(array);
+    }
+}
+
 #[cfg(test)]
 mod test {
-    use crate::sorting::traits::{InplaceSorter, Sorter};
+    use crate::sorting::traits::Sorter;
     use crate::sorting::StoogeSort;
 
     sorting_tests!(StoogeSort::sort, stooge_sort);
-    sorting_tests!(StoogeSort::sort_inplace, stooge_sort_inplace, inplace);
+    sorting_tests!(StoogeSort::sort_inplace, stooge_sort, inplace);
 }

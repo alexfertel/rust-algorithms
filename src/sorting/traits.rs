@@ -1,11 +1,10 @@
-pub trait Sorter<T> {
-    fn sort(arr: &[T]) -> Vec<T>
-    where
-        T: Ord + Copy;
+pub trait Sorter<T: Ord + Copy> {
+    fn sort_inplace(arr: &mut [T]);
+
+    fn sort(arr: &[T]) -> Vec<T> {
+        let mut arr = arr.to_vec();
+        Self::sort_inplace(&mut arr);
+        arr
+    }
 }
 
-pub trait InplaceSorter<T> {
-    fn sort_inplace(arr: &mut [T])
-    where
-        T: Ord + Copy;
-}

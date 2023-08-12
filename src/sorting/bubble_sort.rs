@@ -1,4 +1,15 @@
-use crate::sorting::traits::{InplaceSorter, Sorter};
+use crate::sorting::traits::Sorter;
+
+fn bubble_sort<T: Ord>(arr: &mut [T]) {
+    for i in 0..arr.len() {
+        // Last i elements are already in place.
+        for j in 0..arr.len() - 1 - i {
+            if arr[j] > arr[j + 1] {
+                arr.swap(j, j + 1);
+            }
+        }
+    }
+}
 
 /// It sorts the array by repeatedly comparing the
 /// adjacent elements and swapping them if they are
@@ -7,38 +18,20 @@ use crate::sorting::traits::{InplaceSorter, Sorter};
 /// Auxiliary space is O(1)
 pub struct BubbleSort;
 
-impl<T> InplaceSorter<T> for BubbleSort
-where
-    T: Ord,
-{
-    fn sort_inplace(array: &mut [T]) {
-        for i in 0..array.len() {
-            // Last i elements are already in place.
-            for j in 0..array.len() - 1 - i {
-                if array[j] > array[j + 1] {
-                    array.swap(j, j + 1);
-                }
-            }
-        }
-    }
-}
-
 impl<T> Sorter<T> for BubbleSort
 where
-    T: Ord + Copy,
+    T: Ord + Copy
 {
-    fn sort(array: &[T]) -> Vec<T> {
-        let mut vec = array.to_vec();
-        BubbleSort::sort_inplace(&mut vec);
-        vec
+    fn sort_inplace(array: &mut [T]) {
+        bubble_sort(array);
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::sorting::traits::{InplaceSorter, Sorter};
+    use crate::sorting::traits::Sorter;
     use crate::sorting::BubbleSort;
 
     sorting_tests!(BubbleSort::sort, bubble_sort);
-    sorting_tests!(BubbleSort::sort_inplace, bubble_sort_inplace, inplace);
+    sorting_tests!(BubbleSort::sort_inplace, bubble_sort, inplace);
 }

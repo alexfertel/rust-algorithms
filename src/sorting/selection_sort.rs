@@ -1,26 +1,4 @@
-use crate::sorting::traits::{InplaceSorter, Sorter};
-
-pub struct SelectionSort;
-
-impl<T> InplaceSorter<T> for SelectionSort
-where
-    T: Ord,
-{
-    fn sort_inplace(array: &mut [T]) {
-        selection_sort(array);
-    }
-}
-
-impl<T> Sorter<T> for SelectionSort
-where
-    T: Ord + Copy,
-{
-    fn sort(array: &[T]) -> Vec<T> {
-        let mut vec = array.to_vec();
-        selection_sort(&mut vec);
-        vec
-    }
-}
+use crate::sorting::traits::Sorter;
 
 fn selection_sort<T: Ord>(array: &mut [T]) {
     // Loop through each element in the array.
@@ -38,11 +16,22 @@ fn selection_sort<T: Ord>(array: &mut [T]) {
     }
 }
 
+pub struct SelectionSort;
+
+impl<T> Sorter<T> for SelectionSort
+where
+    T: Ord + Copy,
+{
+    fn sort_inplace(array: &mut [T]) {
+        selection_sort(array);
+    }
+}
+
 #[cfg(test)]
 mod tests {
-    use crate::sorting::traits::{InplaceSorter, Sorter};
+    use crate::sorting::traits::Sorter;
     use crate::sorting::SelectionSort;
 
     sorting_tests!(SelectionSort::sort, selection_sort);
-    sorting_tests!(SelectionSort::sort_inplace, selection_sort_inplace, inplace);
+    sorting_tests!(SelectionSort::sort_inplace, selection_sort, inplace);
 }

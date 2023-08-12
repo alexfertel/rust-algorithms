@@ -1,27 +1,5 @@
-use crate::sorting::traits::{InplaceSorter, Sorter};
+use crate::sorting::traits::Sorter;
 use std::cmp;
-
-pub struct TimSort;
-
-impl<T> InplaceSorter<T> for TimSort
-where
-    T: Ord + Clone + Default + Eq + Copy,
-{
-    fn sort_inplace(array: &mut [T]) {
-        tim_sort(array);
-    }
-}
-
-impl<T> Sorter<T> for TimSort
-where
-    T: Ord + Clone + Default + Eq + Copy,
-{
-    fn sort(array: &[T]) -> Vec<T> {
-        let mut vec = array.to_vec();
-        tim_sort(&mut vec);
-        vec
-    }
-}
 
 static MIN_MERGE: usize = 32;
 
@@ -124,11 +102,22 @@ fn tim_sort<T: Ord + Eq + Default + Clone + Copy>(arr: &mut [T]) {
     _tim_sort(arr, n);
 }
 
+pub struct TimSort;
+
+impl<T> Sorter<T> for TimSort
+where
+    T: Ord + Clone + Default + Eq + Copy,
+{
+    fn sort_inplace(array: &mut [T]) {
+        tim_sort(array);
+    }
+}
+
 #[cfg(test)]
 mod tests {
-    use crate::sorting::traits::{InplaceSorter, Sorter};
+    use crate::sorting::traits::Sorter;
     use crate::sorting::TimSort;
 
     sorting_tests!(TimSort::sort, tim_sort);
-    sorting_tests!(TimSort::sort_inplace, tim_sort_inplace, inplace);
+    sorting_tests!(TimSort::sort_inplace, tim_sort, inplace);
 }

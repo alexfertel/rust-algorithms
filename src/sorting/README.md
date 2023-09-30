@@ -120,5 +120,115 @@ __Sources to read:__
 * [Geeksforgeeks](https://www.geeksforgeeks.org/selection-sort/)
 * [Programiz](https://www.programiz.com/dsa/selection-sort)
 
+### [Heap Sort](./heap_sort.rs)
+
+Heap sort is a comparison-based sorting algorithm that uses a binary heap data structure. The main idea behind heap sort is to turn the array into a max-heap structure, which ensures that the largest element of the heap is located at the root. This largest element is then swapped with the last element and removed from the heap. This process is repeated until the heap is empty, resulting in a sorted array.
+
+* Safety: One of Rust's main features is memory safety. In the heap sort implementation, Rust ensures safety by using borrowing and the slice notation to manipulate parts of the array.
+* In-place Swapping: Rust provides an efficient way to swap two elements in an array with arr.swap(i, j), which makes the algorithm elegant and concise.
+* Performance: Rust, being a systems programming language, ensures that the heap sort implementation is efficient and can be optimized further by the Rust compiler.
+
+__Properties__
+* In-place sorting: It sorts the data in place, requiring only a constant amount of additional memory.
+* Time complexity: Heap sort has a worst-case time complexity of O(n log n).
+
+__Sources to read:__
+* [Wikipedia](https://en.wikipedia.org/wiki/Heapsort)
+* [Geeksforgeeks](https://www.geeksforgeeks.org/heap-sort/)
+* [Programiz](https://www.programiz.com/dsa/heap-sort)
+
+### [Odd-Even Sort](./odd_even_sort.rs)
+
+Odd-Even Sort, also known as Brick Sort, is a relatively simple sorting algorithm, inspired by the idea behind Bubble Sort. The main idea is to repeatedly make two passes on an array: one for every odd-indexed element pair and the other for every even-indexed element pair.
+
+__Algorithm__
+* Odd Step: Compare all odd-indexed elements of the array with their next neighbor (i.e., at index i and i+1) and swap them if the element at index i is greater than the one at i+1.
+* Even Step: Compare all even-indexed elements of the array with their next neighbor (i.e., at index i and i+1) and swap them if the element at index i is greater than the one at i+1.
+* Repeat the two steps until the array is sorted.
+
+![Alt text](image.png)
+
+__Properties__
+* Worst case : O(n^2)
+* Best case : O(n)
+* Average case : O(n^2)
+
+__Sources to read:__
+* [Wikipedia](https://en.wikipedia.org/wiki/Odd%E2%80%93even_sort)
+* [Geeksforgeeks](https://www.geeksforgeeks.org/odd-even-sort-brick-sort/)
+* [Programiz](https://www.programiz.com/dsa/heap-sort)
+
+
+### [Pancake Sort](./pancake_sort.rs)
+
+The main operation in Pancake Sort is a "flip" operation. Given an integer k, the flip operation reverses the order of the first k elements in the array.
+
+The idea behind Pancake Sort:
+
+* Find the index of the maximum element in the array.
+* Use the flip operation to move this maximum element to the beginning of the array.
+* Use another flip operation to move this maximum element to its correct position at the end of the array.
+* Exclude the last element and repeat the above steps for the rest of the array.
+
+The goal is to move the largest unsorted element to its correct position in each iteration.
+
+__Properties__
+* Worst case : O(n^2)
+* Average case : O(n^2)
+
+__Sources to read:__
+* [Wikipedia](https://en.wikipedia.org/wiki/Pancake_sorting)
+* [Geeksforgeeks](https://www.geeksforgeeks.org/pancake-sorting/)
+
+
+### [Merge Sort](./merge_sort.rs)
+
+Merge sort is a divide-and-conquer sorting algorithm. It works as follows:
+
+* Divide the unsorted list into n sublists, each containing one element.
+* Repeatedly merge sublists to produce new sorted sublists until there is only one sublist remaining.
+
+* The merge_sort function first checks if the array has a length of 1 or 0. If so, it's already sorted, so it returns the array as-is.
+* The array is split into two halves, which are recursively sorted.
+* The sorted halves are merged together using the merge function.
+* The merge function takes two sorted arrays (or slices) and returns a new array that contains all the elements from both arrays in sorted order. It does this by iterating through both arrays simultaneously, always choosing the smallest of the two current elements to append to the result.
+
+__Properties__
+* Worst case : O(nlogn)
+* Average case : O(nlogn)
+* Best case : O(nlogn)
+
+__Sources to read:__
+* [Wikipedia](https://en.wikipedia.org/wiki/Merge_sort)
+* [Geeksforgeeks](https://www.geeksforgeeks.org/merge-sort/)
+* [Programiz](https://www.programiz.com/dsa/merge-sort)
+
+
+### [Insertion Sort](./insertion_sort.rs)
+
+Insertion sort is a simple and intuitive sorting algorithm that builds the final sorted array one element at a time. It's best suited for small arrays or arrays that are already nearly sorted.
+
+The basic idea of insertion sort is similar to the way many people sort playing cards in their hands. We start from the beginning of the array and continuously insert elements in their correct position in the sorted portion of the array.
+
+Here's a step-by-step explanation followed by a Rust implementation:
+
+* Start from the second element (index 1) assuming the element at index 0 is sorted.
+* Compare the current element with the previous elements. If the current element is smaller than the previous element, we keep comparing with the elements before until we reach an element smaller or reach the start of the array.
+* Insert the current element in its correct position so that the elements before are all smaller than the current element.
+* Repeat the process for each of the elements in the array. 
+
+__Properties__
+* Worst case : O(n^2)
+* Average case : O(n^2)
+* Best case : O(n)
+
+__Space Complexity__
+* O(1) - Because it's an in-place sorting algorithm (i.e., it doesn't require any additional storage).
+
+__Sources to read:__
+* [Wikipedia](https://en.wikipedia.org/wiki/Insertion_sort)
+* [Geeksforgeeks](https://www.geeksforgeeks.org/insertion-sort/)
+* [Programiz](https://www.programiz.com/dsa/insertion-sort)
+
 
 

@@ -128,6 +128,8 @@ Heap sort is a comparison-based sorting algorithm that uses a binary heap data s
 * In-place Swapping: Rust provides an efficient way to swap two elements in an array with arr.swap(i, j), which makes the algorithm elegant and concise.
 * Performance: Rust, being a systems programming language, ensures that the heap sort implementation is efficient and can be optimized further by the Rust compiler.
 
+![Alt text](image-4.png)
+
 __Properties__
 * In-place sorting: It sorts the data in place, requiring only a constant amount of additional memory.
 * Time complexity: Heap sort has a worst-case time complexity of O(n log n).
@@ -172,6 +174,8 @@ The idea behind Pancake Sort:
 
 The goal is to move the largest unsorted element to its correct position in each iteration.
 
+![Alt text](image-3.png)
+
 __Properties__
 * Worst case : O(n^2)
 * Average case : O(n^2)
@@ -192,6 +196,8 @@ Merge sort is a divide-and-conquer sorting algorithm. It works as follows:
 * The array is split into two halves, which are recursively sorted.
 * The sorted halves are merged together using the merge function.
 * The merge function takes two sorted arrays (or slices) and returns a new array that contains all the elements from both arrays in sorted order. It does this by iterating through both arrays simultaneously, always choosing the smallest of the two current elements to append to the result.
+
+![Alt text](image-2.png)
 
 __Properties__
 * Worst case : O(nlogn)
@@ -216,6 +222,8 @@ Here's a step-by-step explanation followed by a Rust implementation:
 * Compare the current element with the previous elements. If the current element is smaller than the previous element, we keep comparing with the elements before until we reach an element smaller or reach the start of the array.
 * Insert the current element in its correct position so that the elements before are all smaller than the current element.
 * Repeat the process for each of the elements in the array. 
+
+![Alt text](image-1.png)
 
 __Properties__
 * Worst case : O(n^2)

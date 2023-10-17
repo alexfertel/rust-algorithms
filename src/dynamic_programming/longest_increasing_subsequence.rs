@@ -1,9 +1,26 @@
-/// Finds the longest increasing subsequence and returns it.
-///
-/// If multiple subsequences with the longest possible subsequence length can be found, the
-/// subsequence which appeared first will be returned (see `test_example_1`).
-///
-/// Inspired by [this LeetCode problem](https://leetcode.com/problems/longest-increasing-subsequence/).
+//! Longest Increasing Subsequence
+//!
+//! # Algorithm
+//!
+//! The algorithm uses dynamic programming to efficiently find the longest increasing subsequence.
+//! It maintains a sequence of increasing elements while iterating through the input array.
+//! For each element in the input array, it compares the element with the last element in the increasing sequence.
+//! If the current element is greater, it extends the sequence. If not, it finds the correct position to replace a previous element to maintain the increasing order.
+//!
+//! The result is the longest increasing subsequence found in the input array. If multiple subsequences with the same length are possible, the one that appeared first in the input array is returned.
+//!
+//! # Generic Type
+//!
+//! This function is generic over the type of elements in the input array and requires the `Ord` trait to be implemented for the elements.
+//!
+//! # Panics
+//!
+//! This function does not panic and will return an empty vector if the input array is empty.
+//!
+//! # Inspired by
+//!
+//! This function is inspired by the [Longest Increasing Subsequence problem on LeetCode](https://leetcode.com/problems/longest-increasing-subsequence/).
+
 pub fn longest_increasing_subsequence<T: Ord + Clone>(input_array: &[T]) -> Vec<T> {
     let n = input_array.len();
     if n <= 1 {

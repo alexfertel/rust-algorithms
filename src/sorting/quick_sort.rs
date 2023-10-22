@@ -13,7 +13,9 @@
 /// after `x. All this should be done in linear time.
 ///
 /// QuickSort's time complexity is O(n*logn).
-pub fn quick_sort<T: Ord>(array: &mut [T]) {
+use crate::sorting::traits::Sorter;
+
+fn quick_sort<T: Ord>(array: &mut [T]) {
     match array.len() {
         0 | 1 => return,
         _ => {}
@@ -22,7 +24,6 @@ pub fn quick_sort<T: Ord>(array: &mut [T]) {
     let (pivot, rest) = array.split_first_mut().expect("array is non-empty");
     let mut left = 0;
     let mut right = rest.len() - 1;
-    
     while left <= right {
         if &rest[left] <= pivot {
             left += 1;
@@ -46,12 +47,7 @@ pub fn quick_sort<T: Ord>(array: &mut [T]) {
     let (left, right) = array.split_at_mut(left);
     quick_sort(left);
     quick_sort(&mut right[1..]);
-}
-
-/// QuickSort is a type that implements the `Sorter` trait for QuickSort.
-pub struct QuickSort;
-
-impl<T> Sorter<T> for QuickSort
+}impl<T> Sorter<T> for QuickSort
 where
     T: Ord + Copy,
 {
@@ -60,40 +56,11 @@ where
     }
 }
 
-// Example module organization structure
-mod sorting {
-    pub mod traits {
-        pub trait Sorter<T> {
-            fn sort_inplace(array: &mut [T]);
-        }
-    }
-
-    pub mod quicksort {
-        use super::traits::Sorter;
-
-        /// Sorts an array using the QuickSort algorithm.
-        pub fn quick_sort<T: Ord>(array: &mut [T]) {
-            // ... (QuickSort implementation)
-        }
-
-        /// QuickSort is a type that implements the `Sorter` trait for QuickSort.
-        pub struct QuickSort;
-
-        impl<T> Sorter<T> for QuickSort
-        where
-            T: Ord + Copy,
-        {
-            fn sort_inplace(array: &mut [T]) {
-                quick_sort(array);
-            }
-        }
-    }
-}
-
 #[cfg(test)]
 mod tests {
     use crate::sorting::traits::Sorter;
-    use crate::sorting::quicksort::QuickSort;
+    use crate::sorting::QuickSort;
 
-    // Add your unit tests here
+    sorting_tests!(QuickSort::sort, quick_sort);
+    sorting_tests!(QuickSort::sort_inplace, quick_sort, inplace);
 }

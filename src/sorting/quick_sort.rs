@@ -47,20 +47,4 @@ fn quick_sort<T: Ord>(array: &mut [T]) {
     let (left, right) = array.split_at_mut(left);
     quick_sort(left);
     quick_sort(&mut right[1..]);
-}impl<T> Sorter<T> for QuickSort
-where
-    T: Ord + Copy,
-{
-    fn sort_inplace(array: &mut [T]) {
-        quick_sort(array);
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use crate::sorting::traits::Sorter;
-    use crate::sorting::QuickSort;
-
-    sorting_tests!(QuickSort::sort, quick_sort);
-    sorting_tests!(QuickSort::sort_inplace, quick_sort, inplace);
 }

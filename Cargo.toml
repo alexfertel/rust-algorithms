@@ -7,3 +7,4 @@ edition = "2018"
 
 [dependencies]
 paste = "1.0.12"
+bitvec = "1.0.1"

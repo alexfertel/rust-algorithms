@@ -1,30 +1,22 @@
-/// calculates the signed area between the function f and the x axis from
-/// x = a to b using a trapezoidal Riemann sum. precision is the number of
-/// trapezoids to calculate
 pub fn trapezoidal_integral<F>(a: f64, b: f64, f: F, precision: u32) -> f64
 where
     F: Fn(f64) -> f64,
 {
-    fn core<F>(a: f64, b: f64, f: F, precision: u32) -> f64
-    where
-        F: Fn(f64) -> f64,
-    {
-        let delta = (b - a) / precision as f64;
+    let delta = (b - a) / precision as f64;
 
-        (0..precision)
-            .map(|trapezoid| {
-                let left_side = a + (delta * trapezoid as f64);
-                let right_size = left_side + delta;
+    let integral: f64 = (0..precision)
+        .map(|trapezoid| {
+            let left_side = a + (delta * trapezoid as f64);
+            let right_side = left_side + delta;
 
-                0.5 * (f(left_side) + f(right_size)) * delta
-            })
-            .sum()
-    }
+            0.5 * (f(left_side) + f(right_side)) * delta
+        })
+        .sum();
 
     if a > b {
-        -core(b, a, f, precision)
+        -integral
     } else {
-        core(a, b, f, precision)
+        integral
     }
 }
 

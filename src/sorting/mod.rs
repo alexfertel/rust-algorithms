@@ -41,6 +41,7 @@ mod shell_sort;
 mod stooge_sort;
 mod tim_sort;
 mod traits;
+mod sleep_sort;
 
 use std::fmt;
 
@@ -64,6 +65,7 @@ pub use self::selection_sort::SelectionSort;
 pub use self::shell_sort::ShellSort;
 pub use self::stooge_sort::StoogeSort;
 pub use self::tim_sort::TimSort;
+pub use self::sleep_sort::sleep_sort;
 
 #[cfg(test)]
 mod tests {

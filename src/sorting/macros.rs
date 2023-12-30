@@ -1,15 +1,18 @@
+#[macro_export]
 macro_rules! assert_sorted {
     ($iter:expr) => {
         assert!($crate::sorting::is_sorted($iter));
     };
 }
 
+#[macro_export]
 macro_rules! assert_not_sorted {
     ($iter:expr) => {
         assert!(!$crate::sorting::is_sorted($iter));
     };
 }
 
+#[macro_export]
 macro_rules! sorting_tests {
     ($sorter: expr, $mod_name: ident, inplace) => {
         paste::paste! {

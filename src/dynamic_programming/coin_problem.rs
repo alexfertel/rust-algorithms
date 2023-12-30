@@ -42,7 +42,7 @@ pub fn coin_problem(n: usize, coins: &mut Vec<usize>) -> usize {
         for j in 0..combinations.len() {
             if coins[i] <= j {
                 // update the combinations array
-                combinations[j] += combinations[(j - coins[i])];
+                combinations[j] += combinations[j - coins[i]];
             }
         }
     }

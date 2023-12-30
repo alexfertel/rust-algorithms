@@ -132,7 +132,7 @@ fn calc_chunk(chunk: &mut [u8; 64], state: &mut BufState) -> bool {
         chunk[63] = (len << 3) as u8;
         len >>= 5;
         for i in 1..8 {
-            chunk[(63 - i)] = len as u8;
+            chunk[63 - i] = len as u8;
             len >>= 8;
         }
         state.total = true;

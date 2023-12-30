@@ -4,7 +4,6 @@ pub struct Vertex(u32);
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub struct Edge(u32, u32);
 
-
 #[derive(Debug, Clone)]
 pub struct Graph {
     vertices: Vec<Vertex>,

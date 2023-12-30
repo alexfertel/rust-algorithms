@@ -4,6 +4,7 @@ mod binary_search_tree;
 mod bloom_filter;
 mod fenwick_tree;
 mod graph;
+mod hashtable;
 mod heap;
 mod linked_list;
 mod queue;
@@ -13,15 +14,14 @@ mod stack;
 mod stack_using_singly_linked_list;
 mod trie;
 mod union_find;
-mod hashtable;
 
 pub use self::bloom_filter::BloomFilter;
+pub use self::hashtable::HashTable;
 pub use self::heap::MaxHeap;
 pub use self::heap::MinHeap;
 pub use self::linked_list::LinkedList;
 pub use self::queue::Queue;
 pub use self::stack::Stack;
-pub use self::hashtable::HashTable;
 
 // REVIEW: Some of these might actually belong in src/graph
 pub use self::avl_tree::AVLTree;

@@ -28,6 +28,7 @@ pub fn sleep_sort(vec: &[usize]) -> Vec<usize> {
     rx.into_iter().take(len).collect()
 }
 
+#[allow(dead_code)]
 fn main() {
     let vec = vec![5, 3, 7, 10, 1, 0, 8];
     let sorted_vec = sleep_sort(&vec);

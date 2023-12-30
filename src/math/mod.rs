@@ -24,6 +24,7 @@ mod random;
 mod sieve_of_eratosthenes;
 mod simpson_integration;
 mod square_root;
+mod trapezoidal_integration;
 mod trial_division;
 mod zellers_congruence_algorithm;
 
@@ -60,5 +61,6 @@ pub use self::random::PCG32;
 pub use self::sieve_of_eratosthenes::sieve_of_eratosthenes;
 pub use self::simpson_integration::simpson_integration;
 pub use self::square_root::square_root;
+pub use self::trapezoidal_integration::trapezoidal_integral;
 pub use self::trial_division::trial_division;
 pub use self::zellers_congruence_algorithm::zellers_congruence_algorithm;

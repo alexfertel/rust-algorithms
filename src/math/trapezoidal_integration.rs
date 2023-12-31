@@ -20,6 +20,7 @@ where
     }
 }
 
+#[allow(dead_code)]
 fn main() {
     let f = |x: f64| x.powi(3);
     let result = trapezoidal_integral(0.0, 1.0, f, 1000);

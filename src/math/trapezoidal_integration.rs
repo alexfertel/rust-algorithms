@@ -2,22 +2,20 @@ pub fn trapezoidal_integral<F>(a: f64, b: f64, f: F, precision: u32) -> f64
 where
     F: Fn(f64) -> f64,
 {
+    if a > b {
+        return trapezoidal_integral(b, a, f, precision);
+    }
+	
     let delta = (b - a) / precision as f64;
 
-    let integral: f64 = (0..precision)
+    (0..precision)
         .map(|trapezoid| {
             let left_side = a + (delta * trapezoid as f64);
             let right_side = left_side + delta;
 
             0.5 * (f(left_side) + f(right_side)) * delta
         })
-        .sum();
-
-    if a > b {
-        -integral
-    } else {
-        integral
-    }
+        .sum()
 }
 
 #[allow(dead_code)]

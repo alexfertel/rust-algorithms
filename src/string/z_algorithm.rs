@@ -39,6 +39,7 @@ fn match_with_z_array<T: Eq>(
     }
 }
 
+#[allow(dead_code)]
 pub fn z_array<T: Eq>(input: &[T]) -> Vec<usize> {
     match_with_z_array(input, input, 1, false)
 }

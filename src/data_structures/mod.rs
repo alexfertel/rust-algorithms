@@ -4,6 +4,7 @@ mod binary_search_tree;
 mod bloom_filter;
 mod fenwick_tree;
 mod graph;
+mod hashtable;
 mod heap;
 mod linked_list;
 mod queue;
@@ -15,6 +16,7 @@ mod trie;
 mod union_find;
 
 pub use self::bloom_filter::BloomFilter;
+pub use self::hashtable::HashTable;
 pub use self::heap::MaxHeap;
 pub use self::heap::MinHeap;
 pub use self::linked_list::LinkedList;

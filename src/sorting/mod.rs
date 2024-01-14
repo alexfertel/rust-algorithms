@@ -20,6 +20,7 @@ where
     true
 }
 
+mod bingo_sort;
 mod bogo_sort;
 mod bubble_sort;
 mod bucket_sort;
@@ -38,12 +39,14 @@ mod quick_sort;
 mod radix_sort;
 mod selection_sort;
 mod shell_sort;
+mod sleep_sort;
 mod stooge_sort;
 mod tim_sort;
 mod traits;
 
 use std::fmt;
 
+pub use self::bingo_sort::bingo_sort;
 pub use self::bogo_sort::BogoSort;
 pub use self::bubble_sort::BubbleSort;
 pub use self::bucket_sort::BucketSort;
@@ -62,6 +65,7 @@ pub use self::quick_sort::QuickSort;
 pub use self::radix_sort::RadixSort;
 pub use self::selection_sort::SelectionSort;
 pub use self::shell_sort::ShellSort;
+pub use self::sleep_sort::sleep_sort;
 pub use self::stooge_sort::StoogeSort;
 pub use self::tim_sort::TimSort;
 

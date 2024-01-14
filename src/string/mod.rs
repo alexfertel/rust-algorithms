@@ -17,4 +17,4 @@ pub use self::manacher::manacher;
 pub use self::naive::naive;
 pub use self::rabin_karp::rabin_karp;
 pub use self::reverse::reverse;
-pub use self::z_algorithm::match_pattern;
+pub use self::z_algorithm::{match_pattern, z_array};

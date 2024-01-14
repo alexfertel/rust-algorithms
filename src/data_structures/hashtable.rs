@@ -1,4 +1,7 @@
 use std::collections::LinkedList;
+const GROWTH_FACTOR: usize = 2;
+const LOAD_FACTOR_BOUND: f64 = 0.75;
+const INITIAL_CAPACITY: usize = 3000;
 
 pub struct HashTable<K, V> {
     elements: Vec<LinkedList<(K, V)>>,
@@ -17,7 +20,7 @@ pub trait Hashable {
 
 impl<K: Hashable + std::cmp::PartialEq, V> HashTable<K, V> {
     pub fn new() -> HashTable<K, V> {
-        let initial_capacity = 3000;
+        let initial_capacity = INITIAL_CAPACITY;
         let mut elements = Vec::with_capacity(initial_capacity);
 
         for _ in 0..initial_capacity {
@@ -28,7 +31,7 @@ impl<K: Hashable + std::cmp::PartialEq, V> HashTable<K, V> {
     }
 
     pub fn insert(&mut self, key: K, value: V) {
-        if self.count >= self.elements.len() * 3 / 4 {
+        if self.count >= self.elements.len() * LOAD_FACTOR_BOUND as usize {
             self.resize();
         }
         let index = key.hash() % self.elements.len();
@@ -45,7 +48,7 @@ impl<K: Hashable + std::cmp::PartialEq, V> HashTable<K, V> {
     }
 
     fn resize(&mut self) {
-        let new_size = self.elements.len() * 2;
+        let new_size = self.elements.len() * GROWTH_FACTOR;
         let mut new_elements = Vec::with_capacity(new_size);
 
         for _ in 0..new_size {
@@ -93,7 +96,7 @@ mod tests {
         let mut hash_table = HashTable::new();
         let initial_capacity = hash_table.elements.capacity();
 
-        for i in 0..initial_capacity * 3 / 4 + 1 {
+        for i in 0..initial_capacity * LOAD_FACTOR_BOUND as usize + 1 {
             hash_table.insert(TestKey(i), TestKey(i + 10));
         }
 

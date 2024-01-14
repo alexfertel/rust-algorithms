@@ -5,7 +5,7 @@ where
     if a > b {
         return trapezoidal_integral(b, a, f, precision);
     }
-	
+
     let delta = (b - a) / precision as f64;
 
     (0..precision)

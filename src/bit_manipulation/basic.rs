@@ -11,23 +11,15 @@ pub fn clear_bit(bits: i8, n: usize) -> i8 {
 }
 
 pub fn update_bit(bits: i8, n: usize, set_it: bool) -> i8 {
-    let cleared_bits = clear_bit(bits, n);
-
-    let updated_bits = if set_it {
-        set_bit(cleared_bits, n)
+    if set_it {
+        set_bit(bits, n)
     } else {
-        cleared_bits
-    };
-
-    updated_bits
+        clear_bit(bits, n)
+    }
 }
 
 pub fn is_even(bits: i8) -> bool {
-    if get_bit(bits, 0) == 0 {
-        true
-    } else {
-        false
-    }
+    bool::from(bits & 1 == 0)
 }
 
 pub fn is_positive(bits: i8) -> bool {
@@ -35,11 +27,7 @@ pub fn is_positive(bits: i8) -> bool {
         return false;
     }
 
-    if get_bit(bits, 7) == 0 {
-        true
-    } else {
-        false
-    }
+    get_bit(bits, 7) == 0
 }
 
 pub fn multiply_by_two(bits: i8) -> i8 {
@@ -87,22 +75,25 @@ pub fn count_ones(bits: i8) -> i8 {
     result
 }
 
+/// Counts the number of equal bits.
+pub fn bit_equivalence(a: i8, b: i8) -> i8 {
+    count_ones(!(a ^ b))
+}
+
 pub fn bit_distance(a: i8, b: i8) -> i8 {
     count_ones(a ^ b)
 }
 
-pub fn bits_length(bits: i8) -> u32 {
-    let mut counter = 0;
-
-    while (1 << counter) <= bits {
-        counter += 1;
-    }
-
-    counter
-}
-
 pub fn is_power_of_two(bits: i8) -> bool {
     bits & (bits.wrapping_sub(1)) == 0
+}
+
+pub fn is_power_of_two_difference(bits: i8) -> bool {
+    ((bits | (bits.saturating_sub(1)))
+        .checked_add(1)
+        .unwrap_or(0))
+        & bits
+        == 0
 }
 
 #[cfg(test)]
@@ -138,19 +129,19 @@ mod tests {
     fn test_update_bit() {
         let bits = 0b101_0101;
 
-        // It contains clear_bit
+        // Clears a bit.
         assert_eq!(0b101_0100, update_bit(bits, 0, false));
         assert_eq!(0b101_0001, update_bit(bits, 2, false));
 
-        // It contains set_bit
+        // Sets a bit.
         assert_eq!(0b101_0111, update_bit(bits, 1, true));
         assert_eq!(0b101_1101, update_bit(bits, 3, true));
 
-        // Does nothing when setting a set bit
+        // Does nothing when setting a set bit.
         assert_eq!(bits, update_bit(bits, 0, true));
         assert_eq!(bits, update_bit(bits, 2, true));
 
-        // Does nothing when clearing a set bit
+        // Does nothing when clearing an unset bit.
         assert_eq!(bits, update_bit(bits, 1, false));
         assert_eq!(bits, update_bit(bits, 3, false));
     }
@@ -241,6 +232,13 @@ mod tests {
     }
 
     #[test]
+    fn test_bit_equivalence() {
+        assert_eq!(0, bit_equivalence(0b000_0000, 0b111_1111));
+        assert_eq!(6, bit_equivalence(0b000_0001, 0b000_0000));
+        assert_eq!(7, bit_equivalence(0b111_1111, 0b111_1111));
+    }
+
+    #[test]
     fn test_bit_distance() {
         assert_eq!(0, bit_distance(0, 0));
         assert_eq!(0, bit_distance(127, 127));
@@ -248,14 +246,6 @@ mod tests {
         assert_eq!(6, bit_distance(0b111_1111, 0b000_0100));
         assert_eq!(6, bit_distance(0b101_1011, 0b000_0100));
         assert_eq!(7, bit_distance(0b111_1111, 0b000_0000));
-    }
-
-    #[test]
-    fn test_bits_length() {
-        assert_eq!(0, bits_length(0));
-        assert_eq!(1, bits_length(1));
-        assert_eq!(3, bits_length(5));
-        assert_eq!(6, bits_length(63));
     }
 
     #[test]
@@ -268,5 +258,17 @@ mod tests {
         assert!(!is_power_of_two(33));
         assert!(!is_power_of_two(124));
         assert!(!is_power_of_two(-13));
+    }
+
+    #[test]
+    fn test_is_power_of_two_difference() {
+        assert!(is_power_of_two_difference(2));
+        assert!(is_power_of_two_difference(4));
+        assert!(is_power_of_two_difference(12));
+        assert!(is_power_of_two_difference(14));
+        assert!(is_power_of_two_difference(124));
+
+        assert!(!is_power_of_two_difference(33));
+        assert!(!is_power_of_two_difference(-13));
     }
 }

@@ -134,7 +134,7 @@ cargo test
 ### Bit Manipulation
 
 - [x] [Bit Distance](./src/bit_manipulation/basic.rs)
-- [x] [Bits Length](./src/bit_manipulation/basic.rs)
+- [x] [Bit Equivalence](./src/bit_manipulation/basic.rs)
 - [x] [Clear Bit](./src/bit_manipulation/basic.rs)
 - [x] [Count Ones](./src/bit_manipulation/basic.rs)
 - [x] [Divide By Two](./src/bit_manipulation/basic.rs)

@@ -21,6 +21,7 @@ where
 }
 
 mod bingo_sort;
+mod bogo_bogo_sort;
 mod bogo_sort;
 mod bubble_sort;
 mod bucket_sort;
@@ -47,6 +48,7 @@ mod traits;
 use std::fmt;
 
 pub use self::bingo_sort::bingo_sort;
+pub use self::bogo_bogo_sort::BogoBogoSort;
 pub use self::bogo_sort::BogoSort;
 pub use self::bubble_sort::BubbleSort;
 pub use self::bucket_sort::BucketSort;

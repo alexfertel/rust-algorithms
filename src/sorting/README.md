@@ -6,6 +6,18 @@ Two versions of this algorithm exist: a deterministic version that enumerates al
 
 [bogosort-wiki]:https://en.wikipedia.org/wiki/Bogosort
 
+### [Bogo-Bogo-sort](./bogo_bogo_sort.rs)
+From [leonardini.dev][bogo-bogo-doc]: BogoBogo Sort is a humorously inefficient sorting
+algorithm inspired by the original Bogosort. It adds a layer of complexity by recursively
+sorting the first n-1 elements before placing the nth element. This process is repeated until
+the array is sorted. The algorithm's performance is exceptionally poor, making it impractical
+for sorting but a useful tool for educational purposes, especially in understanding
+algorithm efficiency and recursive functions.
+__Properties__
+* Worst case performance (unbounded, extremely poor)
+* Best case performance O(n!)
+* Average case performance (unpredictable and impractical)
+
 ### [Bucket_Sort](./bucket_sort.rs)
 
 From [Wikipedia][bucketsort-wiki]: Bucket sort, or bin sort, is a sorting algorithm that works by distributing the elements of an array into a number of buckets. Each bucket is then sorted individually, either using a different sorting algorithm, or by recursively applying the bucket sorting algorithm. It is a distribution sort, a generalization of pigeonhole sort that allows multiple keys per bucket, and is a cousin of radix sort in the most-to-least significant digit flavor. Bucket sort can be implemented with comparisons and therefore can also be considered a comparison sort algorithm. The computational complexity depends on the algorithm used to sort each bucket, the number of buckets to use, and whether the input is uniformly distributed.

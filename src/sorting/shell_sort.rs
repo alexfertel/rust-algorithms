@@ -9,7 +9,7 @@ pub fn shell_sort<T: Ord + Copy>(values: &mut [T]) {
             // make swaps
             while pos >= gap && values[pos - gap] > val_current {
                 values[pos] = values[pos - gap];
-                pos = pos - gap;
+                pos -= gap;
             }
             values[pos] = val_current;
         }

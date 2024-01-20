@@ -73,7 +73,7 @@ fn pollard_rho_customizable(
             {
                 small_iteration += 1;
                 x = advance(x, c, number);
-                let diff = (x as i128 - y as i128).abs() as u128;
+                let diff = (x as i128 - y as i128).unsigned_abs();
                 remainder = (remainder * diff) % number as u128;
             }
             current_gcd = gcd(remainder as u64, number);
@@ -87,7 +87,7 @@ fn pollard_rho_customizable(
     if current_gcd == number {
         while current_gcd == 1 {
             x_start = advance(x_start, c, number);
-            current_gcd = gcd((x_start as i128 - y as i128).abs() as u64, number);
+            current_gcd = gcd((x_start as i128 - y as i128).unsigned_abs() as u64, number);
         }
     }
     current_gcd
@@ -178,8 +178,7 @@ pub fn pollard_rho_factorize(
         return result;
     }
     let mut to_be_factored = vec![number];
-    while !to_be_factored.is_empty() {
-        let last = to_be_factored.pop().unwrap();
+    while let Some(last) = to_be_factored.pop() {
         if last < minimum_prime_factors.len() as u64 {
             result.append(&mut factor_using_mpf(last as usize, minimum_prime_factors));
             continue;

@@ -34,8 +34,8 @@ fn merge<T: Default + Clone + Eq + Ord + Copy>(
 ) -> &[T] {
     let len1 = m - l + 1;
     let len2 = r - m;
-    let mut left = vec![T::default(); len1 as usize];
-    let mut right = vec![T::default(); len2 as usize];
+    let mut left = vec![T::default(); len1];
+    let mut right = vec![T::default(); len2];
 
     left[..len1].clone_from_slice(&arr[l..(len1 + l)]);
 
@@ -73,7 +73,7 @@ fn merge<T: Default + Clone + Eq + Ord + Copy>(
 }
 
 fn _tim_sort<T: Ord + Eq + Default + Clone + Copy>(arr: &mut [T], n: usize) {
-    let min_run = min_run_length(MIN_MERGE) as usize;
+    let min_run = min_run_length(MIN_MERGE);
 
     let mut i = 0;
     while i < n {

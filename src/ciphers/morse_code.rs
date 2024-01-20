@@ -1,5 +1,4 @@
 use std::collections::HashMap;
-use std::io;
 
 const UNKNOWN_CHARACTER: &str = "........";
 const _UNKNOWN_MORSE_CHARACTER: &str = "_";
@@ -19,7 +18,7 @@ pub fn encode(message: &str) -> String {
 // Declarative macro for creating readable map declarations, for more info see https://doc.rust-lang.org/book/ch19-06-macros.html
 macro_rules! map {
     ($($key:expr => $value:expr),* $(,)?) => {
-        std::iter::Iterator::collect(std::array::IntoIter::new([$(($key, $value),)*]))
+        std::iter::Iterator::collect(IntoIterator::into_iter([$(($key, $value),)*]))
     };
 }
 
@@ -109,10 +108,10 @@ fn _decode_part(string: &str) -> String {
 /// Given a morse code, return the corresponding message.
 /// If the code is invalid, the undecipherable part of the code is replaced by `_`.
 #[cfg(test)]
-pub fn decode(string: &str) -> Result<String, io::Error> {
+pub fn decode(string: &str) -> Result<String, std::io::Error> {
     if !_check_all_parts(string) {
-        return Err(io::Error::new(
-            io::ErrorKind::InvalidData,
+        return Err(std::io::Error::new(
+            std::io::ErrorKind::InvalidData,
             "Invalid morse code",
         ));
     }
@@ -192,7 +191,7 @@ mod tests {
     fn decrypt_invalid_morsecode_with_spaces() {
         let encypted = "1... . .-.. .-.. --- / -- --- .-. ... .";
         let result = decode(encypted).map_err(|e| e.kind());
-        let expected = Err(io::ErrorKind::InvalidData);
+        let expected = Err(std::io::ErrorKind::InvalidData);
 
         assert_eq!(expected, result);
     }

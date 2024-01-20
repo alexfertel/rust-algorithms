@@ -29,7 +29,7 @@ pub fn rod_cutting(price: &mut Vec<u32>) -> u32 {
         return 0;
     }
 
-    let mut val = vec![0; (length + 1) as usize];
+    let mut val = vec![0; length + 1];
     val[0] = 0;
 
     // build the table in bottom up manner and return the last entry from the table

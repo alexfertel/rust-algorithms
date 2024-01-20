@@ -6,8 +6,8 @@ pub struct Edge(u32, u32);
 
 #[derive(Debug, Clone)]
 pub struct Graph {
-    vertices: Vec<Vertex>,
-    edges: Vec<Edge>,
+    pub vertices: Vec<Vertex>,
+    pub edges: Vec<Edge>,
 }
 
 impl Graph {

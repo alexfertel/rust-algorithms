@@ -6,8 +6,7 @@ pub fn prufer_encode<V: Ord + Copy>(tree: &Graph<V>) -> Vec<V> {
     if tree.len() <= 2 {
         return vec![];
     }
-    let mut result: Vec<V> = Vec::new();
-    result.reserve(tree.len() - 2);
+    let mut result: Vec<V> = Vec::with_capacity(tree.len() - 2);
     let mut queue = BinaryHeap::new();
     let mut in_tree = BTreeSet::new();
     let mut degree = BTreeMap::new();
@@ -33,7 +32,7 @@ pub fn prufer_encode<V: Ord + Copy>(tree: &Graph<V>) -> Vec<V> {
 
 #[inline]
 fn add_directed_edge<V: Ord + Copy>(tree: &mut Graph<V>, a: V, b: V) {
-    tree.entry(a).or_insert(vec![]).push(b);
+    tree.entry(a).or_default().push(b);
 }
 
 #[inline]

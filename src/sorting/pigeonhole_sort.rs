@@ -27,13 +27,6 @@ pub fn pigeonhole_sort(arr: &mut [i32]) {
     }
 }
 
-fn main() {
-    let mut arr = vec![10, 10, 9, 8, 7, 7, 6, 5, 4, 3, 2, 1];
-    pigeonhole_sort(&mut arr);
-
-    println!("Sorted order is : {:?}", arr);
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;

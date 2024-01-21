@@ -60,16 +60,6 @@ fn tree_sort(arr: &mut Vec<i32>) {
     store_sorted(&root, arr);
 }
 
-fn main() {
-    let mut arr = vec![5, 4, 7, 2, 11];
-    tree_sort(&mut arr);
-    for item in arr.iter() {
-        print!("{} ", item);
-    }
-
-    println!();
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;

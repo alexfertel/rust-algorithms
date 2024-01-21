@@ -30,19 +30,6 @@ fn bitonic_merge(up: bool, x: &mut [i32]) {
     bitonic_merge(up, second);
 }
 
-fn main() {
-    let mut numbers = vec![10, 30, 11, 20, 4, 330, 21, 110];
-    // Ensure the length is a power of 2 for bitonic sorting
-    assert_eq!(
-        numbers.len() & (numbers.len() - 1),
-        0,
-        "The length of the array should be a power of 2."
-    );
-
-    bitonic_sort(true, &mut numbers);
-    println!("Sorted numbers: {:?}", numbers);
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;

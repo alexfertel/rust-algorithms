@@ -38,19 +38,6 @@ pub fn strand_sort(ip: &mut LinkedList<i32>, op: &mut LinkedList<i32>) {
     strand_sort(ip, op);
 }
 
-fn main() {
-    let mut ip: LinkedList<i32> = LinkedList::from([10, 5, 30, 40, 2, 4, 9]);
-    let mut op: LinkedList<i32> = LinkedList::new();
-
-    strand_sort(&mut ip, &mut op);
-
-    for x in op {
-        print!("{} ", x);
-    }
-
-    println!();
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;

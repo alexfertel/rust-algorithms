@@ -23,6 +23,9 @@ cargo test
 ### Sorting Algorithms
 
 - [x] [Bingo](./src/sorting/bingo_sort.rs)
+- [x] [Bitonic](./src/sorting/bitonic_sort.rs)
+- [x] [Bogo Bogo](./src/sorting/bogo_bogo_sort.rs)
+- [x] [Bogo](./src/sorting/bogo_sort.rs)
 - [x] [Bubble](./src/sorting/bubble_sort.rs)
 - [x] [Bucket](./src/sorting/bucket_sort.rs)
 - [x] [Cocktail-Shaker](./src/sorting/cocktail_shaker_sort.rs)
@@ -36,13 +39,16 @@ cargo test
 - [x] [Merge](./src/sorting/merge_sort.rs)
 - [x] [Odd-even](./src/sorting/odd_even_sort.rs)
 - [x] [Pancake](./src/sorting/pancake_sort.rs)
+- [x] [Pigeonhole](./src/sorting/pigeonhole_sort.rs)
 - [x] [Quick](./src/sorting/quick_sort.rs)
 - [x] [Radix](./src/sorting/radix_sort.rs)
 - [x] [Selection](./src/sorting/selection_sort.rs)
 - [x] [Shell](./src/sorting/shell_sort.rs)
 - [x] [Sleep](./src/sorting/sleep_sort.rs)
 - [x] [Stooge](./src/sorting/stooge_sort.rs)
+- [x] [Strand](./src/sorting/strand_sort.rs)
 - [x] [Timsort](./src/sorting/tim_sort.rs)
+- [x] [Tree](./src/sorting/tree_sort.rs)
 
 ### Graphs
 
@@ -172,6 +178,7 @@ cargo test
 
 - [x] [Armstrong Number](./src/math/armstrong_number.rs)
 - [x] [Baby-Step Giant-Step Algorithm](./src/math/baby_step_giant_step.rs)
+- [x] [Derivative](./src/math/derivative_method.rs)
 - [x] [Extended euclidean algorithm](./src/math/extended_euclidean_algorithm.rs)
 - [x] [Fast Fourier Transform](./src/math/fast_fourier_transform.rs)
 - [x] [Fast power algorithm](./src/math/fast_power.rs)

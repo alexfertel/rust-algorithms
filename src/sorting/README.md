@@ -1,3 +1,21 @@
+### [Bitonic Sort](./bitonic_sort.rs)
+
+Bitonic Sort is an efficient sorting algorithm based on the bitonic sequence concept and is often used in parallel processing due to its regular and repetitive structure. It works by first sorting sub-arrays in different directions and then combining them in a special merging process, ensuring a fully sorted array. This algorithm is particularly efficient when dealing with data sets whose size is a power of two.
+
+* Parallel Processing: Bitonic sort is highly parallelizable, making it suitable for multi-threading and distributed systems, a strength that Rust can capitalize on with its robust concurrency features.
+* Recursive Strategy: The algorithm uses recursive division of the array, which is elegantly handled in Rust with its strong support for recursion and memory safety.
+* Efficiency: For medium-sized arrays, especially in parallel computing environments, bitonic sort can be very efficient, leveraging Rust's performance capabilities.
+
+__Properties__
+* Special Case Input: Bitonic sort is most efficient when the input size is a power of two.
+* Time Complexity: In the worst-case scenario, the time complexity of bitonic sort is O(n log² n).
+* Not-in-place Sorting: While it doesn't sort in place, it requires less extra space compared to other non-in-place sorting algorithms.
+
+__Sources to read:__
+* [Wikipedia](https://en.wikipedia.org/wiki/Bitonic_sorter)
+* [Geeksforgeeks](https://www.geeksforgeeks.org/bitonic-sort/)
+* [TutorialsPoint](https://www.tutorialspoint.com/bitonic-sort-in-data-structure)
+
 ### [Bogo Sort](./bogo_sort.rs)
 
 From [Wikipedia][bogosort-wiki]: In computer science, bogosort (also known as permutation sort, stupid sort, slowsort or bozosort) is a sorting algorithm based on the generate and test paradigm. The function successively generates permutations of its input until it finds one that is sorted. It is not considered useful for sorting, but may be used for educational purposes, to contrast it with more efficient algorithms.
@@ -5,6 +23,18 @@ From [Wikipedia][bogosort-wiki]: In computer science, bogosort (also known as pe
 Two versions of this algorithm exist: a deterministic version that enumerates all permutations until it hits a sorted one,and a randomized version that randomly permutes its input. An analogy for the working of the latter version is to sort a deck of cards by throwing the deck into the air, picking the cards up at random, and repeating the process until the deck is sorted. Its name is a portmanteau of the words bogus and sort.
 
 [bogosort-wiki]:https://en.wikipedia.org/wiki/Bogosort
+
+### [Bogo-Bogo-sort](./bogo_bogo_sort.rs)
+From [leonardini.dev][bogo-bogo-doc]: BogoBogo Sort is a humorously inefficient sorting
+algorithm inspired by the original Bogosort. It adds a layer of complexity by recursively
+sorting the first n-1 elements before placing the nth element. This process is repeated until
+the array is sorted. The algorithm's performance is exceptionally poor, making it impractical
+for sorting but a useful tool for educational purposes, especially in understanding
+algorithm efficiency and recursive functions.
+__Properties__
+* Worst case performance (unbounded, extremely poor)
+* Best case performance O(n!)
+* Average case performance (unpredictable and impractical)
 
 ### [Bucket_Sort](./bucket_sort.rs)
 
@@ -238,5 +268,59 @@ __Sources to read:__
 * [Geeksforgeeks](https://www.geeksforgeeks.org/insertion-sort/)
 * [Programiz](https://www.programiz.com/dsa/insertion-sort)
 
+### [Strand Sort](./strand_sort.rs)
+
+Strand Sort is a sorting algorithm that works by repeatedly pulling sorted sublists out of the list to be sorted and merging them with the already sorted part. It is particularly effective for sorting lists where there are large numbers of ordered elements. The algorithm is intuitive and simple, iterating through the list, picking up elements in order, and merging these 'strands' into a final sorted list.
+
+* Simplicity: The algorithm is straightforward and easy to implement, making it a good choice for introductory sorting algorithm education.
+* Adaptive: Strand sort performs well on lists that are already partially sorted, as it can quickly identify and extract these ordered sublists.
+* In-place Sorting: The nature of the algorithm allows it to be implemented in an in-place fashion, although this is not always the case.
+
+![Alt text](image-7.png)
+
+__Properties__
+* Not-in-place Sorting: Typically, strand sort requires additional space for the strands, though in-place variants exist.
+* Time Complexity: The average and worst-case time complexity of strand sort can vary greatly depending on the input but typically is O(n²).
+* Stability: The algorithm is stable, maintaining the relative order of equal elements.
+
+__Sources to read:__
+* [Wikipedia](https://en.wikipedia.org/wiki/Strand_sort)
+* [Geeksforgeeks](https://www.geeksforgeeks.org/strand-sort/)
+* [Tutorialspoint](https://www.tutorialspoint.com/strand-sort-in-data-structure)
+
+## Pigeonhole Sort Implementation in Rust
+
+Pigeonhole Sort is a sorting algorithm that is efficient for sorting data with a known, limited range of key values. It works by creating an array of 'holes' (each representing a position in the range of the data) and then sorting the data by 'placing' each item into its corresponding hole. The algorithm then collects the items from each hole in order, resulting in a sorted array.
+
+### Rust Implementation
+The Rust implementation of Pigeonhole Sort involves the following steps:
+
+* Initialization: First, it checks if the input array is empty. If so, it returns immediately as there's nothing to sort.
+
+* Finding the Range: The implementation identifies the minimum and maximum values in the array. The range is the difference between these values plus one.
+
+* Creating Holes: A vector of vectors (`Vec<Vec<i32>>`) is created to represent the holes. The size of this outer vector is equal to the range of the input data.
+
+* Filling the Holes: The algorithm iterates over each element in the array, placing it into the corresponding hole based on its value.
+
+* Reconstructing the Array: Finally, it iterates over the holes in order, placing each element back into the original array, now sorted.
+
+### [Tree Sort](./tree_sort.rs)
+
+Tree Sort is a sorting algorithm that builds a binary search tree from the elements of the array to be sorted and then performs an in-order traversal to generate a sorted array. The essence of tree sort lies in leveraging the properties of a binary search tree, where elements are inserted in such a way that for any given node, all elements in the left subtree are less than the node and all elements in the right subtree are greater.
+
+* Safety: Rust’s adherence to memory safety is a significant asset in the implementation of tree sort. The algorithm makes use of Rust's ownership and borrowing rules to manage the tree structure without the risk of memory leaks or dangling pointers.
+* Tree Construction: Rust’s powerful data handling capabilities facilitate the efficient construction and manipulation of the binary search tree, a crucial aspect of tree sort.
+* Performance: While not the most efficient in all cases, tree sort in Rust can be quite performant especially for datasets that are not large, thanks to Rust's optimization capabilities.
+
+![Alt text](image-5.png)
+
+__Properties__
+* Not-in-place sorting: Tree sort requires additional memory for the binary search tree, hence it's not an in-place sorting algorithm.
+* Time complexity: The average case time complexity of tree sort is O(n log n), but it can degrade to O(n²) in the worst case when the tree becomes unbalanced.
+
+__Sources to read:__
+* [Wikipedia](https://en.wikipedia.org/wiki/Tree_sort)
+* [Geeksforgeeks](https://www.geeksforgeeks.org/tree-sort/)
 
 

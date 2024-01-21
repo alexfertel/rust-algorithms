@@ -21,6 +21,8 @@ where
 }
 
 mod bingo_sort;
+mod bitonic_sort;
+mod bogo_bogo_sort;
 mod bogo_sort;
 mod bubble_sort;
 mod bucket_sort;
@@ -35,18 +37,23 @@ mod insertion_sort;
 mod merge_sort;
 mod odd_even_sort;
 mod pancake_sort;
+mod pigeonhole_sort;
 mod quick_sort;
 mod radix_sort;
 mod selection_sort;
 mod shell_sort;
 mod sleep_sort;
 mod stooge_sort;
+mod strand_sort;
 mod tim_sort;
 mod traits;
+mod tree_sort;
 
 use std::fmt;
 
 pub use self::bingo_sort::bingo_sort;
+pub use self::bitonic_sort::bitonic_sort;
+pub use self::bogo_bogo_sort::BogoBogoSort;
 pub use self::bogo_sort::BogoSort;
 pub use self::bubble_sort::BubbleSort;
 pub use self::bucket_sort::BucketSort;
@@ -61,13 +68,16 @@ pub use self::insertion_sort::InsertionSort;
 pub use self::merge_sort::MergeSort;
 pub use self::odd_even_sort::OddEvenSort;
 pub use self::pancake_sort::PancakeSort;
+pub use self::pigeonhole_sort::pigeonhole_sort;
 pub use self::quick_sort::QuickSort;
 pub use self::radix_sort::RadixSort;
 pub use self::selection_sort::SelectionSort;
 pub use self::shell_sort::ShellSort;
 pub use self::sleep_sort::sleep_sort;
 pub use self::stooge_sort::StoogeSort;
+pub use self::strand_sort::strand_sort;
 pub use self::tim_sort::TimSort;
+pub use self::tree_sort::TreeSort;
 
 #[cfg(test)]
 mod tests {

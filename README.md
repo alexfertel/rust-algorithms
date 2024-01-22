@@ -151,6 +151,8 @@ cargo test
 - [x] [Multiply By Two](./src/bit_manipulation/basic.rs)
 - [x] [Multiply Signed](./src/bit_manipulation/basic.rs)
 - [x] [Multiply Unsigned](./src/bit_manipulation/basic.rs)
+- [x] [Rightmost 1-bit](./src/bit_manipulation/basic.rs)
+- [x] [Rightmost 0-bit](./src/bit_manipulation/basic.rs)
 - [x] [Set Bit](./src/bit_manipulation/basic.rs)
 - [x] [Twos Complement](./src/bit_manipulation/basic.rs)
 - [x] [Update Bit](./src/bit_manipulation/basic.rs)

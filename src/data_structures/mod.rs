@@ -9,6 +9,7 @@ mod heap;
 mod linked_list;
 mod queue;
 mod rb_tree;
+mod rope;
 mod segment_tree;
 mod stack;
 mod stack_using_singly_linked_list;

@@ -1,9 +1,12 @@
-use std::cmp::Ordering;
+use std::{
+    cmp::Ordering,
+    fmt::{Display, Formatter},
+};
 
-// A Rope is a data structure designed for efficient manipulation of large strings
-// of text by dividing the text into smaller segments represented as nodes in a binary tree.
-// Each leaf (end node) holds a string and a length (also known as a "weight"),
-// and each node further up the tree holds the sum of the lengths of all the leaves in its left subtree.
+/// A Rope is a data structure designed for efficient manipulation of large strings
+/// of text by dividing the text into smaller segments represented as nodes in a binary tree.
+/// Each leaf (end node) holds a string and a length (also known as a "weight"),
+/// and each node further up the tree holds the sum of the lengths of all the leaves in its left subtree.
 pub enum Rope {
     Leaf(String),
     Node {
@@ -13,53 +16,30 @@ pub enum Rope {
     },
 }
 
+impl Display for Rope {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Rope::Leaf(s) => write!(f, "{s}"),
+            Rope::Node { left, right, .. } => {
+                if let Some(l) = left {
+                    write!(f, "{l}")?;
+                }
+                if let Some(r) = right {
+                    write!(f, "{r}")?;
+                }
+
+                Ok(())
+            }
+        }
+    }
+}
+
 impl Rope {
     pub fn get_weight(&self) -> usize {
-        match &*self {
-            Rope::Node {
-                left: _,
-                right: _,
-                weight,
-            } => *weight,
+        match self {
+            Rope::Node { weight, .. } => *weight,
             Rope::Leaf(str) => str.len(),
         }
-    }
-
-    pub fn to_string(&self) -> String {
-        let leaves: Vec<&Rope> = self.collect_leaves();
-        let mut result = String::new();
-        for leaf in leaves {
-            if let Rope::Leaf(value) = &*leaf {
-                result.push_str(&*value)
-            }
-        }
-        result
-    }
-
-    pub fn collect_leaves(&self) -> Vec<&Rope> {
-        if let Rope::Leaf(_) = *self {
-            return vec![self];
-        }
-
-        let mut result = Vec::new();
-        if let Rope::Node {
-            left,
-            right,
-            weight: _,
-        } = &*self
-        {
-            if let Some(left) = left {
-                let mut left_leaves = left.collect_leaves();
-                result.append(&mut left_leaves);
-            }
-
-            if let Some(right) = right {
-                let mut right_leaves = right.collect_leaves();
-                result.append(&mut right_leaves);
-            }
-        }
-
-        result
     }
 
     pub fn split(self: Box<Rope>, index: usize) -> (Option<Box<Rope>>, Option<Box<Rope>>) {
@@ -83,51 +63,51 @@ impl Rope {
             } => match index.cmp(&(weight - 1)) {
                 Ordering::Equal => (left, right),
                 Ordering::Less => {
-                    if let Some(left) = left {
-                        return match left.split(index) {
-                            (Some(first), Some(second)) => (
-                                Some(first),
-                                Some(Box::new(Rope::Node {
-                                    left: Some(second),
-                                    right: right,
-                                    weight: weight - index - 1,
-                                })),
-                            ),
-                            (Some(left), None) => (Some(left), right),
-                            (_, _) => panic!("Invalid split results"),
-                        };
-                    } else {
+                    let Some(left) = left else {
                         panic!("Rope weight is inconsistent with left child");
+                    };
+
+                    match left.split(index) {
+                        (Some(first), Some(second)) => (
+                            Some(first),
+                            Some(Box::new(Rope::Node {
+                                left: Some(second),
+                                right,
+                                weight: weight - index - 1,
+                            })),
+                        ),
+                        (Some(left), None) => (Some(left), right),
+                        (_, _) => panic!("Invalid split results"),
                     }
                 }
                 Ordering::Greater => {
-                    if let Some(right) = right {
-                        return match right.split(index - weight) {
-                            (Some(first), Some(second)) => (
-                                Some(Box::new(Rope::Node {
-                                    weight: {
-                                        match left {
-                                            Some(ref left) => left.get_weight(),
-                                            None => 0,
-                                        }
-                                    },
-                                    left,
-                                    right: Some(first),
-                                })),
-                                Some(second),
-                            ),
-                            (Some(right), None) => (
-                                Some(Box::new(Rope::Node {
-                                    left,
-                                    right: Some(right),
-                                    weight,
-                                })),
-                                None,
-                            ),
-                            (_, _) => panic!("Invalid split results"),
-                        };
-                    } else {
+                    let Some(right) = right else {
                         panic!("Rope weight is inconsistent with left child");
+                    };
+
+                    match right.split(index - weight) {
+                        (Some(first), Some(second)) => (
+                            Some(Box::new(Rope::Node {
+                                weight: {
+                                    match left {
+                                        Some(ref left) => left.get_weight(),
+                                        None => 0,
+                                    }
+                                },
+                                left,
+                                right: Some(first),
+                            })),
+                            Some(second),
+                        ),
+                        (Some(right), None) => (
+                            Some(Box::new(Rope::Node {
+                                left,
+                                right: Some(right),
+                                weight,
+                            })),
+                            None,
+                        ),
+                        (_, _) => panic!("Invalid split results"),
                     }
                 }
             },
@@ -163,7 +143,7 @@ mod tests {
     use super::Rope;
 
     #[test]
-    fn collect_as_string() {
+    fn to_string() {
         let rope = Box::new(Rope::Node {
             left: Some(Box::new(Rope::Leaf(String::from("hello ")))),
             right: Some(Box::new(Rope::Leaf(String::from("world")))),
@@ -173,7 +153,7 @@ mod tests {
     }
 
     #[test]
-    fn concat() {
+    fn concats() {
         let left = Box::new(Rope::Node {
             left: Some(Box::new(Rope::Leaf(String::from("hello ")))),
             right: None,
@@ -182,14 +162,7 @@ mod tests {
 
         let right = Box::new(Rope::Leaf(String::from("world")));
         let concat = left.concat(right);
-        let Rope::Node {
-            left: _,
-            right: _,
-            weight,
-        } = *concat
-        else {
-            panic!("")
-        };
+        let weight = concat.get_weight();
 
         assert_eq!(weight, 6);
     }

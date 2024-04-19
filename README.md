@@ -105,7 +105,7 @@ cargo test
 
 - [x] [Aho-Corasick Algorithm](./src/string/aho_corasick.rs)
 - [x] [Burrows-Wheeler transform](./src/string/burrows_wheeler_transform.rs)
-- [ ] Finite Automaton
+- [x] [Finite Automaton](./src/string/finite_automaton.rs)
 - [x] [Hamming Distance](./src/string/hamming_distance.rs)
 - [x] [Knuth Morris Pratt](./src/string/knuth_morris_pratt.rs)
 - [x] [Manacher](./src/string/manacher.rs)

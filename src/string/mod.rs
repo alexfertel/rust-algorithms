@@ -1,5 +1,6 @@
 mod aho_corasick;
 mod burrows_wheeler_transform;
+mod finite_automaton;
 mod hamming_distance;
 mod knuth_morris_pratt;
 mod manacher;
@@ -11,6 +12,7 @@ mod z_algorithm;
 pub use self::aho_corasick::AhoCorasick;
 pub use self::burrows_wheeler_transform::burrows_wheeler_transform;
 pub use self::burrows_wheeler_transform::inv_burrows_wheeler_transform;
+pub use self::finite_automaton::DeterministicFiniteAutomata;
 pub use self::hamming_distance::hamming_distance;
 pub use self::knuth_morris_pratt::knuth_morris_pratt;
 pub use self::manacher::manacher;

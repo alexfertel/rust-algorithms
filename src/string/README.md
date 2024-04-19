@@ -62,3 +62,8 @@ In this algorithm, we construct a Z array.
 __Properties__
 * Case-performance = O(m + n)
 * Case space complexity  O(w)
+
+### [Deterministic finite automaton](./finite_automaton.rs)
+From [Wikipedia][finite-automaton-wiki]: In the theory of computation, a branch of theoretical computer science, a deterministic finite automaton (DFA)—also known as deterministic finite acceptor (DFA), deterministic finite-state machine (DFSM), or deterministic finite-state automaton (DFSA)—is a finite-state machine that accepts or rejects a given string of symbols, by running through a state sequence uniquely determined by the string.
+
+[finite-automaton-wiki]: https://en.wikipedia.org/wiki/Deterministic_finite_automaton

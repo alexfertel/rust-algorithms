@@ -48,13 +48,12 @@ impl Rope {
         }
 
         match *self {
-            Rope::Leaf(str) => match index.cmp(&(str.len() - 1)) {
-                Ordering::Equal => (Some(Box::new(Rope::Leaf(str))), None),
+            Rope::Leaf(ref str) => match index.cmp(&(str.len() - 1)) {
+                Ordering::Equal | Ordering::Greater => (Some(self), None),
                 Ordering::Less => (
                     Some(Box::new(Rope::Leaf(String::from(&str[0..index + 1])))),
                     Some(Box::new(Rope::Leaf(String::from(&str[(index + 1)..])))),
                 ),
-                Ordering::Greater => (Some(Box::new(Rope::Leaf(str))), None),
             },
             Rope::Node {
                 left,

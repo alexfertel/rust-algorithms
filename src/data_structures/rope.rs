@@ -98,7 +98,7 @@ impl Rope {
                             })),
                             Some(second),
                         ),
-                        (Some(right), None) => (
+                        (Some(right), None) | (None, Some(right)) => (
                             Some(Box::new(Rope::Node {
                                 left,
                                 right: Some(right),
@@ -131,9 +131,31 @@ impl Rope {
                 (Some(left), Some(right)) => left.concat(new_leaf.concat(right)),
                 (None, Some(rope)) => new_leaf.concat(rope),
                 (Some(rope), None) => rope.concat(new_leaf),
-                _ => panic!("Split operation produced None, None"),
+                _ => unreachable!("Split operation produced None, None"),
             }
         }
+    }
+
+    pub fn delete(self: Box<Rope>, start: usize, length: usize) -> Box<Rope> {
+        let (left, remain) = self.split(start);
+        let Some(remain) = remain else {
+            if let Some(left) = left {
+                return left;
+            } else {
+                unreachable!("Split operation produced None, None");
+            }
+        };
+        let (_, right) = remain.split(length);
+        let weight = left.as_ref().unwrap().get_weight();
+        return Box::new(Rope::Node {
+            left,
+            right,
+            weight,
+        });
+    }
+
+    pub fn slice(&self, start: usize, length: usize) -> String {
+        self.to_string()[start..(length + start)].to_string()
     }
 }
 
@@ -164,6 +186,25 @@ mod tests {
         let weight = concat.get_weight();
 
         assert_eq!(weight, 6);
+    }
+
+    #[test]
+    fn split_at_start() {
+        let rope = Box::new(Rope::Node {
+            left: Some(Box::new(Rope::Node {
+                left: Some(Box::new(Rope::Leaf(String::from("hello ")))),
+                right: None,
+                weight: 6,
+            })),
+            right: Some(Box::new(Rope::Leaf(String::from("world")))),
+            weight: 6,
+        });
+
+        let (None, Some(first)) = rope.split(0) else {
+            panic!("Split at first element should return the original Rope and None")
+        };
+        assert_eq!(first.get_weight(), 6);
+        assert_eq!(first.to_string(), "hello world");
     }
 
     #[test]
@@ -250,5 +291,31 @@ mod tests {
 
         rope = rope.insert("bar ", 3);
         assert_eq!(rope.to_string(), "foo bar baz");
+    }
+
+    #[test]
+    fn delete() {
+        let mut rope = Box::new(Rope::Node {
+            left: Some(Box::new(Rope::Node {
+                left: Some(Box::new(Rope::Leaf(String::from("foo ")))),
+                right: None,
+                weight: 4,
+            })),
+            right: Some(Box::new(Rope::Leaf(String::from("baz")))),
+            weight: 4,
+        });
+
+        rope = rope.delete(4, 5);
+        assert_eq!(rope.to_string(), "foo baz");
+    }
+
+    #[test]
+    fn slice() {
+        let rope = Box::new(Rope::Node {
+            left: Some(Box::new(Rope::Leaf(String::from("hello ")))),
+            right: Some(Box::new(Rope::Leaf(String::from("world")))),
+            weight: 11,
+        });
+        assert_eq!(rope.slice(6, 3), "wor");
     }
 }

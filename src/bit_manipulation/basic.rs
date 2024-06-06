@@ -240,6 +240,36 @@ pub fn is_positive(bits: i8) -> bool {
     get_bit(bits, 7) == 0
 }
 
+/// Multiplies a number by two.
+/// 
+/// Shifts the bits of `bits` one position to the left.
+/// 
+/// see: [Bitwise Shift](https://en.wikipedia.org/wiki/Bitwise_operation#Bit_shifts)
+/// 
+/// # Arguments
+/// 
+/// `bits` - The number to multiply.
+/// 
+/// # Returns
+/// 
+/// The result of shifting the bits of `bits` one position to the left.
+/// 
+/// # Panic
+/// 
+/// This function will not panic.
+/// 
+/// # Examples
+/// 
+/// ```rust
+/// use rust_algorithms::bit_manipulation::multiply_by_two;
+/// 
+/// assert_eq!(4, multiply_by_two(2));
+/// assert_eq!(12, multiply_by_two(6));
+/// assert_eq!(0, multiply_by_two(0));
+/// assert_eq!(2, multiply_by_two(1));
+/// 
+/// ```
+/// 
 pub fn multiply_by_two(bits: i8) -> i8 {
     bits << 1
 }

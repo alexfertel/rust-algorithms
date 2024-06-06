@@ -625,7 +625,49 @@ pub fn is_power_of_two(bits: i8) -> bool {
 // `((x | (x - 1)) + 1) & x == 0`
 //
 // Also `((x & -x) + x) & x == 0`
+
+/// Checks if a number is a power of two using a different approach.
+///
+/// Returns true if `bits` is a power of two, otherwise false.
+///
+/// see: [Power of Two](https://en.wikipedia.org/wiki/Power_of_two)
+///
+/// This function uses the following bitwise operation:
+///
+/// `((x | (x - 1)) + 1) & x == 0`
+///
+/// /// Also `((x & -x) + x) & x == 0`
+///
+/// # Arguments
+///
+/// `bits` - The number to check.
+///
+/// # Returns
+///
+/// True if `bits` is a power of two, otherwise false.
+///
+/// # Panic
+///
+/// This function will not panic.
+///
+/// # Examples
+///
+/// ```rust
+/// use rust_algorithms::bit_manipulation::is_power_of_two_difference;
+///
+/// assert!(is_power_of_two_difference(2));
+/// assert!(is_power_of_two_difference(4));
+/// assert!(is_power_of_two_difference(12));
+/// assert!(is_power_of_two_difference(14));
+/// assert!(is_power_of_two_difference(124));
+///
+/// assert!(!is_power_of_two_difference(33));
+/// assert!(!is_power_of_two_difference(-13));
+///
+/// ```
+///
 pub fn is_power_of_two_difference(bits: i8) -> bool {
+
     ((bits | (bits.saturating_sub(1)))
         .checked_add(1)
         .unwrap_or(0))

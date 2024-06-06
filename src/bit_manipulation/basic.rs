@@ -404,7 +404,6 @@ pub fn twos_complement(bits: i8) -> i8 {
 /// ```
 /// 
 pub fn multiply_signed(a: i8, b: i8) -> i8 {
-    println!("{} {}", a, b);
     if a == 0 || b == 0 {
         return 0;
     }

@@ -1,3 +1,35 @@
+/// Gets specific bits from a number.
+/// 
+/// Returns the value of the bit at position `n` in `bits`.
+/// 
+/// see: [Get Bit](https://en.wikipedia.org/wiki/Bit_manipulation)
+/// 
+/// # Arguments
+/// 
+/// `bits` - The number to extract the bit from.
+/// `n` - The position of the bit to extract.
+/// 
+/// # Returns
+/// 
+/// The value of the bit at position `n` in `bits`.
+/// 
+/// # Panic
+/// 
+/// This function will not panic.
+/// 
+/// # Examples
+/// 
+/// ```rust
+/// use rust_algorithms::bit_manipulation::get_bit;
+/// 
+/// let bits = 0b0101_0101;
+/// 
+/// assert_eq!(0, get_bit(bits, 7));
+/// assert_eq!(1, get_bit(bits, 6));
+/// assert_eq!(1, get_bit(bits, 0));
+/// 
+/// ```
+///
 pub fn get_bit(bits: i8, n: usize) -> i8 {
     (bits >> n) & 1
 }

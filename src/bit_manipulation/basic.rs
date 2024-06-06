@@ -463,6 +463,37 @@ pub fn multiply_unsigned(a: i8, b: i8) -> i8 {
     result
 }
 
+/// Counts the number of ones in a number.
+///
+/// Returns the number of ones in `bits`.
+/// 
+/// see: [Hamming Weight](https://en.wikipedia.org/wiki/Hamming_weight)
+/// 
+/// # Arguments
+/// 
+/// `bits` - The number to count the ones in.
+/// 
+/// # Returns
+/// 
+/// The number of ones in `bits`.
+/// 
+/// # Panic
+/// 
+/// This function will not panic.
+/// 
+/// # Examples
+/// 
+/// ```rust
+/// use rust_algorithms::bit_manipulation::count_ones;
+/// 
+/// assert_eq!(0, count_ones(0));
+/// assert_eq!(1, count_ones(1));
+/// assert_eq!(3, count_ones(0b0101_0100));
+/// assert_eq!(1, count_ones(0b0000_0100));
+/// assert_eq!(7, count_ones(0b0111_1111));
+/// 
+/// ```
+/// 
 pub fn count_ones(bits: i8) -> i8 {
     let mut result = 0;
     for i in 0..7 {

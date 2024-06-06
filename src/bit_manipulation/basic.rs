@@ -105,6 +105,51 @@ pub fn clear_bit(bits: i8, n: usize) -> i8 {
     bits & !(1 << n)
 }
 
+/// Updates a specific bit in a number.
+/// 
+/// Sets the bit at position `n` in `bits` to 1 if `set_it` is true, otherwise sets it to 0.
+/// 
+/// see: [Update Bit](https://en.wikipedia.org/wiki/Bit_manipulation)
+/// 
+/// # Arguments
+/// 
+/// `bits` - The number to update the bit in.
+/// `n` - The position of the bit to update.
+/// `set_it` - If true, the bit will be set to 1, otherwise it will be set to 0.
+/// 
+/// # Returns
+/// 
+/// The number with the bit at position `n` set to 1 if `set_it` is true, otherwise set to 0.
+/// 
+/// # Panic
+/// 
+/// This function will not panic.
+/// 
+/// # Examples
+/// 
+/// ```rust
+/// use rust_algorithms::bit_manipulation::update_bit;
+/// 
+/// let bits = 0b0101_0101;
+/// 
+/// // Clears a bit.
+/// assert_eq!(0b0101_0100, update_bit(bits, 0, false));
+/// assert_eq!(0b0101_0001, update_bit(bits, 2, false));
+/// 
+/// // Sets a bit.
+/// assert_eq!(0b0101_0111, update_bit(bits, 1, true));
+/// assert_eq!(0b0101_1101, update_bit(bits, 3, true));
+/// 
+/// // Does nothing when setting a set bit.
+/// assert_eq!(bits, update_bit(bits, 0, true));
+/// assert_eq!(bits, update_bit(bits, 2, true));
+/// 
+/// // Does nothing when clearing an unset bit.
+/// assert_eq!(bits, update_bit(bits, 1, false));
+/// assert_eq!(bits, update_bit(bits, 3, false));
+/// 
+/// ```
+/// 
 pub fn update_bit(bits: i8, n: usize, set_it: bool) -> i8 {
     if set_it {
         set_bit(bits, n)

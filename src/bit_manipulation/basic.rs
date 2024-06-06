@@ -158,10 +158,80 @@ pub fn update_bit(bits: i8, n: usize, set_it: bool) -> i8 {
     }
 }
 
+/// Checks if a number is even.
+/// 
+/// Returns true if the least significant bit of `bits` is 0, otherwise false.
+/// 
+/// see: [Parity](https://en.wikipedia.org/wiki/Parity_(mathematics))
+/// 
+/// # Arguments
+/// 
+/// `bits` - The number to check.
+/// 
+/// # Returns
+/// 
+/// True if the least significant bit of `bits` is 0, otherwise false.
+/// 
+/// # Panic
+/// 
+/// This function will not panic.
+/// 
+/// # Examples
+/// 
+/// ```rust
+/// use rust_algorithms::bit_manipulation::is_even;
+/// 
+/// assert!(is_even(2));
+/// assert!(is_even(0));
+/// assert!(is_even(6));
+/// assert!(is_even(36));
+/// 
+/// assert!(!is_even(33));
+/// assert!(!is_even(1));
+/// assert!(!is_even(17));
+/// assert!(!is_even(127));
+/// 
+/// ```
+/// 
 pub fn is_even(bits: i8) -> bool {
     bool::from(bits & 1 == 0)
 }
 
+/// Checks if a number is positive.
+/// 
+/// Returns true if the most significant bit of `bits` is 0, otherwise false.
+/// 
+/// see: [Sign Bit](https://en.wikipedia.org/wiki/Sign_bit)
+/// 
+/// # Arguments
+/// 
+/// `bits` - The number to check.
+/// 
+/// # Returns
+/// 
+/// True if the most significant bit of `bits` is 0, otherwise false.
+/// 
+/// # Panic
+/// 
+/// This function will not panic.
+/// 
+/// # Examples
+/// 
+/// ```rust
+/// use rust_algorithms::bit_manipulation::is_positive;
+/// 
+/// assert!(is_positive(5));
+/// assert!(is_positive(1));
+/// assert!(is_positive(100));
+/// assert!(is_positive(127));
+/// 
+/// assert!(!is_positive(-1));
+/// assert!(!is_positive(-45));
+/// assert!(!is_positive(-128));
+/// assert!(!is_positive(0));
+/// 
+/// ```
+/// 
 pub fn is_positive(bits: i8) -> bool {
     if bits == 0 {
         return false;

@@ -707,8 +707,34 @@ pub fn rightmost_one(bits: i8) -> i8 {
     bits & -bits
 }
 
-// Creates a word with a single 1-bit at the position of the rightmost
-// 0-bit in the input, producing 0 if none.
+/// Returns the position of the rightmost zero-bit in a number.
+///
+/// Creates a byte with a single 1-bit at the position of the rightmost 0-bit in the input, producing 0 if none.
+///
+/// # Arguments
+///
+/// `bits` - The number to check.
+///
+/// # Returns
+///
+/// The position of the rightmost zero-bit in `bits`.
+///
+/// # Panic
+///
+/// This function will not panic.
+///
+/// # Examples
+///
+/// ```rust
+/// use rust_algorithms::bit_manipulation::rightmost_zero;
+///
+/// assert_eq!(0b000_0001, rightmost_zero(0b101_0000));
+/// assert_eq!(0b000_0001, rightmost_zero(0b000_0000));
+/// assert_eq!(0b000_0000, rightmost_zero(0b111_1111));
+/// assert_eq!(0b000_1000, rightmost_zero(0b010_0111));
+///
+/// ```
+///
 pub fn rightmost_zero(bits: i8) -> i8 {
     !bits & (bits.checked_add(1).unwrap_or(0))
 }

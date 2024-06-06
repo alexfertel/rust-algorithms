@@ -540,6 +540,41 @@ pub fn bit_equivalence(a: i8, b: i8) -> i8 {
     count_ones(!(a ^ b))
 }
 
+/// Calculates the bit distance between two numbers.
+///
+/// Returns the number of different bits between `a` and `b`.
+///
+/// see: [Hamming Distance](https://en.wikipedia.org/wiki/Hamming_distance)
+///
+/// note that the sign bit is not considered in this operation.
+///
+/// # Arguments
+///
+/// `a` - The first number to compare.
+/// `b` - The second number to compare.
+///
+/// # Returns
+///
+/// The number of different bits between `a` and `b`.
+///
+/// # Panic
+///
+/// This function will not panic.
+///
+/// # Examples
+///
+/// ```rust
+/// use rust_algorithms::bit_manipulation::bit_distance;
+///
+/// assert_eq!(0, bit_distance(0, 0));
+/// assert_eq!(0, bit_distance(127, 127));
+/// assert_eq!(0, bit_distance(55, 55));
+/// assert_eq!(6, bit_distance(0b111_1111, 0b000_0100));
+/// assert_eq!(6, bit_distance(0b101_1011, 0b000_0100));
+/// assert_eq!(7, bit_distance(0b111_1111, 0b000_0000));
+///
+/// ```
+///
 pub fn bit_distance(a: i8, b: i8) -> i8 {
     count_ones(a ^ b)
 }

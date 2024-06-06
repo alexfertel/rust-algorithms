@@ -70,6 +70,37 @@ pub fn set_bit(bits: i8, n: usize) -> i8 {
     bits | (1 << n)
 }
 
+/// Clears a specific bit in a number.
+///
+/// Sets the bit at position `n` in `bits` to 0.
+///
+/// see: [Clear Bit](https://en.wikipedia.org/wiki/Bit_manipulation)
+///
+/// # Arguments
+///
+/// `bits` - The number to clear the bit in.
+/// `n` - The position of the bit to clear.
+///
+/// # Returns
+///
+/// The number with the bit at position `n` set to 0.
+///
+/// # Panic
+///
+/// This function will not panic.
+///
+/// # Examples
+///
+/// ```rust
+/// use rust_algorithms::bit_manipulation::clear_bit;
+///
+/// let bits = 0b0101_0101;
+///
+/// assert_eq!(0b0101_0100, clear_bit(bits, 0));
+/// assert_eq!(0b0101_0001, clear_bit(bits, 2));
+///
+/// ```
+///
 pub fn clear_bit(bits: i8, n: usize) -> i8 {
     bits & !(1 << n)
 }

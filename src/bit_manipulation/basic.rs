@@ -417,6 +417,42 @@ pub fn multiply_signed(a: i8, b: i8) -> i8 {
     }
 }
 
+/// Multiplies two unsigned numbers.
+/// 
+/// Multiplies `a` by `b` using the Russian peasant algorithm, (also known as Egyptian multiplication, Ethiopian 
+/// multiplication, Russian multiplication, peasant multiplication, or mediation and duplation)
+/// 
+/// see: [Ancient Egyptian multiplication](https://en.wikipedia.org/wiki/Ancient_Egyptian_multiplication)
+/// 
+/// # Arguments
+/// 
+/// `a` - The first number to multiply.
+/// `b` - The second number to multiply.
+/// 
+/// # Returns
+/// 
+/// The result of multiplying `a` by `b`.
+/// 
+/// # Panic
+/// 
+/// This function will not panic.
+/// 
+/// # Examples
+/// 
+/// ```rust
+/// use rust_algorithms::bit_manipulation::multiply_unsigned;
+/// 
+/// assert_eq!(120, multiply_unsigned(30, 4));
+/// assert_eq!(120, multiply_unsigned(4, 30));
+/// assert_eq!(36, multiply_unsigned(36, 1));
+/// assert_eq!(36, multiply_unsigned(1, 36));
+/// assert_eq!(0, multiply_unsigned(1, 0));
+/// assert_eq!(0, multiply_unsigned(0, 1));
+/// assert_eq!(0, multiply_unsigned(0, 0));
+/// assert_eq!(64, multiply_unsigned(32, 2));
+/// 
+/// ```
+/// 
 pub fn multiply_unsigned(a: i8, b: i8) -> i8 {
     let mut result = 0;
     for i in 0..7 {

@@ -299,6 +299,36 @@ pub fn multiply_by_two(bits: i8) -> i8 {
     bits << 1
 }
 
+/// Divides a number by two.
+/// 
+/// Shifts the bits of `bits` one position to the right.
+/// 
+/// see: [Bitwise Shift](https://en.wikipedia.org/wiki/Bitwise_operation#Bit_shifts)
+/// 
+/// # Arguments
+/// 
+/// `bits` - The number to divide.
+/// 
+/// # Returns
+/// 
+/// The result of shifting the bits of `bits` one position to the right.
+/// 
+/// # Panic
+/// 
+/// This function will not panic.
+/// 
+/// # Examples
+/// 
+/// ```rust
+/// use rust_algorithms::bit_manipulation::divide_by_two;
+/// 
+/// assert_eq!(2, divide_by_two(4));
+/// assert_eq!(12, divide_by_two(24));
+/// assert_eq!(0, divide_by_two(0));
+/// assert_eq!(0, divide_by_two(1));
+/// 
+/// ```
+/// 
 pub fn divide_by_two(bits: i8) -> i8 {
     bits >> 1
 }

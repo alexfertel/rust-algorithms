@@ -368,6 +368,41 @@ pub fn twos_complement(bits: i8) -> i8 {
     (!bits).wrapping_add(1)
 }
 
+/// Multiplies two signed numbers.
+/// 
+/// Multiplies `a` by `b` using the Russian peasant algorithm, (also known as Egyptian multiplication, Ethiopian 
+/// multiplication, Russian multiplication, peasant multiplication, or mediation and duplation)
+/// 
+/// see: [Ancient Egyptian multiplication](https://en.wikipedia.org/wiki/Ancient_Egyptian_multiplication)
+/// 
+/// # Arguments
+/// 
+/// `a` - The first number to multiply.
+/// `b` - The second number to multiply.
+/// 
+/// # Returns
+/// 
+/// The result of multiplying `a` by `b`.
+/// 
+/// # Panic
+/// 
+/// This function will not panic.
+/// 
+/// # Examples
+/// 
+/// ```rust
+/// use rust_algorithms::bit_manipulation::multiply_signed;
+/// 
+/// assert_eq!(-12, multiply_signed(-6, 2));
+/// assert_eq!(-8, multiply_signed(2, -4));
+/// assert_eq!(-12, multiply_signed(2, -6));
+/// assert_eq!(120, multiply_signed(30, 4));
+/// assert_eq!(120, multiply_signed(-30, -4));
+/// assert_eq!(36, multiply_signed(36, 1));
+/// assert_eq!(36, multiply_signed(1, 36));
+/// 
+/// ```
+/// 
 pub fn multiply_signed(a: i8, b: i8) -> i8 {
     println!("{} {}", a, b);
     if a == 0 || b == 0 {

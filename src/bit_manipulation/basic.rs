@@ -34,6 +34,38 @@ pub fn get_bit(bits: i8, n: usize) -> i8 {
     (bits >> n) & 1
 }
 
+/// Sets a specific bit in a number.
+///
+/// Sets the bit at position `n` in `bits` to 1.
+///
+/// see: [Set Bit](https://en.wikipedia.org/wiki/Bit_manipulation)
+///
+/// # Arguments
+///
+/// `bits` - The number to set the bit in.
+/// `n` - The position of the bit to set.
+///
+/// # Returns
+///
+/// The number with the bit at position `n` set to 1.
+///
+/// # Panic
+///
+/// This function will not panic.
+///
+/// # Examples
+///
+/// ```rust
+/// use rust_algorithms::bit_manipulation::set_bit;
+///
+/// let bits = 0b0101_0100;
+///
+/// assert_eq!(0b0101_0101, set_bit(bits, 0));
+/// assert_eq!(0b0101_0110, set_bit(bits, 1));
+/// assert_eq!(0b0101_1100, set_bit(bits, 3));
+///
+/// ```
+///
 pub fn set_bit(bits: i8, n: usize) -> i8 {
     bits | (1 << n)
 }

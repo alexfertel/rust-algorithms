@@ -333,6 +333,37 @@ pub fn divide_by_two(bits: i8) -> i8 {
     bits >> 1
 }
 
+/// Calculates the two's complement of a number.
+/// 
+/// Returns the two's complement of `bits`.
+/// 
+/// see: [Two's Complement](https://en.wikipedia.org/wiki/Two%27s_complement)
+/// 
+/// # Arguments
+/// 
+/// `bits` - The number to calculate the two's complement of.
+/// 
+/// # Returns
+/// 
+/// The two's complement of `bits`.
+/// 
+/// # Panic
+/// 
+/// This function will not panic.
+/// 
+/// # Examples
+/// 
+/// ```rust
+/// use rust_algorithms::bit_manipulation::twos_complement;
+/// 
+/// assert_eq!(-1, twos_complement(1));
+/// assert_eq!(0b000_0000, twos_complement(0b000_0000));
+/// assert_eq!(-127, twos_complement(127));
+/// assert_eq!(5, twos_complement(twos_complement(5)));
+/// assert_eq!(10, twos_complement(twos_complement(10)));
+/// 
+/// ```
+/// 
 pub fn twos_complement(bits: i8) -> i8 {
     (!bits).wrapping_add(1)
 }

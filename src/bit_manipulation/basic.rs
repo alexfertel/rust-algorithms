@@ -579,7 +579,45 @@ pub fn bit_distance(a: i8, b: i8) -> i8 {
     count_ones(a ^ b)
 }
 
-// `x & (x - 1) == 0`
+
+/// Checks if a number is a power of two.
+///
+/// Returns true if `bits` is a power of two, otherwise false.
+///
+/// see: [Power of Two](https://en.wikipedia.org/wiki/Power_of_two)
+///
+/// This function uses the following bitwise operation:
+///
+/// `x & (x - 1) == 0`
+///
+/// # Arguments
+///
+/// `bits` - The number to check.
+///
+/// # Returns
+///
+/// True if `bits` is a power of two, otherwise false.
+///
+/// # Panic
+///
+/// This function will not panic.
+///
+/// # Examples
+///
+/// ```rust
+/// use rust_algorithms::bit_manipulation::is_power_of_two;
+///
+/// assert!(is_power_of_two(0));
+/// assert!(is_power_of_two(2));
+/// assert!(is_power_of_two(16));
+/// assert!(is_power_of_two(64));
+///
+/// assert!(!is_power_of_two(33));
+/// assert!(!is_power_of_two(124));
+/// assert!(!is_power_of_two(-13));
+///
+/// ```
+///
 pub fn is_power_of_two(bits: i8) -> bool {
     bits & (bits.wrapping_sub(1)) == 0
 }

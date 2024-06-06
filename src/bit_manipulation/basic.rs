@@ -502,7 +502,40 @@ pub fn count_ones(bits: i8) -> i8 {
     result
 }
 
-/// Counts the number of equal bits.
+/// Counts the number of equal bits between two numbers.
+///
+/// Returns the number of equal bits between `a` and `b`.
+///
+/// see: [Hamming Distance](https://en.wikipedia.org/wiki/Hamming_distance)
+///
+/// This is the inverse of the Hamming Distance.
+///
+/// note that the sign bit is not considered in this operation.
+///
+/// # Arguments
+///
+/// `a` - The first number to compare.
+/// `b` - The second number to compare.
+///
+/// # Returns
+///
+/// The number of equal bits between `a` and `b`.
+///
+/// # Panic
+///
+/// This function will not panic.
+///
+/// # Examples
+///
+/// ```rust
+/// use rust_algorithms::bit_manipulation::bit_equivalence;
+///
+/// assert_eq!(0, bit_equivalence(0b000_0000, 0b111_1111));
+/// assert_eq!(6, bit_equivalence(0b000_0001, 0b000_0000));
+/// assert_eq!(7, bit_equivalence(0b111_1111, 0b111_1111));
+///
+/// ```
+///
 pub fn bit_equivalence(a: i8, b: i8) -> i8 {
     count_ones(!(a ^ b))
 }

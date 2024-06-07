@@ -1,3 +1,61 @@
+//! Implementation of the Advanced Encryption Standard (AES) block cipher.
+//!
+//! # AES
+//!
+//! AES is a symmetric block cipher that encrypts and decrypts data in blocks of 128 bits.
+//!
+//! The algorithm consists of several steps:
+//!
+//! 1. **Key Expansion**: The original key is expanded into a key schedule.
+//! 2. **Initial Round**: The input block is XORed with the first part of the key schedule.
+//! 3. **Rounds**: A number of rounds are performed, each consisting of the following steps:
+//!    a. **SubBytes**: Each byte of the block is replaced by a value from a lookup table.
+//!    b. **ShiftRows**: The bytes of the block are shifted to the left.
+//!    c. **MixColumns**: Each column of the block is multiplied with a fixed matrix.
+//! 4. **Final Round**: The block is passed through the SubBytes and ShiftRows steps, but not MixColumns.
+//! 5. **Output**: The block is XORed with the last part of the key schedule.
+//!
+//! The number of rounds depends on the key size:
+//!
+//! - 128-bit key: 10 rounds
+//! - 192-bit key: 12 rounds
+//! - 256-bit key: 14 rounds
+//!
+//! # Example
+//!
+//! ```rust
+//! use rust_algorithms::ciphers::{aes_encrypt, AesKey::AesKey128};
+//!
+//! let key = [
+//!    0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6,
+//!    0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c,
+//! ];
+//!
+//! let plaintext = [
+//!   0x32, 0x43, 0xf6, 0xa8, 0x88, 0x5a, 0x30, 0x8d,
+//!   0x31, 0x31, 0x98, 0xa2, 0xe0, 0x37, 0x07, 0x34,
+//! ];
+//!
+//! let ciphertext = aes_encrypt(&plaintext, AesKey128(key));
+//!
+//! assert_eq!(ciphertext, [
+//!     0x39, 0x25, 0x84, 0x1d, 0x02, 0xdc, 0x09, 0xfb,
+//!     0xdc, 0x11, 0x85, 0x97, 0x19, 0x6a, 0x0b, 0x32
+//! ]);
+//! ```
+//!
+//! # References
+//!
+//! - [FIPS 197](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf): Advanced Encryption Standard (AES)
+//! - [Wikipedia](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard): Advanced Encryption Standard
+//!
+//! # Security Warning
+//!
+//! This library has not been reviewed by cryptographers. It is not suitable for security-critical applications.
+//!
+//! Use this library at your own risk.
+//!
+
 const AES_WORD_SIZE: usize = 4;
 const AES_BLOCK_SIZE: usize = 16;
 const AES_NUM_BLOCK_WORDS: usize = AES_BLOCK_SIZE / AES_WORD_SIZE;

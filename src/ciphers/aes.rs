@@ -461,6 +461,18 @@ pub fn aes_decrypt(cipher_text: &[Byte], key: AesKey) -> Vec<Byte> {
     data
 }
 
+/// key_expansion expands the given initial key into a key schedule.
+/// The key schedule is used to generate round keys for each round of the AES algorithm.
+/// The key schedule is generated using the Rijndael key schedule algorithm.
+///
+/// # Arguments
+/// `init_key` - The initial key to expand
+/// `num_rounds` - The number of rounds in the AES algorithm
+///
+/// # Returns
+///
+/// The key schedule as a vector of bytes
+///
 fn key_expansion(init_key: &[Byte], num_rounds: usize) -> Vec<Byte> {
     let nr = num_rounds;
     // number of words in initial key
@@ -489,6 +501,15 @@ fn key_expansion(init_key: &[Byte], num_rounds: usize) -> Vec<Byte> {
         .concat()
 }
 
+/// add_round_key adds the given round key to the given data.
+/// The data is modified in place.
+/// The round key must be the same size as the data.
+///
+/// # Arguments
+///
+/// `data` - The data to add the round key to
+/// `round_key` - The round key to add to the data
+///
 fn add_round_key(data: &mut [Byte], round_key: &[Byte]) {
     assert!(data.len() % AES_BLOCK_SIZE == 0 && round_key.len() == AES_BLOCK_SIZE);
     let num_blocks = data.len() / AES_BLOCK_SIZE;
@@ -497,12 +518,28 @@ fn add_round_key(data: &mut [Byte], round_key: &[Byte]) {
         .for_each(|(s, k)| *s ^= k);
 }
 
+/// sub_bytes_blocks applies the AES S-Box to each block in the given data.
+/// The data is modified in place.
+///
+/// # Arguments
+///
+/// `data` - The data to apply the S-Box to
+/// `mode` - The AES mode to use
+///
 fn sub_bytes_blocks(data: &mut [Byte], mode: AesMode) {
     for block in data.chunks_mut(AES_BLOCK_SIZE) {
         sub_bytes(block, mode);
     }
 }
 
+/// shift_rows_blocks applies the AES ShiftRows operation to each block in the given data.
+/// The data is modified in place.
+///
+/// # Arguments
+///
+/// `data` - The data to apply the ShiftRows operation to
+/// `mode` - The AES mode to use
+///
 fn shift_rows_blocks(blocks: &mut [Byte], mode: AesMode) {
     for block in blocks.chunks_mut(AES_BLOCK_SIZE) {
         transpose_block(block);
@@ -511,6 +548,14 @@ fn shift_rows_blocks(blocks: &mut [Byte], mode: AesMode) {
     }
 }
 
+/// mix_column_blocks applies the AES MixColumns operation to each block in the given data.
+/// The data is modified in place.
+///
+/// # Arguments
+///
+/// `data` - The data to apply the MixColumns operation to
+/// `mode` - The AES mode to use
+///
 fn mix_column_blocks(data: &mut [Byte], mode: AesMode) {
     for block in data.chunks_mut(AES_BLOCK_SIZE) {
         transpose_block(block);
@@ -519,6 +564,17 @@ fn mix_column_blocks(data: &mut [Byte], mode: AesMode) {
     }
 }
 
+/// padding pads the given data to the given block size using the default value of the data type.
+///
+/// # Arguments
+///
+/// `data` - The data to pad
+/// `block_size` - The block size to pad the data to
+///
+/// # Returns
+///
+/// The padded data
+///
 fn padding<T: Clone + Default>(data: &[T], block_size: usize) -> Vec<T> {
     if data.len() % block_size == 0 {
         Vec::from(data)
@@ -533,12 +589,31 @@ fn padding<T: Clone + Default>(data: &[T], block_size: usize) -> Vec<T> {
     }
 }
 
+/// sub_word applies the AES S-Box/InvS-Box to the given word.
+///
+/// # Arguments
+///
+/// `word` - The word to apply the S-Box/InvS-Box to
+/// `mode` - The AES mode to use
+///
+/// # Returns
+///
+/// The word with the S-Box/InvS-Box applied
+///
 fn sub_word(word: Word, mode: AesMode) -> Word {
     let mut bytes = word_to_bytes(word);
     sub_bytes(&mut bytes, mode);
     bytes_to_word(&bytes)
 }
 
+/// sub_bytes applies the AES S-Box/InvS-Box to the given data.
+/// The data is modified in place.
+///
+/// # Arguments
+///
+/// `data` - The data to apply the S-Box/InvS-Box to
+/// `mode` - The AES mode to use
+///
 fn sub_bytes(data: &mut [Byte], mode: AesMode) {
     let sbox = match mode {
         AesMode::Encryption => &SBOX,
@@ -549,6 +624,14 @@ fn sub_bytes(data: &mut [Byte], mode: AesMode) {
     }
 }
 
+/// shift_rows applies the AES ShiftRows/InvShiftRows operation to the given block.
+/// The block is modified in place.
+///
+/// # Arguments
+///
+/// `block` - The block to apply the ShiftRows/InvShiftRows operation to
+/// `mode` - The AES mode to use
+///
 fn shift_rows(block: &mut [Byte], mode: AesMode) {
     // skip the first row, index begin from 1
     for row in 1..4 {
@@ -563,6 +646,14 @@ fn shift_rows(block: &mut [Byte], mode: AesMode) {
     }
 }
 
+/// mix_column applies the AES MixColumns/InvMixColumns operation to the given block.
+/// The block is modified in place.
+///
+/// # Arguments
+///
+/// `block` - The block to apply the MixColumns/InvMixColumns operation to
+/// `mode` - The AES mode to use
+///
 fn mix_column(block: &mut [Byte], mode: AesMode) {
     let mix_col_mat = match mode {
         AesMode::Encryption => [
@@ -595,6 +686,16 @@ fn mix_column(block: &mut [Byte], mode: AesMode) {
     }
 }
 
+/// transpose_block transposes the given block in place.
+///
+/// # Arguments
+///
+/// `block` - The block to transpose
+///
+/// # Panics
+///
+/// This function will panic if the block is smaller than 16 bytes.
+///
 fn transpose_block(block: &mut [u8]) {
     let mut src_block = [0u8; AES_BLOCK_SIZE];
     src_block.copy_from_slice(block);
@@ -605,6 +706,20 @@ fn transpose_block(block: &mut [u8]) {
     }
 }
 
+/// bytes_to_word converts the given bytes to a word.
+///
+/// # Arguments
+///
+/// `bytes` - The bytes to convert to a word
+///
+/// # Returns
+///
+/// The word
+///
+/// # Panics
+///
+/// This function will panic if 'bytes' are not 4 bytes long.
+///
 fn bytes_to_word(bytes: &[Byte]) -> Word {
     assert!(bytes.len() == AES_WORD_SIZE);
     let mut word = 0;
@@ -614,6 +729,16 @@ fn bytes_to_word(bytes: &[Byte]) -> Word {
     word
 }
 
+/// word_to_bytes converts the given word to an AESWord byte array.
+///
+/// # Arguments
+///
+/// `word` - The word to convert to an AESWord byte array.
+///
+/// # Returns
+///
+/// The AESWord byte array
+///
 fn word_to_bytes(word: Word) -> AesWord {
     let mut bytes = [0; AES_WORD_SIZE];
     for (i, byte) in bytes.iter_mut().enumerate() {
@@ -623,6 +748,20 @@ fn word_to_bytes(word: Word) -> AesWord {
     bytes
 }
 
+/// rot_word rotates the given word to the left.
+///
+/// # Arguments
+///
+/// `word` - The word to rotate
+///
+/// # Returns
+///
+/// The rotated word
+///
+/// # Panics
+///
+/// This function will not panic.
+///
 fn rot_word(word: Word) -> Word {
     let mut bytes = word_to_bytes(word);
     let init = bytes[0];

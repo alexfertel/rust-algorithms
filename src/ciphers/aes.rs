@@ -115,8 +115,13 @@ const SBOX: [Byte; 256] = [
     0x8C, 0xA1, 0x89, 0x0D, 0xBF, 0xE6, 0x42, 0x68, 0x41, 0x99, 0x2D, 0x0F, 0xB0, 0x54, 0xBB, 0x16,
 ];
 
-/// Inverse Rijndael S-box Substitution table used for decryption in the
-/// subBytesDec step.
+/// Inverse Rijndael S-box Substitution table.
+///
+/// This table is used to substitute each byte of the state matrix in the
+/// subBytes step of the decryption process.
+///
+/// The inverse S-box is calculated by taking the multiplicative inverse of
+/// each element in the S-box.
 const INV_SBOX: [Byte; 256] = [
     // 0     1     2     3     4     5     6     7     8     9     A     B     C     D     E     F
     0x52, 0x09, 0x6A, 0xD5, 0x30, 0x36, 0xA5, 0x38, 0xBF, 0x40, 0xA3, 0x9E, 0x81, 0xF3, 0xD7, 0xFB,

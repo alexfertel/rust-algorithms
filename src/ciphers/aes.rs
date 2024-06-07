@@ -393,6 +393,45 @@ pub fn aes_encrypt(plain_text: &[Byte], key: AesKey) -> Vec<Byte> {
     data
 }
 
+/// aes_decrypt decrypts the given cipher text using the given AES key.
+/// The key must be 128, 192, or 256 bits.
+///
+/// # Arguments
+///
+/// `cipher_text` - The cipher text to decrypt
+/// `key` - The AES key to use for decryption
+///
+/// # Returns
+///
+/// The decrypted text in bytes. This may be padded with '0' bytes.
+///
+/// # Panics
+///
+/// This function will not panic.
+///
+/// # Examples
+///
+/// ```rust
+/// use rust_algorithms::ciphers::{AesKey::AesKey128, aes_encrypt, aes_decrypt};
+/// use std::str;
+///
+/// let key = [
+///    0xc3, 0x50, 0x30, 0xb5, 0x84, 0xed, 0x31, 0xe1,
+///    0x7e, 0x7e, 0xe4, 0x0b, 0x01, 0x23, 0x5b, 0xf9,
+/// ];
+///
+/// let plain_text = b"All around the world!";
+/// let cipher_text = aes_encrypt(plain_text, AesKey128(key));
+///
+/// let round_trip = aes_decrypt(&cipher_text, AesKey128(key));
+///
+/// // Convert the round trip back to a string since
+/// // the encryption procces may have added '0' padding to the plaintext.
+/// let round_trip_str = str::from_utf8(&round_trip).unwrap().trim_end_matches(char::from(0));
+///
+/// assert_eq!(plain_text, round_trip_str.as_bytes());
+/// ```
+///
 pub fn aes_decrypt(cipher_text: &[Byte], key: AesKey) -> Vec<Byte> {
     let (key, num_rounds) = match key {
         AesKey::AesKey128(key) => (Vec::from(key), 10),

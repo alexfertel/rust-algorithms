@@ -67,6 +67,9 @@ type AesWord = [Byte; AES_WORD_SIZE];
 
 /// Precalculated values for x to the power of 2 in Rijndaels galois field.
 /// Used as 'RCON' during the key expansion.
+///
+/// The values are calculated by multiplying the previous value by 2 in the
+/// galois field, and then reducing the result modulo 0x11b.
 const RCON: [Word; 256] = [
     // 0     1     2     3     4     5     6     7     8     9     A     B     C     D     E     F
     0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8, 0xab, 0x4d, 0x9a,

@@ -299,18 +299,71 @@ const GF_MUL_TABLE: [[Byte; 256]; 16] = [
     /* F */ [0u8; 256],
 ];
 
+/// AesKey represents an AES key of 128, 192, or 256 bits.
+/// The key is represented as an array of bytes.
+/// The key size determines the number of rounds in the AES algorithm.
+/// The key size also determines the number of words in the key.
 pub enum AesKey {
+    /// AES 128-bit key, 16 bytes
     AesKey128([Byte; 16]),
+    /// AES 192-bit key, 24 bytes
     AesKey192([Byte; 24]),
+    /// AES 256-bit key, 32 bytes
     AesKey256([Byte; 32]),
 }
 
+/// AesMode represents the AES mode of operation. Either converting plaintext to
+/// encrypted text (Encryption) or converting encrypted text to plaintext (Decryption).
 #[derive(Clone, Copy)]
 enum AesMode {
+    /// Encryption mode
+    /// This mode is used to convert plaintext to encrypted text.
     Encryption,
+    /// Decryption mode
+    /// This mode is used to convert encrypted text to plaintext.
     Decryption,
 }
 
+/// aes_encrypt encrypts the given plaintext using the given AES key.
+/// The plaintext is padded to the AES block size using PKCS7 padding.
+/// The key must be 128, 192, or 256 bits.
+///
+/// # Arguments
+///
+/// `plain_text` - The plaintext to encrypt
+/// `key` - The AES key to use for encryption
+///
+/// # Returns
+///
+/// The encrypted text
+///
+/// # Panics
+///
+/// This function will not panic.
+///
+/// # Examples
+///
+/// ```rust
+/// use rust_algorithms::ciphers::{AesKey::AesKey128, aes_encrypt, aes_decrypt};
+/// use std::str;
+///
+/// let key = [
+///     0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6,
+///     0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c,
+/// ];
+///
+/// let plain_text = b"Hello, world!";
+/// let cipher_text = aes_encrypt(plain_text, AesKey128(key));
+///
+/// let round_trip = aes_decrypt(&cipher_text, AesKey128(key));
+///
+/// // Convert the round trip back to a string since
+/// // the encryption procces may have added '0' padding to the plaintext.
+/// let round_trip_str = str::from_utf8(&round_trip).unwrap().trim_end_matches(char::from(0));
+///
+/// assert_eq!(plain_text, round_trip_str.as_bytes());
+/// ```
+///
 pub fn aes_encrypt(plain_text: &[Byte], key: AesKey) -> Vec<Byte> {
     let (key, num_rounds) = match key {
         AesKey::AesKey128(key) => (Vec::from(key), 10),

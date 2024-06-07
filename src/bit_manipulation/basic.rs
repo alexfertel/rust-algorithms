@@ -17,7 +17,7 @@
 //! - `bit_equivalence`: Counts the number of equal bits between two numbers.
 //! - `bit_distance`: Calculates the bit distance between two numbers.
 //! - `is_power_of_two`: Checks if a number is a power of two.
-//! - `is_power_of_two_difference`: Checks if the number is a difference of two numbers that are powers of two
+//! - `is_power_of_two_difference`: Checks if the number is the difference of two powers of two.
 //! - `rightmost_one`: Returns the position of the rightmost one-bit in a number.
 //! - `rightmost_zero`: Returns the position of the rightmost zero-bit in a number.
 //!
@@ -52,9 +52,7 @@
 /// assert_eq!(0, get_bit(bits, 7));
 /// assert_eq!(1, get_bit(bits, 6));
 /// assert_eq!(1, get_bit(bits, 0));
-///
 /// ```
-///
 pub fn get_bit(bits: i8, n: usize) -> i8 {
     (bits >> n) & 1
 }
@@ -88,9 +86,7 @@ pub fn get_bit(bits: i8, n: usize) -> i8 {
 /// assert_eq!(0b0101_0101, set_bit(bits, 0));
 /// assert_eq!(0b0101_0110, set_bit(bits, 1));
 /// assert_eq!(0b0101_1100, set_bit(bits, 3));
-///
 /// ```
-///
 pub fn set_bit(bits: i8, n: usize) -> i8 {
     bits | (1 << n)
 }
@@ -123,9 +119,7 @@ pub fn set_bit(bits: i8, n: usize) -> i8 {
 ///
 /// assert_eq!(0b0101_0100, clear_bit(bits, 0));
 /// assert_eq!(0b0101_0001, clear_bit(bits, 2));
-///
 /// ```
-///
 pub fn clear_bit(bits: i8, n: usize) -> i8 {
     bits & !(1 << n)
 }
@@ -172,9 +166,7 @@ pub fn clear_bit(bits: i8, n: usize) -> i8 {
 /// // Does nothing when clearing an unset bit.
 /// assert_eq!(bits, update_bit(bits, 1, false));
 /// assert_eq!(bits, update_bit(bits, 3, false));
-///
 /// ```
-///
 pub fn update_bit(bits: i8, n: usize, set_it: bool) -> i8 {
     if set_it {
         set_bit(bits, n)
@@ -215,9 +207,7 @@ pub fn update_bit(bits: i8, n: usize, set_it: bool) -> i8 {
 /// assert!(!is_even(1));
 /// assert!(!is_even(17));
 /// assert!(!is_even(127));
-///
 /// ```
-///
 pub fn is_even(bits: i8) -> bool {
     bool::from(bits & 1 == 0)
 }
@@ -254,9 +244,7 @@ pub fn is_even(bits: i8) -> bool {
 /// assert!(!is_positive(-45));
 /// assert!(!is_positive(-128));
 /// assert!(!is_positive(0));
-///
 /// ```
-///
 pub fn is_positive(bits: i8) -> bool {
     if bits == 0 {
         return false;
@@ -292,9 +280,7 @@ pub fn is_positive(bits: i8) -> bool {
 /// assert_eq!(12, multiply_by_two(6));
 /// assert_eq!(0, multiply_by_two(0));
 /// assert_eq!(2, multiply_by_two(1));
-///
 /// ```
-///
 pub fn multiply_by_two(bits: i8) -> i8 {
     bits << 1
 }
@@ -326,9 +312,7 @@ pub fn multiply_by_two(bits: i8) -> i8 {
 /// assert_eq!(12, divide_by_two(24));
 /// assert_eq!(0, divide_by_two(0));
 /// assert_eq!(0, divide_by_two(1));
-///
 /// ```
-///
 pub fn divide_by_two(bits: i8) -> i8 {
     bits >> 1
 }
@@ -361,9 +345,7 @@ pub fn divide_by_two(bits: i8) -> i8 {
 /// assert_eq!(-127, twos_complement(127));
 /// assert_eq!(5, twos_complement(twos_complement(5)));
 /// assert_eq!(10, twos_complement(twos_complement(10)));
-///
 /// ```
-///
 pub fn twos_complement(bits: i8) -> i8 {
     (!bits).wrapping_add(1)
 }
@@ -400,9 +382,7 @@ pub fn twos_complement(bits: i8) -> i8 {
 /// assert_eq!(120, multiply_signed(-30, -4));
 /// assert_eq!(36, multiply_signed(36, 1));
 /// assert_eq!(36, multiply_signed(1, 36));
-///
 /// ```
-///
 pub fn multiply_signed(a: i8, b: i8) -> i8 {
     if a == 0 || b == 0 {
         return 0;
@@ -450,9 +430,7 @@ pub fn multiply_signed(a: i8, b: i8) -> i8 {
 /// assert_eq!(0, multiply_unsigned(0, 1));
 /// assert_eq!(0, multiply_unsigned(0, 0));
 /// assert_eq!(64, multiply_unsigned(32, 2));
-///
 /// ```
-///
 pub fn multiply_unsigned(a: i8, b: i8) -> i8 {
     let mut result = 0;
     for i in 0..7 {
@@ -491,9 +469,7 @@ pub fn multiply_unsigned(a: i8, b: i8) -> i8 {
 /// assert_eq!(3, count_ones(0b0101_0100));
 /// assert_eq!(1, count_ones(0b0000_0100));
 /// assert_eq!(7, count_ones(0b0111_1111));
-///
 /// ```
-///
 pub fn count_ones(bits: i8) -> i8 {
     let mut result = 0;
     for i in 0..7 {
@@ -533,9 +509,7 @@ pub fn count_ones(bits: i8) -> i8 {
 /// assert_eq!(0, bit_equivalence(0b000_0000, 0b111_1111));
 /// assert_eq!(6, bit_equivalence(0b000_0001, 0b000_0000));
 /// assert_eq!(7, bit_equivalence(0b111_1111, 0b111_1111));
-///
 /// ```
-///
 pub fn bit_equivalence(a: i8, b: i8) -> i8 {
     count_ones(!(a ^ b))
 }
@@ -572,9 +546,7 @@ pub fn bit_equivalence(a: i8, b: i8) -> i8 {
 /// assert_eq!(6, bit_distance(0b111_1111, 0b000_0100));
 /// assert_eq!(6, bit_distance(0b101_1011, 0b000_0100));
 /// assert_eq!(7, bit_distance(0b111_1111, 0b000_0000));
-///
 /// ```
-///
 pub fn bit_distance(a: i8, b: i8) -> i8 {
     count_ones(a ^ b)
 }
@@ -614,24 +586,34 @@ pub fn bit_distance(a: i8, b: i8) -> i8 {
 /// assert!(!is_power_of_two(33));
 /// assert!(!is_power_of_two(124));
 /// assert!(!is_power_of_two(-13));
-///
 /// ```
-///
 pub fn is_power_of_two(bits: i8) -> bool {
     bits & (bits.wrapping_sub(1)) == 0
 }
 
-/// Checks if the number is a difference of two numbers that are powers of two.
-///
-/// Returns true if `bits` is a difference of two power of two numbers, otherwise false.
-///
-/// see: [Sum and Difference of Powers](https://themathpage.com/Alg/difference-two-squares-2.htm)
+/// Checks if the number is the difference of two powers of two.
 ///
 /// This function uses the following bitwise operation:
 ///
-/// `((x | (x - 1)) + 1) & x == 0`
+/// ```text
+/// ((bits | (bits - 1)) + 1) & bits == 0
+/// ```
 ///
-/// Also `((x & -x) + x) & x == 0`
+/// A number of the form `2^k - 2^j`, where `k > j`, is a contiguous block of
+/// ones. Starting from the number 14 (`00001110`), the algorithm is as follows:
+///
+/// ```text
+/// 00001110   bits
+/// 00001101   bits - 1
+/// 00001111   bits | (bits - 1)
+/// 00010000  (bits | (bits - 1)) + 1
+/// 00000000 ((bits | (bits - 1)) + 1) & bits
+/// ```
+///
+/// The algorithm, basically turns off the block of ones and checks if it's
+/// zero.
+///
+/// This would also work: `((bits & -bits) + bits) & bits == 0`.
 ///
 /// # Arguments
 ///
@@ -639,7 +621,7 @@ pub fn is_power_of_two(bits: i8) -> bool {
 ///
 /// # Returns
 ///
-/// True if `bits` is a difference of a power of two, otherwise false.
+/// True if `bits` is of the form `2^k - 2^j`, where `k > j`, otherwise `false`.
 ///
 /// # Panic
 ///
@@ -658,9 +640,7 @@ pub fn is_power_of_two(bits: i8) -> bool {
 ///
 /// assert!(!is_power_of_two_difference(33));
 /// assert!(!is_power_of_two_difference(-13));
-///
 /// ```
-///
 pub fn is_power_of_two_difference(bits: i8) -> bool {
     ((bits | (bits.saturating_sub(1)))
         .checked_add(1)
@@ -694,9 +674,7 @@ pub fn is_power_of_two_difference(bits: i8) -> bool {
 /// assert_eq!(0b000_0000, rightmost_one(0b000_0000));
 /// assert_eq!(0b000_0001, rightmost_one(0b111_1111));
 /// assert_eq!(0b000_0010, rightmost_one(0b010_0110));
-///
 /// ```
-///
 pub fn rightmost_one(bits: i8) -> i8 {
     bits & -bits
 }
@@ -726,202 +704,7 @@ pub fn rightmost_one(bits: i8) -> i8 {
 /// assert_eq!(0b000_0001, rightmost_zero(0b000_0000));
 /// assert_eq!(0b000_0000, rightmost_zero(0b111_1111));
 /// assert_eq!(0b000_1000, rightmost_zero(0b010_0111));
-///
 /// ```
-///
 pub fn rightmost_zero(bits: i8) -> i8 {
     !bits & (bits.checked_add(1).unwrap_or(0))
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_get_bit() {
-        let bits = 0b0101_0101;
-
-        assert_eq!(0, get_bit(bits, 7));
-        assert_eq!(1, get_bit(bits, 6));
-        assert_eq!(1, get_bit(bits, 0));
-    }
-
-    #[test]
-    fn test_set_bit() {
-        let bits = 0b101_0101;
-
-        assert_eq!(0b101_0111, set_bit(bits, 1));
-        assert_eq!(0b101_1101, set_bit(bits, 3));
-    }
-
-    #[test]
-    fn test_clear_bit() {
-        let bits = 0b101_0101;
-
-        assert_eq!(0b101_0100, clear_bit(bits, 0));
-        assert_eq!(0b101_0001, clear_bit(bits, 2));
-    }
-
-    #[test]
-    fn test_update_bit() {
-        let bits = 0b101_0101;
-
-        // Clears a bit.
-        assert_eq!(0b101_0100, update_bit(bits, 0, false));
-        assert_eq!(0b101_0001, update_bit(bits, 2, false));
-
-        // Sets a bit.
-        assert_eq!(0b101_0111, update_bit(bits, 1, true));
-        assert_eq!(0b101_1101, update_bit(bits, 3, true));
-
-        // Does nothing when setting a set bit.
-        assert_eq!(bits, update_bit(bits, 0, true));
-        assert_eq!(bits, update_bit(bits, 2, true));
-
-        // Does nothing when clearing an unset bit.
-        assert_eq!(bits, update_bit(bits, 1, false));
-        assert_eq!(bits, update_bit(bits, 3, false));
-    }
-
-    #[test]
-    fn test_is_even() {
-        assert!(is_even(2));
-        assert!(is_even(0));
-        assert!(is_even(6));
-        assert!(is_even(36));
-
-        assert!(!is_even(33));
-        assert!(!is_even(1));
-        assert!(!is_even(17));
-        assert!(!is_even(127));
-    }
-
-    #[test]
-    fn test_is_positive() {
-        assert!(is_positive(5));
-        assert!(is_positive(1));
-        assert!(is_positive(100));
-        assert!(is_positive(127));
-
-        assert!(!is_positive(-1));
-        assert!(!is_positive(-45));
-        assert!(!is_positive(-128));
-        assert!(!is_positive(0));
-    }
-
-    #[test]
-    fn test_multiply_by_two() {
-        assert_eq!(4, multiply_by_two(2));
-        assert_eq!(12, multiply_by_two(6));
-        assert_eq!(0, multiply_by_two(0));
-        assert_eq!(2, multiply_by_two(1));
-    }
-
-    #[test]
-    fn test_divide_by_two() {
-        assert_eq!(2, divide_by_two(4));
-        assert_eq!(12, divide_by_two(24));
-        assert_eq!(0, divide_by_two(0));
-        assert_eq!(0, divide_by_two(1));
-    }
-
-    #[test]
-    fn test_twos_complement() {
-        assert_eq!(-1, twos_complement(1));
-        assert_eq!(0b000_0000, twos_complement(0b000_0000));
-        assert_eq!(-127, twos_complement(127));
-        assert_eq!(0, twos_complement(twos_complement(0)));
-        assert_eq!(10, twos_complement(twos_complement(10)));
-        assert_eq!(10, twos_complement(twos_complement(10)));
-    }
-
-    #[test]
-    fn test_multiply_signed() {
-        assert_eq!(-12, multiply_signed(-6, 2));
-        assert_eq!(-8, multiply_signed(2, -4));
-        assert_eq!(-12, multiply_signed(2, -6));
-        assert_eq!(120, multiply_signed(30, 4));
-        assert_eq!(120, multiply_signed(-30, -4));
-        assert_eq!(36, multiply_signed(36, 1));
-        assert_eq!(36, multiply_signed(1, 36));
-    }
-
-    #[test]
-    fn test_multiply_unsigned() {
-        assert_eq!(120, multiply_unsigned(30, 4));
-        assert_eq!(120, multiply_unsigned(4, 30));
-        assert_eq!(36, multiply_unsigned(36, 1));
-        assert_eq!(36, multiply_unsigned(1, 36));
-        assert_eq!(0, multiply_unsigned(1, 0));
-        assert_eq!(0, multiply_unsigned(0, 1));
-        assert_eq!(0, multiply_unsigned(0, 0));
-        assert_eq!(64, multiply_unsigned(32, 2));
-        assert_eq!(25, multiply_unsigned(5, 5));
-    }
-
-    #[test]
-    fn test_count_ones() {
-        assert_eq!(0, count_ones(0));
-        assert_eq!(1, count_ones(1));
-        assert_eq!(3, count_ones(0b101_0100));
-        assert_eq!(1, count_ones(0b000_0100));
-        assert_eq!(7, count_ones(0b111_1111));
-    }
-
-    #[test]
-    fn test_bit_equivalence() {
-        assert_eq!(0, bit_equivalence(0b000_0000, 0b111_1111));
-        assert_eq!(6, bit_equivalence(0b000_0001, 0b000_0000));
-        assert_eq!(7, bit_equivalence(0b111_1111, 0b111_1111));
-    }
-
-    #[test]
-    fn test_bit_distance() {
-        assert_eq!(0, bit_distance(0, 0));
-        assert_eq!(0, bit_distance(127, 127));
-        assert_eq!(0, bit_distance(55, 55));
-        assert_eq!(6, bit_distance(0b111_1111, 0b000_0100));
-        assert_eq!(6, bit_distance(0b101_1011, 0b000_0100));
-        assert_eq!(7, bit_distance(0b111_1111, 0b000_0000));
-    }
-
-    #[test]
-    fn test_is_power_of_two() {
-        assert!(is_power_of_two(0));
-        assert!(is_power_of_two(2));
-        assert!(is_power_of_two(16));
-        assert!(is_power_of_two(64));
-
-        assert!(!is_power_of_two(33));
-        assert!(!is_power_of_two(124));
-        assert!(!is_power_of_two(-13));
-    }
-
-    #[test]
-    fn test_is_power_of_two_difference() {
-        assert!(is_power_of_two_difference(2));
-        assert!(is_power_of_two_difference(4));
-        assert!(is_power_of_two_difference(12));
-        assert!(is_power_of_two_difference(14));
-        assert!(is_power_of_two_difference(124));
-
-        assert!(!is_power_of_two_difference(33));
-        assert!(!is_power_of_two_difference(-13));
-    }
-
-    #[test]
-    fn test_rightmost_one() {
-        assert_eq!(0b001_0000, rightmost_one(0b101_0000));
-        assert_eq!(0b000_0000, rightmost_one(0b000_0000));
-        assert_eq!(0b000_0001, rightmost_one(0b111_1111));
-        assert_eq!(0b000_0010, rightmost_one(0b010_0110));
-    }
-
-    #[test]
-    fn test_rightmost_zero() {
-        assert_eq!(0b000_0001, rightmost_zero(0b101_0000));
-        assert_eq!(0b000_0001, rightmost_zero(0b000_0000));
-        assert_eq!(0b000_0000, rightmost_zero(0b111_1111));
-        assert_eq!(0b000_1000, rightmost_zero(0b010_0111));
-    }
 }

@@ -337,10 +337,6 @@ enum AesMode {
 ///
 /// The encrypted text
 ///
-/// # Panics
-///
-/// This function will not panic.
-///
 /// # Examples
 ///
 /// ```rust
@@ -404,10 +400,6 @@ pub fn aes_encrypt(plain_text: &[Byte], key: AesKey) -> Vec<Byte> {
 /// # Returns
 ///
 /// The decrypted text in bytes. This may be padded with '0' bytes.
-///
-/// # Panics
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -757,10 +749,6 @@ fn word_to_bytes(word: Word) -> AesWord {
 /// # Returns
 ///
 /// The rotated word
-///
-/// # Panics
-///
-/// This function will not panic.
 ///
 fn rot_word(word: Word) -> Word {
     let mut bytes = word_to_bytes(word);

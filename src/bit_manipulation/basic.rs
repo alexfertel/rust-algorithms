@@ -6,8 +6,8 @@
 ///
 /// # Arguments
 ///
-/// `bits` - The number to extract the bit from.
-/// `n` - The position of the bit to extract.
+/// * `bits` - The number to extract the bit from.
+/// * `n` - The position of the bit to extract.
 ///
 /// # Returns
 ///
@@ -36,8 +36,8 @@ pub fn get_bit(bits: i8, n: usize) -> i8 {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to set the bit in.
-/// `n` - The position of the bit to set.
+/// * `bits` - The number to set the bit in.
+/// * `n` - The position of the bit to set.
 ///
 /// # Returns
 ///
@@ -66,8 +66,8 @@ pub fn set_bit(bits: i8, n: usize) -> i8 {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to clear the bit in.
-/// `n` - The position of the bit to clear.
+/// * `bits` - The number to clear the bit in.
+/// * `n` - The position of the bit to clear.
 ///
 /// # Returns
 ///
@@ -95,9 +95,9 @@ pub fn clear_bit(bits: i8, n: usize) -> i8 {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to update the bit in.
-/// `n` - The position of the bit to update.
-/// `set_it` - If true, the bit will be set to 1, otherwise it will be set to 0.
+/// * `bits` - The number to update the bit in.
+/// * `n` - The position of the bit to update.
+/// * `set_it` - If true, the bit will be set to 1, otherwise it will be set to 0.
 ///
 /// # Returns
 ///
@@ -142,7 +142,7 @@ pub fn update_bit(bits: i8, n: usize, set_it: bool) -> i8 {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to check.
+/// * `bits` - The number to check.
 ///
 /// # Returns
 ///
@@ -175,7 +175,7 @@ pub fn is_even(bits: i8) -> bool {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to check.
+/// * `bits` - The number to check.
 ///
 /// # Returns
 ///
@@ -212,7 +212,7 @@ pub fn is_positive(bits: i8) -> bool {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to multiply.
+/// * `bits` - The number to multiply.
 ///
 /// # Returns
 ///
@@ -240,7 +240,7 @@ pub fn multiply_by_two(bits: i8) -> i8 {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to divide.
+/// * `bits` - The number to divide.
 ///
 /// # Returns
 ///
@@ -268,7 +268,7 @@ pub fn divide_by_two(bits: i8) -> i8 {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to calculate the two's complement of.
+/// * `bits` - The number to calculate the two's complement of.
 ///
 /// # Returns
 ///
@@ -298,8 +298,8 @@ pub fn twos_complement(bits: i8) -> i8 {
 ///
 /// # Arguments
 ///
-/// `a` - The first number to multiply.
-/// `b` - The second number to multiply.
+/// * `a` - The first number to multiply.
+/// * `b` - The second number to multiply.
 ///
 /// # Returns
 ///
@@ -341,8 +341,8 @@ pub fn multiply_signed(a: i8, b: i8) -> i8 {
 ///
 /// # Arguments
 ///
-/// `a` - The first number to multiply.
-/// `b` - The second number to multiply.
+/// * `a` - The first number to multiply.
+/// * `b` - The second number to multiply.
 ///
 /// # Returns
 ///
@@ -380,7 +380,7 @@ pub fn multiply_unsigned(a: i8, b: i8) -> i8 {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to count the ones in.
+/// * `bits` - The number to count the ones in.
 ///
 /// # Returns
 ///
@@ -417,8 +417,8 @@ pub fn count_ones(bits: i8) -> i8 {
 ///
 /// # Arguments
 ///
-/// `a` - The first number to compare.
-/// `b` - The second number to compare.
+/// * `a` - The first number to compare.
+/// * `b` - The second number to compare.
 ///
 /// # Returns
 ///
@@ -447,8 +447,8 @@ pub fn bit_equivalence(a: i8, b: i8) -> i8 {
 ///
 /// # Arguments
 ///
-/// `a` - The first number to compare.
-/// `b` - The second number to compare.
+/// * `a` - The first number to compare.
+/// * `b` - The second number to compare.
 ///
 /// # Returns
 ///
@@ -482,7 +482,7 @@ pub fn bit_distance(a: i8, b: i8) -> i8 {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to check.
+/// * `bits` - The number to check.
 ///
 /// # Returns
 ///
@@ -532,7 +532,7 @@ pub fn is_power_of_two(bits: i8) -> bool {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to check.
+/// * `bits` - The number to check.
 ///
 /// # Returns
 ///
@@ -566,7 +566,7 @@ pub fn is_power_of_two_difference(bits: i8) -> bool {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to check.
+/// * `bits` - The number to check.
 ///
 /// # Returns
 ///
@@ -592,7 +592,7 @@ pub fn rightmost_one(bits: i8) -> i8 {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to check.
+/// * `bits` - The number to check.
 ///
 /// # Returns
 ///

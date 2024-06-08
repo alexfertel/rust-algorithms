@@ -1,28 +1,3 @@
-//! This module provides basic bit manipulation operations.
-//!
-//! The following functions are available:
-//!
-//! - `get_bit`: Gets the value of a specific bit in a number.
-//! - `set_bit`: Sets a specific bit in a number to 1.
-//! - `clear_bit`: Sets a specific bit in a number to 0.
-//! - `update_bit`: Updates a specific bit in a number based on a boolean value.
-//! - `is_even`: Checks if a number is even.
-//! - `is_positive`: Checks if a number is positive.
-//! - `multiply_by_two`: Multiplies a number by two.
-//! - `divide_by_two`: Divides a number by two.
-//! - `twos_complement`: Calculates the two's complement of a number.
-//! - `multiply_signed`: Multiplies two signed numbers.
-//! - `multiply_unsigned`: Multiplies two unsigned numbers.
-//! - `count_ones`: Counts the number of ones in a number.
-//! - `bit_equivalence`: Counts the number of equal bits between two numbers.
-//! - `bit_distance`: Calculates the bit distance between two numbers.
-//! - `is_power_of_two`: Checks if a number is a power of two.
-//! - `is_power_of_two_difference`: Checks if the number is the difference of two powers of two.
-//! - `rightmost_one`: Returns the position of the rightmost one-bit in a number.
-//! - `rightmost_zero`: Returns the position of the rightmost zero-bit in a number.
-//!
-//! For more information on each function, please refer to their individual documentation.
-
 /// Gets specific bits from a number.
 ///
 /// Returns the value of the bit at position `n` in `bits`.

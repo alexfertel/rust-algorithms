@@ -13,10 +13,6 @@
 ///
 /// The value of the bit at position `n` in `bits`.
 ///
-/// # Panic
-///
-/// This function will not panic.
-///
 /// # Examples
 ///
 /// ```rust
@@ -46,10 +42,6 @@ pub fn get_bit(bits: i8, n: usize) -> i8 {
 /// # Returns
 ///
 /// The number with the bit at position `n` set to 1.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -81,10 +73,6 @@ pub fn set_bit(bits: i8, n: usize) -> i8 {
 ///
 /// The number with the bit at position `n` set to 0.
 ///
-/// # Panic
-///
-/// This function will not panic.
-///
 /// # Examples
 ///
 /// ```rust
@@ -114,10 +102,6 @@ pub fn clear_bit(bits: i8, n: usize) -> i8 {
 /// # Returns
 ///
 /// The number with the bit at position `n` set to 1 if `set_it` is true, otherwise set to 0.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -164,10 +148,6 @@ pub fn update_bit(bits: i8, n: usize, set_it: bool) -> i8 {
 ///
 /// True if the least significant bit of `bits` is 0, otherwise false.
 ///
-/// # Panic
-///
-/// This function will not panic.
-///
 /// # Examples
 ///
 /// ```rust
@@ -200,10 +180,6 @@ pub fn is_even(bits: i8) -> bool {
 /// # Returns
 ///
 /// True if the most significant bit of `bits` is 0, otherwise false.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -242,11 +218,7 @@ pub fn is_positive(bits: i8) -> bool {
 ///
 /// The result of shifting the bits of `bits` one position to the left.
 ///
-/// # Panic
-///
-/// This function will not panic.
-///
-/// # Examples
+// # Examples
 ///
 /// ```rust
 /// use rust_algorithms::bit_manipulation::multiply_by_two;
@@ -273,10 +245,6 @@ pub fn multiply_by_two(bits: i8) -> i8 {
 /// # Returns
 ///
 /// The result of shifting the bits of `bits` one position to the right.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -305,10 +273,6 @@ pub fn divide_by_two(bits: i8) -> i8 {
 /// # Returns
 ///
 /// The two's complement of `bits`.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -340,10 +304,6 @@ pub fn twos_complement(bits: i8) -> i8 {
 /// # Returns
 ///
 /// The result of multiplying `a` by `b`.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -388,10 +348,6 @@ pub fn multiply_signed(a: i8, b: i8) -> i8 {
 ///
 /// The result of multiplying `a` by `b`.
 ///
-/// # Panic
-///
-/// This function will not panic.
-///
 /// # Examples
 ///
 /// ```rust
@@ -429,10 +385,6 @@ pub fn multiply_unsigned(a: i8, b: i8) -> i8 {
 /// # Returns
 ///
 /// The number of ones in `bits`.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -472,10 +424,6 @@ pub fn count_ones(bits: i8) -> i8 {
 ///
 /// The number of equal bits between `a` and `b`.
 ///
-/// # Panic
-///
-/// This function will not panic.
-///
 /// # Examples
 ///
 /// ```rust
@@ -505,10 +453,6 @@ pub fn bit_equivalence(a: i8, b: i8) -> i8 {
 /// # Returns
 ///
 /// The number of different bits between `a` and `b`.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -543,10 +487,6 @@ pub fn bit_distance(a: i8, b: i8) -> i8 {
 /// # Returns
 ///
 /// True if `bits` is a power of two, otherwise false.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -598,10 +538,6 @@ pub fn is_power_of_two(bits: i8) -> bool {
 ///
 /// True if `bits` is of the form `2^k - 2^j`, where `k > j`, otherwise `false`.
 ///
-/// # Panic
-///
-/// This function will not panic.
-///
 /// # Examples
 ///
 /// ```rust
@@ -636,10 +572,6 @@ pub fn is_power_of_two_difference(bits: i8) -> bool {
 ///
 /// The position of the rightmost one-bit in `bits`.
 ///
-/// # Panic
-///
-/// This function will not panic.
-///
 /// # Examples
 ///
 /// ```rust
@@ -665,10 +597,6 @@ pub fn rightmost_one(bits: i8) -> i8 {
 /// # Returns
 ///
 /// The position of the rightmost zero-bit in `bits`.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///

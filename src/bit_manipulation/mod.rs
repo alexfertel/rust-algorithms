@@ -1,5 +1,4 @@
 //! This module provides basic bit manipulation operations.
-//! 
 mod basic;
 
 pub use self::basic::bit_distance;

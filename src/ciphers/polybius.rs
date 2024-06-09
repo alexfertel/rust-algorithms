@@ -1,5 +1,23 @@
 /// Encode an ASCII string into its location in a Polybius square.
 /// Only alphabetical characters are encoded.
+///
+/// # Arguments
+///
+/// * `string` - The ASCII string to encode.
+///
+/// # Returns
+///
+/// The encoded string representing the location of each character in the Polybius square.
+///
+/// # Examples
+///
+/// ```rust
+/// use rust_algorithms::ciphers::encode_ascii;
+///
+/// let encoded = encode_ascii("This is a test");
+///
+/// assert_eq!(encoded, "4423244324431144154344");
+/// ```
 pub fn encode_ascii(string: &str) -> String {
     string
         .chars()
@@ -38,6 +56,24 @@ pub fn encode_ascii(string: &str) -> String {
 /// letters in a Polybius square.
 ///
 /// Any invalid characters, or whitespace will be ignored.
+///
+/// # Arguments
+///
+/// * `string` - The string of integers to decode.
+///
+/// # Returns
+///
+/// The decoded string representing the corresponding letters in the Polybius square.
+///
+/// # Examples
+///
+/// ```rust
+/// use rust_algorithms::ciphers::decode_ascii;
+///
+/// let decoded = decode_ascii("44 23 24 43 24 43 11 44 15 43 44 ");
+///
+/// assert_eq!(decoded, "THISISATEST");
+/// ```
 pub fn decode_ascii(string: &str) -> String {
     string
         .chars()
@@ -91,11 +127,6 @@ mod tests {
     }
 
     #[test]
-    fn encode_valid_string() {
-        assert_eq!(encode_ascii("This is a test"), "4423244324431144154344");
-    }
-
-    #[test]
     fn encode_emoji() {
         assert_eq!(encode_ascii("🙂"), "");
     }
@@ -105,13 +136,6 @@ mod tests {
         assert_eq!(decode_ascii(""), "");
     }
 
-    #[test]
-    fn decode_valid_string() {
-        assert_eq!(
-            decode_ascii("44 23 24 43 24 43 11 44 15 43 44 "),
-            "THISISATEST"
-        );
-    }
 
     #[test]
     fn decode_emoji() {

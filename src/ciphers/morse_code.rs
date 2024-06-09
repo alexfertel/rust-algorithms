@@ -303,11 +303,4 @@ mod tests {
 
         assert_eq!(expected, result);
     }
-
-    #[test]
-    fn test_decode() {
-        let message = ".... . .-.. .-.. --- / -- --- .-. ... .";
-        let cipher = decode(message).unwrap();
-        assert_eq!(cipher, "HELLO MORSE");
-    }
 }

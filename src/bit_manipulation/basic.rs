@@ -1,28 +1,3 @@
-//! This module provides basic bit manipulation operations.
-//!
-//! The following functions are available:
-//!
-//! - `get_bit`: Gets the value of a specific bit in a number.
-//! - `set_bit`: Sets a specific bit in a number to 1.
-//! - `clear_bit`: Sets a specific bit in a number to 0.
-//! - `update_bit`: Updates a specific bit in a number based on a boolean value.
-//! - `is_even`: Checks if a number is even.
-//! - `is_positive`: Checks if a number is positive.
-//! - `multiply_by_two`: Multiplies a number by two.
-//! - `divide_by_two`: Divides a number by two.
-//! - `twos_complement`: Calculates the two's complement of a number.
-//! - `multiply_signed`: Multiplies two signed numbers.
-//! - `multiply_unsigned`: Multiplies two unsigned numbers.
-//! - `count_ones`: Counts the number of ones in a number.
-//! - `bit_equivalence`: Counts the number of equal bits between two numbers.
-//! - `bit_distance`: Calculates the bit distance between two numbers.
-//! - `is_power_of_two`: Checks if a number is a power of two.
-//! - `is_power_of_two_difference`: Checks if the number is the difference of two powers of two.
-//! - `rightmost_one`: Returns the position of the rightmost one-bit in a number.
-//! - `rightmost_zero`: Returns the position of the rightmost zero-bit in a number.
-//!
-//! For more information on each function, please refer to their individual documentation.
-
 /// Gets specific bits from a number.
 ///
 /// Returns the value of the bit at position `n` in `bits`.
@@ -31,16 +6,12 @@
 ///
 /// # Arguments
 ///
-/// `bits` - The number to extract the bit from.
-/// `n` - The position of the bit to extract.
+/// * `bits` - The number to extract the bit from.
+/// * `n` - The position of the bit to extract.
 ///
 /// # Returns
 ///
 /// The value of the bit at position `n` in `bits`.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -65,16 +36,12 @@ pub fn get_bit(bits: i8, n: usize) -> i8 {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to set the bit in.
-/// `n` - The position of the bit to set.
+/// * `bits` - The number to set the bit in.
+/// * `n` - The position of the bit to set.
 ///
 /// # Returns
 ///
 /// The number with the bit at position `n` set to 1.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -99,16 +66,12 @@ pub fn set_bit(bits: i8, n: usize) -> i8 {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to clear the bit in.
-/// `n` - The position of the bit to clear.
+/// * `bits` - The number to clear the bit in.
+/// * `n` - The position of the bit to clear.
 ///
 /// # Returns
 ///
 /// The number with the bit at position `n` set to 0.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -132,17 +95,13 @@ pub fn clear_bit(bits: i8, n: usize) -> i8 {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to update the bit in.
-/// `n` - The position of the bit to update.
-/// `set_it` - If true, the bit will be set to 1, otherwise it will be set to 0.
+/// * `bits` - The number to update the bit in.
+/// * `n` - The position of the bit to update.
+/// * `set_it` - If true, the bit will be set to 1, otherwise it will be set to 0.
 ///
 /// # Returns
 ///
 /// The number with the bit at position `n` set to 1 if `set_it` is true, otherwise set to 0.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -183,15 +142,11 @@ pub fn update_bit(bits: i8, n: usize, set_it: bool) -> i8 {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to check.
+/// * `bits` - The number to check.
 ///
 /// # Returns
 ///
 /// True if the least significant bit of `bits` is 0, otherwise false.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -220,15 +175,11 @@ pub fn is_even(bits: i8) -> bool {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to check.
+/// * `bits` - The number to check.
 ///
 /// # Returns
 ///
 /// True if the most significant bit of `bits` is 0, otherwise false.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -261,17 +212,13 @@ pub fn is_positive(bits: i8) -> bool {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to multiply.
+/// * `bits` - The number to multiply.
 ///
 /// # Returns
 ///
 /// The result of shifting the bits of `bits` one position to the left.
 ///
-/// # Panic
-///
-/// This function will not panic.
-///
-/// # Examples
+// # Examples
 ///
 /// ```rust
 /// use rust_algorithms::bit_manipulation::multiply_by_two;
@@ -293,15 +240,11 @@ pub fn multiply_by_two(bits: i8) -> i8 {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to divide.
+/// * `bits` - The number to divide.
 ///
 /// # Returns
 ///
 /// The result of shifting the bits of `bits` one position to the right.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -325,15 +268,11 @@ pub fn divide_by_two(bits: i8) -> i8 {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to calculate the two's complement of.
+/// * `bits` - The number to calculate the two's complement of.
 ///
 /// # Returns
 ///
 /// The two's complement of `bits`.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -359,16 +298,12 @@ pub fn twos_complement(bits: i8) -> i8 {
 ///
 /// # Arguments
 ///
-/// `a` - The first number to multiply.
-/// `b` - The second number to multiply.
+/// * `a` - The first number to multiply.
+/// * `b` - The second number to multiply.
 ///
 /// # Returns
 ///
 /// The result of multiplying `a` by `b`.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -406,16 +341,12 @@ pub fn multiply_signed(a: i8, b: i8) -> i8 {
 ///
 /// # Arguments
 ///
-/// `a` - The first number to multiply.
-/// `b` - The second number to multiply.
+/// * `a` - The first number to multiply.
+/// * `b` - The second number to multiply.
 ///
 /// # Returns
 ///
 /// The result of multiplying `a` by `b`.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -449,15 +380,11 @@ pub fn multiply_unsigned(a: i8, b: i8) -> i8 {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to count the ones in.
+/// * `bits` - The number to count the ones in.
 ///
 /// # Returns
 ///
 /// The number of ones in `bits`.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -490,16 +417,12 @@ pub fn count_ones(bits: i8) -> i8 {
 ///
 /// # Arguments
 ///
-/// `a` - The first number to compare.
-/// `b` - The second number to compare.
+/// * `a` - The first number to compare.
+/// * `b` - The second number to compare.
 ///
 /// # Returns
 ///
 /// The number of equal bits between `a` and `b`.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -524,16 +447,12 @@ pub fn bit_equivalence(a: i8, b: i8) -> i8 {
 ///
 /// # Arguments
 ///
-/// `a` - The first number to compare.
-/// `b` - The second number to compare.
+/// * `a` - The first number to compare.
+/// * `b` - The second number to compare.
 ///
 /// # Returns
 ///
 /// The number of different bits between `a` and `b`.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -563,15 +482,11 @@ pub fn bit_distance(a: i8, b: i8) -> i8 {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to check.
+/// * `bits` - The number to check.
 ///
 /// # Returns
 ///
 /// True if `bits` is a power of two, otherwise false.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -617,15 +532,11 @@ pub fn is_power_of_two(bits: i8) -> bool {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to check.
+/// * `bits` - The number to check.
 ///
 /// # Returns
 ///
 /// True if `bits` is of the form `2^k - 2^j`, where `k > j`, otherwise `false`.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -655,15 +566,11 @@ pub fn is_power_of_two_difference(bits: i8) -> bool {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to check.
+/// * `bits` - The number to check.
 ///
 /// # Returns
 ///
 /// The position of the rightmost one-bit in `bits`.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///
@@ -685,15 +592,11 @@ pub fn rightmost_one(bits: i8) -> i8 {
 ///
 /// # Arguments
 ///
-/// `bits` - The number to check.
+/// * `bits` - The number to check.
 ///
 /// # Returns
 ///
 /// The position of the rightmost zero-bit in `bits`.
-///
-/// # Panic
-///
-/// This function will not panic.
 ///
 /// # Examples
 ///

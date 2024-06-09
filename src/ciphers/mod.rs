@@ -13,7 +13,7 @@ mod xor;
 pub use self::aes::{aes_decrypt, aes_encrypt, AesKey};
 pub use self::another_rot13::another_rot13;
 pub use self::caesar::caesar;
-pub use self::morse_code::encode;
+pub use self::morse_code::{encode, decode};
 pub use self::polybius::{decode_ascii, encode_ascii};
 pub use self::rot13::rot13;
 pub use self::sha256::sha256;

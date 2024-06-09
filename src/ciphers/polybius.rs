@@ -136,7 +136,6 @@ mod tests {
         assert_eq!(decode_ascii(""), "");
     }
 
-
     #[test]
     fn decode_emoji() {
         assert_eq!(decode_ascii("🙂"), "");

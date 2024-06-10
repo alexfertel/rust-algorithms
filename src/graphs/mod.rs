@@ -1,3 +1,4 @@
+//! This module provides graph based operations.
 mod bellman_ford;
 mod breadth_first_search;
 mod centroid_decomposition;

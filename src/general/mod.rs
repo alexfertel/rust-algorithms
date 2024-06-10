@@ -1,3 +1,4 @@
+//! This module provides a variety of operations.
 mod convex_hull;
 mod graph_coloring;
 mod hanoi;

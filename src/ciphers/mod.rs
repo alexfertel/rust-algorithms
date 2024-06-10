@@ -1,3 +1,4 @@
+//! This module provides cryptographic operations.
 mod aes;
 mod another_rot13;
 mod caesar;

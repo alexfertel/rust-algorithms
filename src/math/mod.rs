@@ -1,3 +1,4 @@
+//! This module provides many mathematical operations.
 mod armstrong_number;
 mod baby_step_giant_step;
 mod derivative_method;

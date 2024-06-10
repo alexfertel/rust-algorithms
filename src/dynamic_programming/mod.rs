@@ -1,3 +1,4 @@
+//! This module provides dynamic programming operations.
 mod coin_change;
 mod coin_problem;
 mod edit_distance;

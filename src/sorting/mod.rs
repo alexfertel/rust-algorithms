@@ -1,3 +1,4 @@
+//! This module provides sorting algorithms.
 include!("macros.rs");
 
 pub fn is_sorted<T: fmt::Debug>(iterator: impl IntoIterator<Item = T>) -> bool

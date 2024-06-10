@@ -21,22 +21,22 @@ struct BufState {
 /// # Returns
 ///
 /// The computed SHA256 hash as a fixed-size array of 32 bytes.
-/// 
+///
 /// # References
-/// 
+///
 /// * [Wikipedia](https://en.wikipedia.org/wiki/SHA-2)
 /// * [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf)
 /// * [RFC 6234](https://tools.ietf.org/html/rfc6234)
 /// * [SHA-256](https://csrc.nist.gov/csrc/media/publications/fips/180/4/archive/2012-03-06/documents/fips180-4.pdf)
 /// * [SHA-256 Test Vectors](https://www.di-mgt.com.au/sha_testvectors.html)
-/// 
+///
 /// # Examples
 ///
 /// ```rust
 /// use rust_algorithms::ciphers::sha256;
-/// 
+///
 /// let hash = sha256(b"The quick brown fox jumps over the lazy dog");
-/// 
+///
 /// assert_eq!(hash,
 ///   [0xD7, 0xA8, 0xFB, 0xB3, 0x07, 0xD7, 0x80, 0x94, 0x69, 0xCA, 0x9A, 0xBC, 0xB0, 0x08,
 ///    0x2E, 0x4F, 0x8D, 0x56, 0x51, 0xE4, 0x6D, 0x3C, 0xDB, 0x76, 0x2D, 0x02, 0xD0, 0xBF,
@@ -142,16 +142,16 @@ pub fn sha256(data: &[u8]) -> [u8; 32] {
 }
 
 /// Calculates the next chunk of data to process in the SHA256 algorithm.
-/// 
+///
 /// # Arguments
-/// 
+///
 /// * `chunk` - The buffer to store the next chunk of data.
 /// * `state` - The current state of the buffer.
-/// 
+///
 /// # Returns
-/// 
+///
 /// A boolean indicating whether the next chunk was successfully calculated.
-/// 
+///
 fn calc_chunk(chunk: &mut [u8; 64], state: &mut BufState) -> bool {
     if state.total {
         return false;

@@ -1,21 +1,61 @@
-//! SHA-2 (256 Bit)
-
+/// Represents the state of the buffer used in the SHA256 algorithm.
 struct BufState {
+    // The data to process.
     data: Vec<u8>,
+    // The length of the data.
     len: usize,
+    // The total length of the data.
     total_len: usize,
+    // A flag indicating if the buffer has a single byte.
     single: bool,
+    // A flag indicating if the buffer has been fully processed.
     total: bool,
 }
 
+/// Computes the SHA256 hash of the given data.
+///
+/// # Arguments
+///
+/// * `data` - The input data to compute the hash for.
+///
+/// # Returns
+///
+/// The computed SHA256 hash as a fixed-size array of 32 bytes.
+/// 
+/// # References
+/// 
+/// * [Wikipedia](https://en.wikipedia.org/wiki/SHA-2)
+/// * [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf)
+/// * [RFC 6234](https://tools.ietf.org/html/rfc6234)
+/// * [SHA-256](https://csrc.nist.gov/csrc/media/publications/fips/180/4/archive/2012-03-06/documents/fips180-4.pdf)
+/// * [SHA-256 Test Vectors](https://www.di-mgt.com.au/sha_testvectors.html)
+/// 
+/// # Examples
+///
+/// ```rust
+/// use rust_algorithms::ciphers::sha256;
+/// 
+/// let hash = sha256(b"The quick brown fox jumps over the lazy dog");
+/// 
+/// assert_eq!(hash,
+///   [0xD7, 0xA8, 0xFB, 0xB3, 0x07, 0xD7, 0x80, 0x94, 0x69, 0xCA, 0x9A, 0xBC, 0xB0, 0x08,
+///    0x2E, 0x4F, 0x8D, 0x56, 0x51, 0xE4, 0x6D, 0x3C, 0xDB, 0x76, 0x2D, 0x02, 0xD0, 0xBF,
+///    0x37, 0xC9, 0xE5, 0x92,]);
+/// ```
 pub fn sha256(data: &[u8]) -> [u8; 32] {
     let mut hash: [u8; 32] = [0; 32];
 
+    // Initial hash values
+    // The first 32 bits of the fractional parts of the square roots of the first 8 primes 2..19
+    // (stored in big-endian format)
     let mut h: [u32; 8] = [
         0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab,
         0x5be0cd19,
     ];
 
+    // Round constants
+    // The first 32 bits of the fractional parts of the cube roots of the first 64 primes 2..311
+    // (stored in big-endian format)
     let k: [u32; 64] = [
         0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4,
         0xab1c5ed5, 0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe,
@@ -101,6 +141,17 @@ pub fn sha256(data: &[u8]) -> [u8; 32] {
     hash
 }
 
+/// Calculates the next chunk of data to process in the SHA256 algorithm.
+/// 
+/// # Arguments
+/// 
+/// * `chunk` - The buffer to store the next chunk of data.
+/// * `state` - The current state of the buffer.
+/// 
+/// # Returns
+/// 
+/// A boolean indicating whether the next chunk was successfully calculated.
+/// 
 fn calc_chunk(chunk: &mut [u8; 64], state: &mut BufState) -> bool {
     if state.total {
         return false;
@@ -155,18 +206,6 @@ mod tests {
                 0x78, 0x52, 0xb8, 0x55
             ]
         );
-    }
-
-    #[test]
-    fn ascii() {
-        assert_eq!(
-            sha256(&b"The quick brown fox jumps over the lazy dog".to_vec()),
-            [
-                0xD7, 0xA8, 0xFB, 0xB3, 0x07, 0xD7, 0x80, 0x94, 0x69, 0xCA, 0x9A, 0xBC, 0xB0, 0x08,
-                0x2E, 0x4F, 0x8D, 0x56, 0x51, 0xE4, 0x6D, 0x3C, 0xDB, 0x76, 0x2D, 0x02, 0xD0, 0xBF,
-                0x37, 0xC9, 0xE5, 0x92
-            ]
-        )
     }
 
     #[test]

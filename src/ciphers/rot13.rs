@@ -1,33 +1,27 @@
-//! Rot13 or "rotate by 13 places"
-//!
-//! # Algorithm
-
-/// Encrypts a given [`&str`] using ROT13 cipher.
+/// Encrypts a given [`&str`] using ROT13 cipher or "rotate by 13 places"
 ///
 /// See [ROT13](https://en.wikipedia.org/wiki/ROT13) for more information.
 ///
 /// Replaces each character with the 13th letter after it in the alphabet.
-/// Rot13 is a special case of [Caesar cipher](https://en.wikipedia.org/wiki/Caesar_cipher)
+/// Rot13 is a special case of a [Caesar cipher](https://en.wikipedia.org/wiki/Caesar_cipher)
 ///
 /// The most basic example is ROT 13, which rotates 'a' to 'n'.
 /// This implementation does not rotate unicode characters.
 ///
 /// # Arguments
 ///
-/// `text` - String to transform.
+/// * `text` - String to transform.
 ///
 /// # Returns
 ///
-/// An owned [`String`]
-///
-/// # Panic
-///
-/// This function won't panic.
+/// An owned [`String`] with the transformed text.
 ///
 /// # Examples
-/// ```
-/// # use rust_algorithms::ciphers::rot13;
+/// ```rust
+/// use rust_algorithms::ciphers::rot13;
+///
 /// let encoded = rot13("hello world");
+///
 /// assert_eq!(encoded, "URYYB JBEYQ");
 /// ```
 pub fn rot13(text: &str) -> String {

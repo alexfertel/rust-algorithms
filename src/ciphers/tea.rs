@@ -1,11 +1,13 @@
 use std::num::Wrapping as W;
 
+/// TEA context, a struct that holds the keys for TEA encryption and decryption.
 struct TeaContext {
     key0: u64,
     key1: u64,
 }
 
 impl TeaContext {
+    /// Create a new TEA context with the given keys.
     pub fn new(key: &[u64; 2]) -> TeaContext {
         TeaContext {
             key0: key[0],
@@ -13,6 +15,16 @@ impl TeaContext {
         }
     }
 
+    /// Encrypt a block of data.
+    ///
+    /// # Arguments
+    ///
+    /// * `block` - The block of data to encrypt.
+    ///
+    /// # Returns
+    ///
+    /// The encrypted block of data.
+    ///
     pub fn encrypt_block(&self, block: u64) -> u64 {
         let (mut b0, mut b1) = divide_u64(block);
         let (k0, k1) = divide_u64(self.key0);
@@ -28,6 +40,16 @@ impl TeaContext {
         ((b1.0 as u64) << 32) | b0.0 as u64
     }
 
+    /// Decrypt a block of data.
+    ///
+    /// # Arguments
+    ///
+    /// * `block` - The block of data to decrypt.
+    ///
+    /// # Returns
+    ///
+    /// The decrypted block of data.
+    ///
     pub fn decrypt_block(&self, block: u64) -> u64 {
         let (mut b0, mut b1) = divide_u64(block);
         let (k0, k1) = divide_u64(self.key0);
@@ -49,6 +71,29 @@ fn divide_u64(n: u64) -> (W<u32>, W<u32>) {
     (W(n as u32), W((n >> 32) as u32))
 }
 
+/// Encrypt a plaintext using the TEA algorithm.
+///
+/// # Arguments
+///
+/// * `plain` - The plaintext to encrypt.
+/// * `key` - The key to use for encryption.
+///
+/// # Returns
+///
+/// The encrypted plaintext.
+///
+/// # Example
+/// ```rust
+/// use rust_algorithms::ciphers::tea_encrypt;
+///
+/// let plain_data = &[0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00];
+/// let key = &[0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+///             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00];
+///
+/// let encrypted = tea_encrypt(plain_data, key);
+///
+/// assert_eq!(encrypted,[0x0A, 0x3A, 0xEA, 0x41, 0x40, 0xA9, 0xBA, 0x94]);
+/// ```
 pub fn tea_encrypt(plain: &[u8], key: &[u8]) -> Vec<u8> {
     let tea = TeaContext::new(&[to_block(&key[..8]), to_block(&key[8..16])]);
     let mut result: Vec<u8> = Vec::new();
@@ -61,6 +106,28 @@ pub fn tea_encrypt(plain: &[u8], key: &[u8]) -> Vec<u8> {
     result
 }
 
+/// Decrypt a ciphertext using the TEA algorithm.
+///
+/// # Arguments
+///
+/// * `cipher` - The ciphertext to decrypt.
+/// * `key` - The key to use for decryption.
+///
+/// # Returns
+///
+/// The decrypted ciphertext.
+///
+/// # Example
+/// ```rust
+/// use rust_algorithms::ciphers::{tea_encrypt, tea_decrypt};
+///
+/// let plain = &[0x1b, 0xcc, 0xd4, 0x31, 0xa0, 0xf6, 0x8a, 0x55];
+/// let key = &[0x20, 0x45, 0x08, 0x10, 0xb0, 0x23, 0xe2, 0x17,
+///            0xc3, 0x81, 0xd6, 0xf2, 0xee, 0x00, 0xa4, 0x8a,];
+/// let cipher = tea_encrypt(plain, key);
+///
+/// assert_eq!(tea_decrypt(&cipher[..], key), plain);
+/// ```
 pub fn tea_decrypt(cipher: &[u8], key: &[u8]) -> Vec<u8> {
     let tea = TeaContext::new(&[to_block(&key[..8]), to_block(&key[8..16])]);
     let mut result: Vec<u8> = Vec::new();
@@ -113,31 +180,5 @@ mod test {
             from_block(0xefcdab8967452301),
             [0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef]
         );
-    }
-
-    #[test]
-    fn test_tea_encrypt() {
-        assert_eq!(
-            tea_encrypt(
-                &[0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00],
-                &[
-                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                    0x00, 0x00, 0x00
-                ]
-            ),
-            [0x0A, 0x3A, 0xEA, 0x41, 0x40, 0xA9, 0xBA, 0x94]
-        );
-    }
-
-    #[test]
-    fn test_tea_encdec() {
-        let plain = &[0x1b, 0xcc, 0xd4, 0x31, 0xa0, 0xf6, 0x8a, 0x55];
-        let key = &[
-            0x20, 0x45, 0x08, 0x10, 0xb0, 0x23, 0xe2, 0x17, 0xc3, 0x81, 0xd6, 0xf2, 0xee, 0x00,
-            0xa4, 0x8a,
-        ];
-        let cipher = tea_encrypt(plain, key);
-
-        assert_eq!(tea_decrypt(&cipher[..], key), plain);
     }
 }

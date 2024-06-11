@@ -1,12 +1,37 @@
-//! Vigenère Cipher
-//!
-//! # Algorithm
-//!
-//! Rotate each ascii character by the offset of the corresponding key character.
-//! When we reach the last key character, we start over from the first one.
-//! This implementation does not rotate unicode characters.
-
-/// Vigenère cipher to rotate plain_text text by key and return an owned String.
+/// A Vigenère cipher is a method of encrypting alphabetic text by using a simple form of polyalphabetic substitution.
+/// Each letter in the plain_text text is shifted by the corresponding letter in the key.
+///
+/// # Algorithm
+///
+/// Rotate each ascii character by the offset of the corresponding key character.
+/// When we reach the last key character, we start over from the first one.
+/// This implementation does not rotate unicode characters.
+///
+/// # Reference
+///
+/// [Vigenère Cipher](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher).
+///
+/// # Arguments
+///
+/// * `plain_text` - A string slice that holds the text to be encrypted.
+/// * `key` - A string slice that holds the key to be used for encryption.
+///
+/// # Returns
+///
+/// An owned String that holds the encrypted text.
+///
+/// # Example
+///
+/// ```rust
+/// use rust_algorithms::ciphers::vigenere;
+///
+/// let plain_text = "LoremIpsumDolorSitAmet";
+/// let key = "base";
+///
+/// let encrypted = vigenere(plain_text, key);
+///
+/// assert_eq!(encrypted, "MojinIhwvmVsmojWjtSqft");
+/// ```
 pub fn vigenere(plain_text: &str, key: &str) -> String {
     // Remove all unicode and non-ascii characters from key.
     let key: String = key.chars().filter(|&c| c.is_ascii_alphabetic()).collect();
@@ -42,14 +67,6 @@ mod tests {
     #[test]
     fn empty() {
         assert_eq!(vigenere("", "test"), "");
-    }
-
-    #[test]
-    fn vigenere_base() {
-        assert_eq!(
-            vigenere("LoremIpsumDolorSitAmet", "base"),
-            "MojinIhwvmVsmojWjtSqft"
-        );
     }
 
     #[test]

@@ -1,40 +1,37 @@
-//! Transposition Cipher
-//!
-//! # Algorithm
-
 use std::collections::BTreeMap;
 
-/// Encrypts a given String with the Transposition cipher
+/// Encrypts a given input text with the Transposition cipher
 ///
-/// For each character of the keyword string a new column inside a table is created.
-/// Each column receives the corresponding character of the keyword string.
-/// Every character of the input string will then be put in the fields from left to right.
+/// For each character of the keyword text a new column inside a table is created.
+/// Each column receives the corresponding character of the keyword text.
+/// Every character of the input text will then be put in the fields from left to right.
 /// Empty fields will be filled with the character 'X'.
-/// The keyword string and its corresponding column is then sorted by its alphanumeric values.
-/// To get the encrypted String every character inside the table will be added from
+/// The key text and its corresponding column is then sorted by its alphanumeric values.
+/// To get the encrypted text every character inside the table will be added from
 /// top to bottom and left to right.
 ///
-/// See [Transposition Cipher](https://en.wikipedia.org/wiki/Transposition_cipher) for the theoretical background.
+/// # References
+///
+/// * [Transposition Cipher](https://en.wikipedia.org/wiki/Transposition_cipher) for the theoretical background.
 ///
 /// # Arguments
 ///
-/// * `key` - string that functions as encryption key
-/// * `input` - string that is encrypted
+/// * `key` - Text that functions as encryption key
+/// * `input` - Text to encrypt.
 ///
 /// # Returns
 ///
-/// * `enc` - encrypted string
-///
-/// # Panic
-///
-/// This function won't panic
+/// The encrypted text.
 ///
 /// # Examples
 ///
+/// ```rust
 /// use std::collections::BTreeMap;
 ///
 /// let encrypted = transposition("lorem", "ipsum");
 ///
+/// assert_eq!("OMLERX", encrypted);
+/// ```
 pub fn transposition(key: &str, input: &str) -> String {
     let mut to_enc = input.to_uppercase();
     let keyword = key.to_uppercase();
@@ -81,11 +78,6 @@ pub fn transposition(key: &str, input: &str) -> String {
 #[cfg(test)]
 mod test {
     use super::*;
-
-    #[test]
-    fn test_word() {
-        assert_eq!("OMLERX", transposition("key", "lorem"));
-    }
 
     #[test]
     fn test_sentence_with_punctuation_marks() {

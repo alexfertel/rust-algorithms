@@ -88,7 +88,7 @@ mod test {
     fn test_word() {
         assert_eq!("OMLERX", transposition("key", "lorem"));
     }
-    
+
     #[test]
     fn test_punctuation_marks() {
         assert_eq!("OM;?LE.!R,:X", transposition("key", "lorem,.;:!?"));

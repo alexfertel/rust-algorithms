@@ -26,11 +26,11 @@ use std::collections::BTreeMap;
 /// # Examples
 ///
 /// ```rust
-/// use std::collections::BTreeMap;
+/// use rust_algorithms::ciphers::transposition;
 ///
 /// let encrypted = transposition("lorem", "ipsum");
 ///
-/// assert_eq!("OMLERX", encrypted);
+/// assert_eq!("UIMPS", encrypted);
 /// ```
 pub fn transposition(key: &str, input: &str) -> String {
     let mut to_enc = input.to_uppercase();

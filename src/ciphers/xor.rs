@@ -10,6 +10,7 @@
 /// * A String that holds the ciphered text.
 ///
 /// # Example
+///
 /// ```rust
 /// use rust_algorithms::ciphers::xor;
 ///

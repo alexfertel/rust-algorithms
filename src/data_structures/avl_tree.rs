@@ -18,6 +18,20 @@ struct AVLNode<T: Ord> {
 /// An AVL Tree is a self-balancing binary search tree. It tracks the height of each node
 /// and performs internal rotations to maintain a height difference of at most 1 between
 /// each sibling pair.
+///
+/// # Examples
+///
+/// ```rust
+/// use rust_algorithms::data_structures::AVLTree;
+///
+/// let mut tree = AVLTree::new();
+///
+/// tree.insert(1);
+/// tree.insert(2);
+/// tree.insert(3);
+///
+/// assert_eq!(tree.iter().collect::<Vec<_>>(), vec![&1, &2, &3]);
+/// ```
 pub struct AVLTree<T: Ord> {
     root: Option<Box<AVLNode<T>>>,
     length: usize,
@@ -39,9 +53,25 @@ impl<T: Ord> AVLTree<T> {
         }
     }
 
-    /// Returns `true` if the tree contains a value.
+    /// Determines if the tree contains a value.
+    ///
+    /// # Returns
+    ///
+    /// `true` if the tree contains a value, `false` otherwise.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::AVLTree;
+    ///
+    /// let tree: AVLTree<_> = (1..4).collect();
+    ///
+    /// assert!(tree.contains(&1));
+    /// assert!(!tree.contains(&4));
+    /// ```
     pub fn contains(&self, value: &T) -> bool {
         let mut current = &self.root;
+
         while let Some(node) = current {
             current = match value.cmp(&node.value) {
                 Ordering::Equal => return true,
@@ -49,37 +79,98 @@ impl<T: Ord> AVLTree<T> {
                 Ordering::Greater => &node.right,
             }
         }
+
         false
     }
 
     /// Adds a value to the tree.
     ///
-    /// Returns `true` if the tree did not yet contain the value.
+    /// # Returns
+    ///
+    /// `true` if the tree did not yet contain the value, `false` otherwise.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::AVLTree;
+    ///
+    /// let mut tree = AVLTree::new();
+    ///
+    /// assert!(tree.insert(1));
+    /// assert!(!tree.insert(1));
+    /// ```
     pub fn insert(&mut self, value: T) -> bool {
         let inserted = insert(&mut self.root, value);
+
         if inserted {
             self.length += 1;
         }
+
         inserted
     }
 
     /// Removes a value from the tree.
     ///
-    /// Returns `true` if the tree contained the value.
+    /// # Returns
+    ///
+    /// `true` if the tree contained the value, `false` otherwise.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::AVLTree;
+    ///
+    /// let mut tree: AVLTree<_> = (1..8).collect();
+    ///
+    /// assert!(tree.remove(&4));
+    /// assert!(!tree.remove(&4));
+    /// ```
     pub fn remove(&mut self, value: &T) -> bool {
         let removed = remove(&mut self.root, value);
+
         if removed {
             self.length -= 1;
         }
+
         removed
     }
 
-    /// Returns the number of values in the tree.
+    /// Gives the number of elements in the tree.
+    ///
+    /// # Returns
+    ///
+    /// The number of values in the tree.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::AVLTree;
+    ///
+    /// let mut tree: AVLTree<_> = (1..4).collect();
+    ///
+    /// assert_eq!(tree.len(), 3);
+    /// ```
     pub fn len(&self) -> usize {
         self.length
     }
 
-    /// Returns `true` if the tree contains no values.
+    /// Determines if the tree contains no values.
+    ///
+    /// # Returns
+    ///
+    /// `true` if the tree contains no values, `false` otherwise.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::AVLTree;
+    ///
+    /// let mut tree = AVLTree::new();
+    ///
+    /// assert!(tree.is_empty());
+    /// tree.insert(1);
+    /// assert!(!tree.is_empty());
+    /// ```
     pub fn is_empty(&self) -> bool {
         self.length == 0
     }
@@ -99,7 +190,21 @@ impl<T: Ord> AVLTree<T> {
         node_iter
     }
 
-    /// Returns an iterator that visits the values in the tree in ascending order.
+    /// Gives an iterator over the values in the tree in ascending order.
+    ///
+    /// # Returns
+    ///
+    /// An iterator over the values in the tree.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::AVLTree;
+    ///
+    /// let mut tree: AVLTree<_> = (1..4).collect();
+    ///
+    /// assert_eq!(tree.iter().collect::<Vec<_>>(), vec![&1, &2, &3]);
+    /// ```
     pub fn iter(&self) -> Iter<T> {
         Iter {
             node_iter: self.node_iter(),
@@ -251,12 +356,24 @@ impl<T: Ord> AVLNode<T> {
     }
 }
 
+/// Implement the `Default` trait for `AVLTree`.
+///
+/// # Examples
+///
+/// ```rust
+/// use rust_algorithms::data_structures::AVLTree;
+///
+/// let tree = AVLTree::<u32>::default();
+///
+/// assert!(tree.is_empty());
+/// ```
 impl<T: Ord> Default for AVLTree<T> {
     fn default() -> Self {
         Self::new()
     }
 }
 
+/// Implement the `Not` trait for `Side`.
 impl Not for Side {
     type Output = Side;
 
@@ -268,6 +385,18 @@ impl Not for Side {
     }
 }
 
+/// Implement the `FromIterator` trait for `AVLTree`.
+///
+/// # Examples
+///
+/// ```rust
+/// use rust_algorithms::data_structures::AVLTree;
+/// use std::iter::FromIterator;
+///
+/// let mut tree = AVLTree::<_>::from_iter((1..4));
+///
+/// assert_eq!(tree.iter().collect::<Vec<_>>(), vec![&1, &2, &3]);
+/// ```
 impl<T: Ord> FromIterator<T> for AVLTree<T> {
     fn from_iter<I: IntoIterator<Item = T>>(iter: I) -> Self {
         let mut tree = AVLTree::new();
@@ -285,6 +414,7 @@ struct NodeIter<'a, T: Ord> {
     stack: Vec<&'a AVLNode<T>>,
 }
 
+/// Implement the `Iterator` trait for `NodeIter`.
 impl<'a, T: Ord> Iterator for NodeIter<'a, T> {
     type Item = &'a AVLNode<T>;
 
@@ -305,14 +435,52 @@ impl<'a, T: Ord> Iterator for NodeIter<'a, T> {
 
 /// An iterator over the items of an `AVLTree`.
 ///
+/// # Note
+///
 /// This struct is created by the `iter` method of `AVLTree`.
+///
+/// # Examples
+///
+/// ```rust
+/// use rust_algorithms::data_structures::AVLTree;
+///
+/// let mut tree: AVLTree<_> = (1..4).collect();
+///
+/// assert_eq!(tree.iter().collect::<Vec<_>>(), vec![&1, &2, &3]);
+/// ```
 pub struct Iter<'a, T: Ord> {
     node_iter: NodeIter<'a, T>,
 }
 
+/// Implement the `Iterator` trait for `Iter`.
+///
+/// # Examples
+///
+/// ```rust
+/// use rust_algorithms::data_structures::AVLTree;
+///
+/// let mut tree: AVLTree<_> = (1..4).collect();
+///
+/// assert_eq!(tree.iter().collect::<Vec<_>>(), vec![&1, &2, &3]);
+/// ```
 impl<'a, T: Ord> Iterator for Iter<'a, T> {
     type Item = &'a T;
 
+    /// Returns the next value in the tree.
+    ///
+    /// # Returns
+    ///
+    /// The next value in the tree, or `None` if there are no more values.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::AVLTree;
+    ///
+    /// let mut tree: AVLTree<_> = (1..3).collect();
+    ///
+    /// assert_eq!(tree.iter().next(), Some(&1));
+    /// ```
     fn next(&mut self) -> Option<&'a T> {
         match self.node_iter.next() {
             Some(node) => Some(&node.value),
@@ -329,37 +497,6 @@ mod tests {
     fn is_balanced<T: Ord>(tree: &AVLTree<T>) -> bool {
         tree.node_iter()
             .all(|n| (-1..=1).contains(&n.balance_factor()))
-    }
-
-    #[test]
-    fn len() {
-        let tree: AVLTree<_> = (1..4).collect();
-        assert_eq!(tree.len(), 3);
-    }
-
-    #[test]
-    fn contains() {
-        let tree: AVLTree<_> = (1..4).collect();
-        assert!(tree.contains(&1));
-        assert!(!tree.contains(&4));
-    }
-
-    #[test]
-    fn insert() {
-        let mut tree = AVLTree::new();
-        // First insert succeeds
-        assert!(tree.insert(1));
-        // Second insert fails
-        assert!(!tree.insert(1));
-    }
-
-    #[test]
-    fn remove() {
-        let mut tree: AVLTree<_> = (1..8).collect();
-        // First remove succeeds
-        assert!(tree.remove(&4));
-        // Second remove fails
-        assert!(!tree.remove(&4));
     }
 
     #[test]

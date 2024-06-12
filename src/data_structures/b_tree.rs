@@ -220,6 +220,26 @@ where
         println!();
     }
 
+    /// Check if the BTree is empty.
+    ///
+    /// # Returns
+    ///
+    /// `true` if the BTree is empty, `false` otherwise.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::BTree;
+    ///
+    /// let mut tree = BTree::new(2);
+    /// assert!(tree.is_empty());
+    /// tree.insert(1);
+    /// assert!(!tree.is_empty());
+    /// ```
+    pub fn is_empty(&self) -> bool {
+        self.root.keys.is_empty()
+    }
+
     /// Search for a key in the BTree.
     ///
     /// # Examples

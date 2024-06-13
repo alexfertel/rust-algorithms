@@ -46,7 +46,6 @@ impl<T> Default for BinarySearchTree<T>
 where
     T: Ord,
 {
-
     /// Create a new, empty `BinarySearchTree`.
     ///
     /// # Examples
@@ -67,8 +66,7 @@ impl<T> BinarySearchTree<T>
 where
     T: Ord,
 {
-
-        /// Create a new, empty `BinarySearchTree`.
+    /// Create a new, empty `BinarySearchTree`.
     ///
     /// # Examples
     ///
@@ -374,7 +372,7 @@ where
     /// assert_eq!(*tree.ceil(&5).unwrap(), 5);
     /// assert_eq!(*tree.ceil(&4).unwrap(), 5);
     /// assert_eq!(*tree.ceil(&0).unwrap(), 3);
-    /// 
+    ///
     /// assert_eq!(tree.ceil(&8), None);
     /// ```
     pub fn ceil(&self, value: &T) -> Option<&T> {
@@ -413,7 +411,7 @@ where
 }
 
 /// Iterator for BinarySearchTree
-/// 
+///
 /// Iterates over the tree in ascending order
 struct BinarySearchTreeIter<'a, T>
 where
@@ -440,7 +438,7 @@ where
 }
 
 /// Iterator implementation for BinarySearchTree
-/// 
+///
 /// Iterates over the tree in ascending order
 impl<'a, T> Iterator for BinarySearchTreeIter<'a, T>
 where
@@ -449,23 +447,23 @@ where
     type Item = &'a T;
 
     /// Get the next value in the tree
-    /// 
+    ///
     /// # Returns
-    /// 
+    ///
     /// The next value in the tree, or `None` if the iterator is exhausted.
-    /// 
+    ///
     /// # Examples
-    /// 
+    ///
     /// ```rust
     /// use rust_algorithms::data_structures::BinarySearchTree;
-    /// 
+    ///
     /// let mut tree = BinarySearchTree::new();
     /// tree.insert(5);
     /// tree.insert(3);
     /// tree.insert(7);
-    /// 
+    ///
     /// let mut iter = tree.iter();
-    /// 
+    ///
     /// assert_eq!(iter.next().unwrap(), &3);
     /// assert_eq!(iter.next().unwrap(), &5);
     /// assert_eq!(iter.next().unwrap(), &7);

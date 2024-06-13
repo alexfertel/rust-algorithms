@@ -47,6 +47,17 @@ where
     T: Ord,
 {
 
+    /// Create a new, empty `BinarySearchTree`.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::BinarySearchTree;
+    ///
+    /// let tree: BinarySearchTree<i32> = BinarySearchTree::default();
+    ///
+    /// assert!(tree.is_empty());
+    /// ```
     fn default() -> Self {
         Self::new()
     }
@@ -57,6 +68,17 @@ where
     T: Ord,
 {
 
+        /// Create a new, empty `BinarySearchTree`.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::BinarySearchTree;
+    ///
+    /// let tree: BinarySearchTree<i32> = BinarySearchTree::new();
+    ///
+    /// assert!(tree.is_empty());
+    /// ```
     pub fn new() -> BinarySearchTree<T> {
         BinarySearchTree {
             value: None,

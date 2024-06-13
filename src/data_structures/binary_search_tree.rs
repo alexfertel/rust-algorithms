@@ -65,6 +65,27 @@ where
         }
     }
 
+    /// Determines if this tree is empty.
+    ///
+    /// # Returns
+    ///
+    /// `true`` if this tree is empty, and `false`` otherwise.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::BinarySearchTree;
+    ///
+    /// let mut tree = BinarySearchTree::new();
+    ///
+    /// assert!(tree.is_empty());
+    /// tree.insert(5);
+    /// assert!(!tree.is_empty());
+    /// ```
+    pub fn is_empty(&self) -> bool {
+        self.value.is_none()
+    }
+
     /// Find a value in this tree.
     ///
     /// # Returns

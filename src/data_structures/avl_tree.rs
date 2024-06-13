@@ -13,11 +13,25 @@ struct AVLNode<T: Ord> {
     right: Option<Box<AVLNode<T>>>,
 }
 
-/// A set based on an AVL Tree.
+/// An AVL tree.
 ///
-/// An AVL Tree is a self-balancing binary search tree. It tracks the height of each node
-/// and performs internal rotations to maintain a height difference of at most 1 between
-/// each sibling pair.
+/// An AVL tree is a self-balancing binary search tree where the height difference between the left
+/// and right subtrees of each node is at most 1. This guarantees a logarithmic height and
+/// efficient operations.
+///
+/// # Examples
+///
+/// ```rust
+/// use rust_algorithms::data_structures::AVLTree;
+///
+/// let mut tree = AVLTree::new();
+/// tree.insert(1);
+/// tree.insert(2);
+///
+/// assert!(tree.contains(&1));
+/// assert!(tree.contains(&2));
+/// assert!(!tree.contains(&3));
+/// ```
 pub struct AVLTree<T: Ord> {
     root: Option<Box<AVLNode<T>>>,
     length: usize,
@@ -32,6 +46,16 @@ enum Side {
 
 impl<T: Ord> AVLTree<T> {
     /// Creates an empty `AVLTree`.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::AVLTree;
+    ///
+    /// let tree: AVLTree<i32> = AVLTree::new();
+    ///
+    /// assert!(tree.is_empty());
+    /// ```
     pub fn new() -> AVLTree<T> {
         AVLTree {
             root: None,
@@ -39,7 +63,29 @@ impl<T: Ord> AVLTree<T> {
         }
     }
 
-    /// Returns `true` if the tree contains a value.
+    /// Checks if the tree contains a value.
+    ///
+    /// # Arguments
+    ///
+    /// * `value`: A reference to the value to check for.
+    ///
+    /// # Returns
+    ///
+    /// `true` if the tree contains the value, `false` otherwise.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::AVLTree;
+    ///
+    /// let mut tree = AVLTree::new();
+    /// tree.insert(1);
+    ///
+    /// // The tree should contain the value 1.
+    /// assert!(tree.contains(&1));
+    /// // The tree should not contain the value 2.
+    /// assert!(!tree.contains(&2));
+    /// ```
     pub fn contains(&self, value: &T) -> bool {
         let mut current = &self.root;
         while let Some(node) = current {
@@ -54,7 +100,22 @@ impl<T: Ord> AVLTree<T> {
 
     /// Adds a value to the tree.
     ///
-    /// Returns `true` if the tree did not yet contain the value.
+    /// # Returns
+    ///
+    /// `true` if the tree did not yet contain the value, `false` otherwise.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::AVLTree;
+    ///
+    /// let mut tree = AVLTree::new();
+    ///
+    /// // The first insertion should succeed.
+    /// assert!(tree.insert(1));
+    /// // The second insertion should fail, since the value is already in the tree.
+    /// assert!(!tree.insert(1));
+    /// ```
     pub fn insert(&mut self, value: T) -> bool {
         let inserted = insert(&mut self.root, value);
         if inserted {
@@ -65,7 +126,23 @@ impl<T: Ord> AVLTree<T> {
 
     /// Removes a value from the tree.
     ///
-    /// Returns `true` if the tree contained the value.
+    /// # Returns
+    ///
+    /// `true` if the tree contained the value, `false` otherwise.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::AVLTree;
+    ///
+    /// let mut tree = AVLTree::new();
+    /// tree.insert(1);
+    ///
+    /// // First removal should succeed, since the value is in the tree.
+    /// assert!(tree.remove(&1));
+    /// // The second removal should fail, since the value is no longer in the tree.
+    /// assert!(!tree.remove(&1));
+    /// ```
     pub fn remove(&mut self, value: &T) -> bool {
         let removed = remove(&mut self.root, value);
         if removed {
@@ -75,11 +152,39 @@ impl<T: Ord> AVLTree<T> {
     }
 
     /// Returns the number of values in the tree.
+    ///
+    /// # Returns
+    ///
+    /// The number of values in the tree.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::AVLTree;
+    ///
+    /// let tree: AVLTree<_> = (1..4).collect();
+    ///
+    /// assert_eq!(tree.len(), 3);
+    /// ```
     pub fn len(&self) -> usize {
         self.length
     }
 
-    /// Returns `true` if the tree contains no values.
+    /// Detects if the AVL Tree is empty.
+    ///
+    /// # Returns
+    ///
+    /// `true` if the tree contains no values, `false` otherwise.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::AVLTree;
+    ///
+    /// let tree: AVLTree<i32> = AVLTree::new();
+    ///
+    /// assert!(tree.is_empty());
+    /// ```
     pub fn is_empty(&self) -> bool {
         self.length == 0
     }
@@ -99,7 +204,21 @@ impl<T: Ord> AVLTree<T> {
         node_iter
     }
 
-    /// Returns an iterator that visits the values in the tree in ascending order.
+    /// Gets an iterator that visits the values in the tree in ascending order.
+    ///
+    /// # Returns
+    ///
+    /// An iterator that visits the values in the tree in ascending order.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::AVLTree;
+    ///
+    /// let tree: AVLTree<_> = (1..4).collect();
+    ///
+    /// assert_eq!(tree.iter().collect::<Vec<_>>(), vec![&1, &2, &3]);
+    /// ```
     pub fn iter(&self) -> Iter<T> {
         Iter {
             node_iter: self.node_iter(),
@@ -251,7 +370,21 @@ impl<T: Ord> AVLNode<T> {
     }
 }
 
+/// Default implementation for `AVLTree`.
+///
+/// Creates an empty `AVLTree`.
 impl<T: Ord> Default for AVLTree<T> {
+    /// Creates an empty `AVLTree`.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::AVLTree;
+    ///
+    /// let tree: AVLTree<i32> = Default::default();
+    ///
+    /// assert!(tree.is_empty());
+    /// ```
     fn default() -> Self {
         Self::new()
     }
@@ -285,6 +418,9 @@ struct NodeIter<'a, T: Ord> {
     stack: Vec<&'a AVLNode<T>>,
 }
 
+/// An iterator over the nodes of an `AVLTree`.
+///
+/// This struct is created by the `node_iter` method of `AVLTree`.
 impl<'a, T: Ord> Iterator for NodeIter<'a, T> {
     type Item = &'a AVLNode<T>;
 
@@ -310,9 +446,31 @@ pub struct Iter<'a, T: Ord> {
     node_iter: NodeIter<'a, T>,
 }
 
+/// An iterator over the items of an `AVLTree`.
+///
+/// This struct is created by the `iter` method of `AVLTree`.
 impl<'a, T: Ord> Iterator for Iter<'a, T> {
     type Item = &'a T;
 
+    /// Returns the next value in the tree.
+    ///
+    /// # Returns
+    ///
+    /// The next value in the tree, or `None` if there are no more values.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::AVLTree;
+    ///
+    /// let tree: AVLTree<_> = (1..4).collect();
+    /// let mut iter = tree.iter();
+    ///
+    /// assert_eq!(iter.next(), Some(&1));
+    /// assert_eq!(iter.next(), Some(&2));
+    /// assert_eq!(iter.next(), Some(&3));
+    /// assert_eq!(iter.next(), None);
+    /// ```
     fn next(&mut self) -> Option<&'a T> {
         match self.node_iter.next() {
             Some(node) => Some(&node.value),
@@ -329,37 +487,6 @@ mod tests {
     fn is_balanced<T: Ord>(tree: &AVLTree<T>) -> bool {
         tree.node_iter()
             .all(|n| (-1..=1).contains(&n.balance_factor()))
-    }
-
-    #[test]
-    fn len() {
-        let tree: AVLTree<_> = (1..4).collect();
-        assert_eq!(tree.len(), 3);
-    }
-
-    #[test]
-    fn contains() {
-        let tree: AVLTree<_> = (1..4).collect();
-        assert!(tree.contains(&1));
-        assert!(!tree.contains(&4));
-    }
-
-    #[test]
-    fn insert() {
-        let mut tree = AVLTree::new();
-        // First insert succeeds
-        assert!(tree.insert(1));
-        // Second insert fails
-        assert!(!tree.insert(1));
-    }
-
-    #[test]
-    fn remove() {
-        let mut tree: AVLTree<_> = (1..8).collect();
-        // First remove succeeds
-        assert!(tree.remove(&4));
-        // Second remove fails
-        assert!(!tree.remove(&4));
     }
 
     #[test]

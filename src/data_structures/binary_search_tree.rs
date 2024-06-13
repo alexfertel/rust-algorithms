@@ -426,7 +426,7 @@ impl<'a, T> BinarySearchTreeIter<'a, T>
 where
     T: Ord,
 {
-    pub fn new(tree: &BinarySearchTree<T>) -> BinarySearchTreeIter<T> {
+    fn new(tree: &BinarySearchTree<T>) -> BinarySearchTreeIter<T> {
         let mut iter = BinarySearchTreeIter { stack: vec![tree] };
         iter.stack_push_left();
         iter

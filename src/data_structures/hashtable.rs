@@ -39,6 +39,27 @@ impl<K: Hashable + std::cmp::PartialEq, V> HashTable<K, V> {
         HashTable { elements, count: 0 }
     }
 
+    /// Returns the number of elements in the hash table.
+    /// 
+    /// # Examples:
+    /// 
+    /// ```rust
+    /// use rust_algorithms::data_structures::HashTable;
+    /// 
+    /// let mut hash_table = HashTable::new();
+    /// 
+    /// assert!(hash_table.is_empty());
+    /// 
+    /// hash_table.insert(1usize, 10);
+    /// let result = hash_table.len();
+    /// 
+    /// assert_eq!(result, 1);
+    /// assert!(!hash_table.is_empty());
+    /// ```
+    pub fn is_empty(&self) -> bool {
+        self.count == 0
+    }
+
     pub fn insert(&mut self, key: K, value: V) {
         if self.count >= self.elements.len() * LOAD_FACTOR_BOUND as usize {
             self.resize();

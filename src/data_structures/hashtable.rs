@@ -12,23 +12,23 @@ const INITIAL_CAPACITY: usize = 3000;
 
 /// A hash table implementation with separate chaining. It uses a linked list to store elements
 /// with the same hash.
-/// 
+///
 /// # Notes:
-/// 
+///
 /// The hash table will resize itself when the number of elements exceeds the load factor bound.
 /// The hash table will grow by a factor of 2 when resizing.
 /// The hash table uses a default initial capacity of 3000.
-/// 
+///
 /// # Examples:
-/// 
+///
 /// ```rust
 /// use rust_algorithms::data_structures::HashTable;
-/// 
+///
 /// let mut hash_table = HashTable::new();
-/// 
+///
 /// hash_table.insert(1usize, 10);
 /// let result = hash_table.search(1);
-/// 
+///
 /// assert_eq!(result, Some(&10));
 /// ```
 #[derive(Debug, PartialEq, Eq)]
@@ -39,16 +39,15 @@ pub struct HashTable<K, V> {
 
 /// Implement Default for HashTable
 impl<K: Hashable + std::cmp::PartialEq, V> Default for HashTable<K, V> {
-
     /// Create a new HashTable with the default initial capacity.
-    /// 
+    ///
     /// # Examples:
-    /// 
+    ///
     /// ```rust
     /// use rust_algorithms::data_structures::HashTable;
-    /// 
+    ///
     /// let hash_table: HashTable<usize, usize> = HashTable::default();
-    /// 
+    ///
     /// assert!(hash_table.is_empty());
     /// ```
     fn default() -> Self {
@@ -70,16 +69,15 @@ impl Hashable for usize {
 }
 
 impl<K: Hashable + std::cmp::PartialEq, V> HashTable<K, V> {
-
     /// Create a new HashTable with the default initial capacity.
-    /// 
+    ///
     /// # Examples:
-    /// 
+    ///
     /// ```rust
     /// use rust_algorithms::data_structures::HashTable;
-    /// 
+    ///
     /// let hash_table = HashTable::<usize, usize>::new();
-    /// 
+    ///
     /// assert!(hash_table.is_empty());
     /// ```
     pub fn new() -> HashTable<K, V> {
@@ -94,18 +92,18 @@ impl<K: Hashable + std::cmp::PartialEq, V> HashTable<K, V> {
     }
 
     /// Returns the number of elements in the hash table.
-    /// 
+    ///
     /// # Examples:
-    /// 
+    ///
     /// ```rust
     /// use rust_algorithms::data_structures::HashTable;
-    /// 
+    ///
     /// let mut hash_table = HashTable::<usize, usize>::new();
-    /// 
+    ///
     /// assert_eq!(hash_table.is_empty(), true);
-    /// 
+    ///
     /// hash_table.insert(1usize, 10);
-    /// 
+    ///
     /// assert_eq!(hash_table.is_empty(), false);
     /// ```
     pub fn is_empty(&self) -> bool {
@@ -113,27 +111,27 @@ impl<K: Hashable + std::cmp::PartialEq, V> HashTable<K, V> {
     }
 
     /// Insert a key-value pair into the hash table.
-    /// 
+    ///
     /// # Arguments:
-    /// 
+    ///
     /// * `key` - The key to insert.
     /// * `value` - The value to insert.
-    /// 
+    ///
     /// # Notes:
-    /// 
+    ///
     /// If the key already exists in the hash table, the value will not be overwritten.
     /// This is different from the behavior of the standard library's HashMap.
-    /// 
+    ///
     /// # Examples:
-    /// 
+    ///
     /// ```rust
     /// use rust_algorithms::data_structures::HashTable;
-    /// 
+    ///
     /// let mut hash_table = HashTable::new();
-    /// 
+    ///
     /// hash_table.insert(1usize, 10);
     /// let result = hash_table.search(1);
-    /// 
+    ///
     /// assert_eq!(result, Some(&10));
     /// ```
     pub fn insert(&mut self, key: K, value: V) {
@@ -146,15 +144,15 @@ impl<K: Hashable + std::cmp::PartialEq, V> HashTable<K, V> {
     }
 
     /// Determines the capacity of the hash table, which is the number of buckets available
-    /// for storing elements. The capacity is not the same as the number of elements 
+    /// for storing elements. The capacity is not the same as the number of elements
     /// in the `HashTable``.
-    /// 
+    ///
     /// # Returns
-    /// 
+    ///
     /// The capacity of the hash table.
-    /// 
+    ///
     /// # Examples:
-    /// 
+    ///
     /// ```rust
     /// use rust_algorithms::data_structures::HashTable;
     pub fn capacity(&self) -> usize {
@@ -162,26 +160,26 @@ impl<K: Hashable + std::cmp::PartialEq, V> HashTable<K, V> {
     }
 
     /// Search for a key in the hash table.
-    /// 
+    ///
     /// # Arguments:
-    /// 
+    ///
     /// * `key` - The key to search for.
-    /// 
+    ///
     /// # Returns:
-    /// 
+    ///
     /// An Option containing a reference to the value if the key is found, or None if the key is not
     /// found.
-    /// 
+    ///
     /// # Examples:
-    /// 
+    ///
     /// ```rust
     /// use rust_algorithms::data_structures::HashTable;
-    /// 
+    ///
     /// let mut hash_table = HashTable::new();
-    /// 
+    ///
     /// hash_table.insert(1usize, 10);
     /// let result = hash_table.search(1);
-    /// 
+    ///
     /// assert_eq!(result, Some(&10));
     /// ```
     pub fn search(&self, key: K) -> Option<&V> {

@@ -22,6 +22,7 @@
    - OR  "|"
    - AND "&"
   
+  <img src="https://embeddedwala.com/uploads/images/202206/img_temp_62af09c374d866-36338888-48712239.gif"></img>
 ### Time and Space complexity
 
     Constant complexity - O(1)
@@ -45,3 +46,13 @@
   4. Optimization: Bitwise operations are faster and can optimize programs effectively. By leveraging bit manipulation techniques, programmers can enhance the performance of algorithms and optimize memory usage, leading to more efficient and streamlined code
    
   5. Competitive Programming: In competitive programming, bit manipulation is a valuable skill. Interviewers often include problems related to bit manipulation, such as bitmask dynamic programming and number of subsets, to assess a programmer's understanding of bitwise operators and problem-solving abilities
+
+### Count Ones 
+
+<img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/setbit.png"></img>
+
+<p>Simple Method Loop through all bits in an integer, check if a bit is set and if it is, then increment the set bit count.</p>
+
+<h3>Time Complexity</h3>
+
+#### Complexity - O(log N)

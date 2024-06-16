@@ -47,7 +47,7 @@ impl<K: Hashable + std::cmp::PartialEq, V> Default for HashTable<K, V> {
     /// ```rust
     /// use rust_algorithms::data_structures::HashTable;
     /// 
-    /// let hash_table = HashTable::default();
+    /// let hash_table: HashTable<usize, usize> = HashTable::default();
     /// 
     /// assert!(hash_table.is_empty());
     /// ```
@@ -78,7 +78,7 @@ impl<K: Hashable + std::cmp::PartialEq, V> HashTable<K, V> {
     /// ```rust
     /// use rust_algorithms::data_structures::HashTable;
     /// 
-    /// let hash_table = HashTable::new();
+    /// let hash_table = HashTable::<usize, usize>::new();
     /// 
     /// assert!(hash_table.is_empty());
     /// ```

@@ -119,6 +119,11 @@ impl<K: Hashable + std::cmp::PartialEq, V> HashTable<K, V> {
     /// * `key` - The key to insert.
     /// * `value` - The value to insert.
     /// 
+    /// # Notes:
+    /// 
+    /// If the key already exists in the hash table, the value will not be overwritten.
+    /// This is different from the behavior of the standard library's HashMap.
+    /// 
     /// # Examples:
     /// 
     /// ```rust

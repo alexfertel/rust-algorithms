@@ -1,11 +1,6 @@
-//! Caesar Cipher
-//! Based on cipher_crypt::caesar
-//!
-//! # Algorithm
-
-/// Encrypts a given [`&str`] using Caesar cipher.
+/// Implements the Caesar Cipher based on cipher_crypt::caesar
 ///
-/// Rotate each ascii character by shift.
+/// Rotates each ascii character by shift.
 /// The most basic example is ROT 13, which rotates 'a' to 'n'.
 /// This implementation does not rotates unicode characters.
 ///
@@ -13,22 +8,20 @@
 ///
 /// # Arguments
 ///
-/// `cipher` - String to transform.
-///
-/// `shift` - Amount to right-shift.
+/// *`cipher` - A [`&str`] plain text to encrypt.
+/// *`shift` - Amount to right-shift the text.
 ///
 /// # Returns
 ///
-/// An owned [`String`]
-///
-/// # Panic
-///
-/// This function won't panic
+/// An owned [`String`] of the encrypted text.
 ///
 /// # Examples
-/// ```
+///
+/// ```rust
 /// # use rust_algorithms::ciphers::caesar;
+///
 /// let encoded = caesar("one sheep two sheep", 3);
+///
 /// assert_eq!(encoded, "rqh vkhhs wzr vkhhs")
 /// ```
 pub fn caesar(cipher: &str, shift: u8) -> String {

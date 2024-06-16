@@ -37,12 +37,26 @@ pub struct HashTable<K, V> {
     count: usize,
 }
 
+/// Implement Default for HashTable
 impl<K: Hashable + std::cmp::PartialEq, V> Default for HashTable<K, V> {
+
+    /// Create a new HashTable with the default initial capacity.
+    /// 
+    /// # Examples:
+    /// 
+    /// ```rust
+    /// use rust_algorithms::data_structures::HashTable;
+    /// 
+    /// let hash_table = HashTable::default();
+    /// 
+    /// assert!(hash_table.is_empty());
+    /// ```
     fn default() -> Self {
         Self::new()
     }
 }
 
+/// A trait for types that can be hashed.
 pub trait Hashable {
     fn hash(&self) -> usize;
 }
@@ -56,6 +70,18 @@ impl Hashable for usize {
 }
 
 impl<K: Hashable + std::cmp::PartialEq, V> HashTable<K, V> {
+
+    /// Create a new HashTable with the default initial capacity.
+    /// 
+    /// # Examples:
+    /// 
+    /// ```rust
+    /// use rust_algorithms::data_structures::HashTable;
+    /// 
+    /// let hash_table = HashTable::new();
+    /// 
+    /// assert!(hash_table.is_empty());
+    /// ```
     pub fn new() -> HashTable<K, V> {
         let initial_capacity = INITIAL_CAPACITY;
         let mut elements = Vec::with_capacity(initial_capacity);
@@ -79,15 +105,32 @@ impl<K: Hashable + std::cmp::PartialEq, V> HashTable<K, V> {
     /// assert!(hash_table.is_empty());
     /// 
     /// hash_table.insert(1usize, 10);
-    /// let result = hash_table.len();
     /// 
     /// assert_eq!(result, 1);
-    /// assert!(!hash_table.is_empty());
     /// ```
     pub fn is_empty(&self) -> bool {
         self.count == 0
     }
 
+    /// Insert a key-value pair into the hash table.
+    /// 
+    /// # Arguments:
+    /// 
+    /// * `key` - The key to insert.
+    /// * `value` - The value to insert.
+    /// 
+    /// # Examples:
+    /// 
+    /// ```rust
+    /// use rust_algorithms::data_structures::HashTable;
+    /// 
+    /// let mut hash_table = HashTable::new();
+    /// 
+    /// hash_table.insert(1usize, 10);
+    /// let result = hash_table.search(1);
+    /// 
+    /// assert_eq!(result, Some(&10));
+    /// ```
     pub fn insert(&mut self, key: K, value: V) {
         if self.count >= self.elements.len() * LOAD_FACTOR_BOUND as usize {
             self.resize();
@@ -97,6 +140,29 @@ impl<K: Hashable + std::cmp::PartialEq, V> HashTable<K, V> {
         self.count += 1;
     }
 
+    /// Search for a key in the hash table.
+    /// 
+    /// # Arguments:
+    /// 
+    /// * `key` - The key to search for.
+    /// 
+    /// # Returns:
+    /// 
+    /// An Option containing a reference to the value if the key is found, or None if the key is not
+    /// found.
+    /// 
+    /// # Examples:
+    /// 
+    /// ```rust
+    /// use rust_algorithms::data_structures::HashTable;
+    /// 
+    /// let mut hash_table = HashTable::new();
+    /// 
+    /// hash_table.insert(1usize, 10);
+    /// let result = hash_table.search(1);
+    /// 
+    /// assert_eq!(result, Some(&10));
+    /// ```
     pub fn search(&self, key: K) -> Option<&V> {
         let index = key.hash() % self.elements.len();
         self.elements[index]

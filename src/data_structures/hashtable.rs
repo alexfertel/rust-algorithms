@@ -194,22 +194,13 @@ impl<K: Hashable + std::cmp::PartialEq, V> HashTable<K, V> {
 mod tests {
     use super::*;
 
-    #[derive(Debug, PartialEq, Eq)]
-    struct TestKey(usize);
-
-    impl Hashable for TestKey {
-        fn hash(&self) -> usize {
-            self.0
-        }
-    }
-
     #[test]
     fn test_resize() {
         let mut hash_table = HashTable::new();
         let initial_capacity = hash_table.elements.capacity();
 
         for i in 0..initial_capacity * LOAD_FACTOR_BOUND as usize + 1 {
-            hash_table.insert(TestKey(i), TestKey(i + 10));
+            hash_table.insert(i, i + 10);
         }
 
         assert!(hash_table.elements.capacity() > initial_capacity);
@@ -218,11 +209,11 @@ mod tests {
     #[test]
     fn test_search_nonexistent() {
         let mut hash_table = HashTable::new();
-        let key = TestKey(1);
-        let value = TestKey(10);
+        let key = 1;
+        let value = 10;
 
         hash_table.insert(key, value);
-        let result = hash_table.search(TestKey(2));
+        let result = hash_table.search(2);
 
         assert_eq!(result, None);
     }
@@ -231,29 +222,29 @@ mod tests {
     fn test_multiple_inserts_and_searches() {
         let mut hash_table = HashTable::new();
         for i in 0..10 {
-            hash_table.insert(TestKey(i), TestKey(i + 100));
+            hash_table.insert(i, i + 100);
         }
 
         for i in 0..10 {
-            let result = hash_table.search(TestKey(i));
-            assert_eq!(result, Some(&TestKey(i + 100)));
+            let result = hash_table.search(i);
+            assert_eq!(result, Some(&(i + 100)));
         }
     }
 
     #[test]
     fn test_not_overwrite_existing_key() {
         let mut hash_table = HashTable::new();
-        hash_table.insert(TestKey(1), TestKey(100));
-        hash_table.insert(TestKey(1), TestKey(200));
+        hash_table.insert(1, 100);
+        hash_table.insert(1, 200);
 
-        let result = hash_table.search(TestKey(1));
-        assert_eq!(result, Some(&TestKey(100)));
+        let result = hash_table.search(1);
+        assert_eq!(result, Some(&100));
     }
 
     #[test]
     fn test_empty_search() {
-        let hash_table: HashTable<TestKey, TestKey> = HashTable::new();
-        let result = hash_table.search(TestKey(1));
+        let hash_table: HashTable<usize, usize> = HashTable::new();
+        let result = hash_table.search(1);
 
         assert_eq!(result, None);
     }

@@ -145,6 +145,22 @@ impl<K: Hashable + std::cmp::PartialEq, V> HashTable<K, V> {
         self.count += 1;
     }
 
+    /// Determines the capacity of the hash table, which is the number of buckets available
+    /// for storing elements. The capacity is not the same as the number of elements 
+    /// in the `HashTable``.
+    /// 
+    /// # Returns
+    /// 
+    /// The capacity of the hash table.
+    /// 
+    /// # Examples:
+    /// 
+    /// ```rust
+    /// use rust_algorithms::data_structures::HashTable;
+    pub fn capacity(&self) -> usize {
+        self.elements.capacity()
+    }
+
     /// Search for a key in the hash table.
     /// 
     /// # Arguments:

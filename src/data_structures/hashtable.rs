@@ -100,13 +100,13 @@ impl<K: Hashable + std::cmp::PartialEq, V> HashTable<K, V> {
     /// ```rust
     /// use rust_algorithms::data_structures::HashTable;
     /// 
-    /// let mut hash_table = HashTable::new();
+    /// let mut hash_table = HashTable::<usize, usize>::new();
     /// 
-    /// assert!(hash_table.is_empty());
+    /// assert_eq!(hash_table.is_empty(), true);
     /// 
     /// hash_table.insert(1usize, 10);
     /// 
-    /// assert_eq!(result, 1);
+    /// assert_eq!(hash_table.is_empty(), false);
     /// ```
     pub fn is_empty(&self) -> bool {
         self.count == 0

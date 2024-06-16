@@ -19,6 +19,14 @@ pub trait Hashable {
     fn hash(&self) -> usize;
 }
 
+/// Implement Hashable for usize
+/// This is useful for testing purposes but doesn't provide a meaningful hash function.
+impl Hashable for usize {
+    fn hash(&self) -> usize {
+        *self
+    }
+}
+
 impl<K: Hashable + std::cmp::PartialEq, V> HashTable<K, V> {
     pub fn new() -> HashTable<K, V> {
         let initial_capacity = INITIAL_CAPACITY;

@@ -3,6 +3,7 @@ const GROWTH_FACTOR: usize = 2;
 const LOAD_FACTOR_BOUND: f64 = 0.75;
 const INITIAL_CAPACITY: usize = 3000;
 
+#[derive(Debug, PartialEq, Eq)]
 pub struct HashTable<K, V> {
     elements: Vec<LinkedList<(K, V)>>,
     count: usize,

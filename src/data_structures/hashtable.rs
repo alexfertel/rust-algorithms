@@ -1,8 +1,36 @@
 use std::collections::LinkedList;
+
+/// The growth factor of the hash table when resizing.
 const GROWTH_FACTOR: usize = 2;
+
+/// The load factor bound of the hash table. The hash table will resize itself when the number of
+/// elements exceeds the load factor bound.
 const LOAD_FACTOR_BOUND: f64 = 0.75;
+
+/// The initial capacity of the hash table.
 const INITIAL_CAPACITY: usize = 3000;
 
+/// A hash table implementation with separate chaining. It uses a linked list to store elements
+/// with the same hash.
+/// 
+/// # Notes:
+/// 
+/// The hash table will resize itself when the number of elements exceeds the load factor bound.
+/// The hash table will grow by a factor of 2 when resizing.
+/// The hash table uses a default initial capacity of 3000.
+/// 
+/// # Examples:
+/// 
+/// ```rust
+/// use rust_algorithms::data_structures::HashTable;
+/// 
+/// let mut hash_table = HashTable::new();
+/// 
+/// hash_table.insert(1usize, 10);
+/// let result = hash_table.search(1);
+/// 
+/// assert_eq!(result, Some(&10));
+/// ```
 #[derive(Debug, PartialEq, Eq)]
 pub struct HashTable<K, V> {
     elements: Vec<LinkedList<(K, V)>>,
@@ -107,18 +135,6 @@ mod tests {
         fn hash(&self) -> usize {
             self.0
         }
-    }
-
-    #[test]
-    fn test_insert_and_search() {
-        let mut hash_table = HashTable::new();
-        let key = TestKey(1);
-        let value = TestKey(10);
-
-        hash_table.insert(key, value);
-        let result = hash_table.search(TestKey(1));
-
-        assert_eq!(result, Some(&TestKey(10)));
     }
 
     #[test]

@@ -1,8 +1,35 @@
 use std::cmp::Ordering;
 use std::ops::Deref;
 
-/// This struct implements as Binary Search Tree (BST), which is a
-/// simple data structure for storing sorted data
+/// A binary search tree (BST) is a binary tree where each node has at most two children, and the
+/// left child is less than the parent, and the right child is greater than the parent. This
+/// implementation is a simple BST, and does not have any balancing mechanisms.
+///
+/// # Examples
+///
+/// ```rust
+/// use rust_algorithms::data_structures::BinarySearchTree;
+///
+/// let mut tree = BinarySearchTree::new();
+/// tree.insert(5);
+/// tree.insert(3);
+/// tree.insert(7);
+/// tree.insert(1);
+/// tree.insert(4);
+/// tree.insert(6);
+/// tree.insert(8);
+///
+/// assert!(tree.search(&5));
+/// assert!(tree.search(&3));
+/// assert!(tree.search(&7));
+/// assert!(tree.search(&1));
+/// assert!(tree.search(&4));
+/// assert!(tree.search(&6));
+/// assert!(tree.search(&8));
+/// assert!(!tree.search(&0));
+/// assert!(!tree.search(&2));
+/// assert!(!tree.search(&9));
+/// ```
 pub struct BinarySearchTree<T>
 where
     T: Ord,
@@ -12,10 +39,24 @@ where
     right: Option<Box<BinarySearchTree<T>>>,
 }
 
+/// Default implementation for BinarySearchTree
+///
+/// Creates a new empty BinarySearchTree
 impl<T> Default for BinarySearchTree<T>
 where
     T: Ord,
 {
+    /// Create a new, empty `BinarySearchTree`.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::BinarySearchTree;
+    ///
+    /// let tree: BinarySearchTree<i32> = BinarySearchTree::default();
+    ///
+    /// assert!(tree.is_empty());
+    /// ```
     fn default() -> Self {
         Self::new()
     }
@@ -25,7 +66,17 @@ impl<T> BinarySearchTree<T>
 where
     T: Ord,
 {
-    /// Create a new, empty BST
+    /// Create a new, empty `BinarySearchTree`.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::BinarySearchTree;
+    ///
+    /// let tree: BinarySearchTree<i32> = BinarySearchTree::new();
+    ///
+    /// assert!(tree.is_empty());
+    /// ```
     pub fn new() -> BinarySearchTree<T> {
         BinarySearchTree {
             value: None,
@@ -34,8 +85,52 @@ where
         }
     }
 
-    /// Find a value in this tree. Returns True iff value is in this
-    /// tree, and false otherwise
+    /// Determines if this tree is empty.
+    ///
+    /// # Returns
+    ///
+    /// `true`` if this tree is empty, and `false`` otherwise.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::BinarySearchTree;
+    ///
+    /// let mut tree = BinarySearchTree::new();
+    ///
+    /// assert!(tree.is_empty());
+    /// tree.insert(5);
+    /// assert!(!tree.is_empty());
+    /// ```
+    pub fn is_empty(&self) -> bool {
+        self.value.is_none()
+    }
+
+    /// Find a value in this tree.
+    ///
+    /// # Returns
+    ///
+    /// `true`` if the value is in this tree, and `false` otherwise.
+    ///
+    /// # Arguments
+    ///
+    /// * `value` - The value to search for in this tree.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::BinarySearchTree;
+    ///
+    /// let mut tree = BinarySearchTree::new();
+    ///
+    /// tree.insert(5);
+    /// tree.insert(3);
+    ///
+    /// assert!(tree.search(&5));
+    /// assert!(tree.search(&3));
+    /// assert!(!tree.search(&0));
+    /// assert!(!tree.search(&4));
+    /// ```
     pub fn search(&self, value: &T) -> bool {
         match &self.value {
             Some(key) => {
@@ -64,12 +159,52 @@ where
         }
     }
 
-    /// Returns a new iterator which iterates over this tree in order
+    /// Creates an iterator which iterates over this tree in ascending order
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::BinarySearchTree;
+    ///
+    /// let mut tree = BinarySearchTree::new();
+    /// tree.insert(5);
+    /// tree.insert(3);
+    /// tree.insert(7);
+    ///
+    /// let mut iter = tree.iter();
+    ///
+    /// assert_eq!(iter.next().unwrap(), &3);
+    /// assert_eq!(iter.next().unwrap(), &5);
+    /// assert_eq!(iter.next().unwrap(), &7);
+    /// assert_eq!(iter.next(), None);
+    /// ```
     pub fn iter(&self) -> impl Iterator<Item = &T> {
         BinarySearchTreeIter::new(self)
     }
 
-    /// Insert a value into the appropriate location in this tree.
+    /// Inserts a value into the appropriate location in this tree.
+    ///
+    /// # Arguments
+    ///
+    /// * `value` - The value to insert into this tree.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::BinarySearchTree;
+    ///
+    /// let mut tree = BinarySearchTree::new();
+    ///
+    /// tree.insert(5);
+    /// tree.insert(3);
+    /// tree.insert(7);
+    ///
+    /// assert!(tree.search(&5));
+    /// assert!(tree.search(&3));
+    /// assert!(tree.search(&7));
+    /// assert!(!tree.search(&0));
+    /// assert!(!tree.search(&4));
+    /// ```
     pub fn insert(&mut self, value: T) {
         if self.value.is_none() {
             self.value = Some(value);
@@ -97,7 +232,27 @@ where
         }
     }
 
-    /// Returns the smallest value in this tree
+    /// Gets the smallest value in this tree.
+    ///
+    /// # Returns
+    ///
+    /// The smallest value in this tree, or `None` if this tree is empty.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::BinarySearchTree;
+    ///
+    /// let mut tree = BinarySearchTree::new();
+    ///
+    /// assert!(tree.minimum().is_none());
+    ///
+    /// tree.insert(5);
+    /// tree.insert(3);
+    /// tree.insert(7);
+    ///
+    /// assert_eq!(*tree.minimum().unwrap(), 3);
+    /// ```
     pub fn minimum(&self) -> Option<&T> {
         match &self.left {
             Some(node) => node.minimum(),
@@ -105,7 +260,27 @@ where
         }
     }
 
-    /// Returns the largest value in this tree
+    /// Gets the largest value in this tree.
+    ///
+    /// # Returns
+    ///
+    /// The largest value in this tree, or `None` if this tree is empty.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::BinarySearchTree;
+    ///
+    /// let mut tree = BinarySearchTree::new();
+    ///
+    /// assert!(tree.maximum().is_none());
+    ///
+    /// tree.insert(5);
+    /// tree.insert(3);
+    /// tree.insert(7);
+    ///
+    /// assert_eq!(*tree.maximum().unwrap(), 7);
+    /// ```
     pub fn maximum(&self) -> Option<&T> {
         match &self.right {
             Some(node) => node.maximum(),
@@ -113,7 +288,34 @@ where
         }
     }
 
-    /// Returns the largest value in this tree smaller than value
+    /// Gets the largest value in this tree smaller than value
+    ///
+    /// # Arguments
+    ///
+    /// * `value` - The floor that limits the maximum value returned.
+    ///
+    /// # Returns
+    ///
+    /// The largest value in this tree smaller than value, or `None` if this tree is empty
+    /// or `value` is smaller than any contained value.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::BinarySearchTree;
+    ///
+    /// let mut tree = BinarySearchTree::new();
+    ///
+    /// tree.insert(5);
+    /// tree.insert(3);
+    /// tree.insert(7);
+    ///
+    /// assert_eq!(*tree.floor(&5).unwrap(), 5);
+    /// assert_eq!(*tree.floor(&4).unwrap(), 3);
+    /// assert_eq!(*tree.floor(&8).unwrap(), 7);
+    ///
+    /// assert_eq!(tree.floor(&0), None);
+    /// ```
     pub fn floor(&self, value: &T) -> Option<&T> {
         match &self.value {
             Some(key) => {
@@ -145,7 +347,34 @@ where
         }
     }
 
-    /// Returns the smallest value in this tree larger than value
+    /// Gets the smallest value in this tree larger than value.
+    ///
+    /// # Arguments
+    ///
+    /// * `value` - The ceil that limits the minimum value returned.
+    ///
+    /// # Returns
+    ///
+    /// The smallest value in this tree larger than value, or `None` if this tree is empty
+    /// or `value` is larger than any contained value.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::BinarySearchTree;
+    ///
+    /// let mut tree = BinarySearchTree::new();
+    ///
+    /// tree.insert(5);
+    /// tree.insert(3);
+    /// tree.insert(7);
+    ///
+    /// assert_eq!(*tree.ceil(&5).unwrap(), 5);
+    /// assert_eq!(*tree.ceil(&4).unwrap(), 5);
+    /// assert_eq!(*tree.ceil(&0).unwrap(), 3);
+    ///
+    /// assert_eq!(tree.ceil(&8), None);
+    /// ```
     pub fn ceil(&self, value: &T) -> Option<&T> {
         match &self.value {
             Some(key) => {
@@ -181,6 +410,9 @@ where
     }
 }
 
+/// Iterator for BinarySearchTree
+///
+/// Iterates over the tree in ascending order
 struct BinarySearchTreeIter<'a, T>
 where
     T: Ord,
@@ -192,7 +424,7 @@ impl<'a, T> BinarySearchTreeIter<'a, T>
 where
     T: Ord,
 {
-    pub fn new(tree: &BinarySearchTree<T>) -> BinarySearchTreeIter<T> {
+    fn new(tree: &BinarySearchTree<T>) -> BinarySearchTreeIter<T> {
         let mut iter = BinarySearchTreeIter { stack: vec![tree] };
         iter.stack_push_left();
         iter
@@ -205,12 +437,38 @@ where
     }
 }
 
+/// Iterator implementation for BinarySearchTree
+///
+/// Iterates over the tree in ascending order
 impl<'a, T> Iterator for BinarySearchTreeIter<'a, T>
 where
     T: Ord,
 {
     type Item = &'a T;
 
+    /// Get the next value in the tree
+    ///
+    /// # Returns
+    ///
+    /// The next value in the tree, or `None` if the iterator is exhausted.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::BinarySearchTree;
+    ///
+    /// let mut tree = BinarySearchTree::new();
+    /// tree.insert(5);
+    /// tree.insert(3);
+    /// tree.insert(7);
+    ///
+    /// let mut iter = tree.iter();
+    ///
+    /// assert_eq!(iter.next().unwrap(), &3);
+    /// assert_eq!(iter.next().unwrap(), &5);
+    /// assert_eq!(iter.next().unwrap(), &7);
+    /// assert_eq!(iter.next(), None);
+    /// ```
     fn next(&mut self) -> Option<&'a T> {
         if self.stack.is_empty() {
             None

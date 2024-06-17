@@ -7,13 +7,43 @@ struct Node<T> {
     children: Vec<Node<T>>,
 }
 
+/// A self-balancing tree data structure.
+///
+/// A BTree maintains sorted data and allows searches, sequential access, insertions, and deletions in logarithmic time.
+/// The B-tree generalizes the binary search tree, allowing for nodes with more than two children.
+/// A B-tree of order m is a tree which satisfies the following properties:
+/// 1. Every node has at most m children.
+/// 2. Every non-leaf node (except the root) has at least m / 2 children.
+/// 3. The root has at least two children if it is not a leaf node.
+/// 4. A non-leaf node with k children contains k−1 keys.
+/// 5. All leaves appear on the same level.
+/// 6. A non-leaf node with k children contains k−1 keys.
+/// 7. All leaves appear on the same level.
+///
+/// # Examples
+///
+/// ```rust
+/// use rust_algorithms::data_structures::BTree;
+///
+/// let mut tree = BTree::new(2);
+/// tree.insert(10);
+/// tree.insert(20);
+/// tree.insert(30);
+/// tree.insert(5);
+///
+/// assert!(tree.search(10));
+/// assert_eq!(tree.search(15), false);
+/// ```
 pub struct BTree<T> {
     root: Node<T>,
     props: BTreeProps,
 }
 
-// Why to need a different Struct for props...
-// Check - http://smallcultfollowing.com/babysteps/blog/2018/11/01/after-nll-interprocedural-conflicts/#fnref:improvement
+/// BTree properties
+///
+/// # Reference
+///
+/// Check - http://smallcultfollowing.com/babysteps/blog/2018/11/01/after-nll-interprocedural-conflicts/#fnref:improvement
 struct BTreeProps {
     degree: usize,
     max_keys: usize,
@@ -117,10 +147,24 @@ impl BTreeProps {
     }
 }
 
+/// BTree implementation
+///
 impl<T> BTree<T>
 where
     T: Ord + Copy + Debug + Default,
 {
+    /// Create a new BTree with the given branch factor.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::BTree;
+    ///
+    /// let mut tree = BTree::new(2);
+    ///
+    /// assert_eq!(tree.search(10), false);
+    /// assert_eq!(tree.search(15), false);
+    /// ```
     pub fn new(branch_factor: usize) -> Self {
         let degree = 2 * branch_factor;
         BTree {
@@ -129,6 +173,22 @@ where
         }
     }
 
+    /// Insert a key into the BTree.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::BTree;
+    ///
+    /// let mut tree = BTree::new(2);
+    /// tree.insert(1);
+    /// tree.insert(2);
+    /// tree.insert(3);
+    /// tree.insert(5);
+    ///
+    /// assert!(tree.search(1));
+    /// assert_eq!(tree.search(4), false);
+    /// ```
     pub fn insert(&mut self, key: T) {
         if self.props.is_maxed_out(&self.root) {
             // Create an empty root and split the old root...
@@ -140,11 +200,60 @@ where
         self.props.insert_non_full(&mut self.root, key);
     }
 
+    /// Traverse the BTree.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::BTree;
+    ///
+    /// let mut tree = BTree::new(2);
+    /// tree.insert(20);
+    /// tree.insert(10);
+    /// tree.insert(30);
+    /// tree.insert(5);
+    ///
+    /// tree.traverse();
+    /// ```
     pub fn traverse(&self) {
         self.props.traverse_node(&self.root, 0);
         println!();
     }
 
+    /// Check if the BTree is empty.
+    ///
+    /// # Returns
+    ///
+    /// `true` if the BTree is empty, `false` otherwise.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::BTree;
+    ///
+    /// let mut tree = BTree::new(2);
+    /// assert!(tree.is_empty());
+    /// tree.insert(1);
+    /// assert!(!tree.is_empty());
+    /// ```
+    pub fn is_empty(&self) -> bool {
+        self.root.keys.is_empty()
+    }
+
+    /// Search for a key in the BTree.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use rust_algorithms::data_structures::BTree;
+    ///
+    /// let mut tree = BTree::new(2);
+    /// tree.insert(1);
+    /// tree.insert(5);
+    ///
+    /// assert!(tree.search(1));
+    /// assert_eq!(tree.search(15), false);
+    /// ```
     pub fn search(&self, key: T) -> bool {
         let mut current_node = &self.root;
         let mut index: isize;

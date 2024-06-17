@@ -1,3 +1,4 @@
+//! This module provides search algorithms.
 mod binary_search;
 mod binary_search_recursive;
 mod exponential_search;

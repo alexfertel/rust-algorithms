@@ -1,3 +1,4 @@
+//! This module provides string manipulation algorithms.
 mod aho_corasick;
 mod burrows_wheeler_transform;
 mod hamming_distance;

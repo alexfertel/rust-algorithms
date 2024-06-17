@@ -1,3 +1,4 @@
+//! This module provides data structures.
 mod avl_tree;
 mod b_tree;
 mod binary_search_tree;

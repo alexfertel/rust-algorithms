@@ -33,9 +33,33 @@ pub struct MaxHeap<T: Ord + Copy> {
     heap: Heap<T>,
 }
 
+/// MinHeap implementation.
+/// 
+/// # Examples:
+/// 
+/// ```rust
+/// use rust_algorithms::data_structures::MinHeap;
+/// 
+/// let mut heap = MinHeap::<i32>::new();
+/// heap.insert(1);
+/// heap.insert(2);
+/// heap.insert(3);
+/// heap.insert(4);
+/// heap.insert(5);
+/// 
+/// assert_eq!(heap.is_empty(), false);
+/// assert_eq!(heap.size(), 5);
+/// assert_eq!(heap.del_min(), 1);
+/// assert_eq!(heap.del_min(), 2);
+/// assert_eq!(heap.del_min(), 3);
+/// assert_eq!(heap.del_min(), 4);
+/// assert_eq!(heap.del_min(), 5);
+/// assert_eq!(heap.is_empty(), true);
+/// ```
 pub struct MinHeap<T: Ord + Copy> {
     heap: Heap<T>,
 }
+
 
 impl<T: Ord + Copy> Heap<T> {
     fn new() -> Heap<T> {
@@ -197,22 +221,4 @@ mod tests {
         }
     }
 
-    #[test]
-    fn min_heap() {
-        let mut heap = heap::MinHeap::<i32>::new();
-        assert_eq!(heap.is_empty(), true);
-        heap.insert(1);
-        heap.insert(2);
-        heap.insert(3);
-        heap.insert(4);
-        heap.insert(5);
-        assert_eq!(heap.is_empty(), false);
-        assert_eq!(heap.size(), 5);
-        assert_eq!(heap.del_min(), 1);
-        assert_eq!(heap.del_min(), 2);
-        assert_eq!(heap.del_min(), 3);
-        assert_eq!(heap.del_min(), 4);
-        assert_eq!(heap.del_min(), 5);
-        assert_eq!(heap.is_empty(), true);
-    }
 }

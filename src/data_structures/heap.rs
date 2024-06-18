@@ -1,12 +1,34 @@
-/*
-Max and Min Priority Queue
- */
-
+/// Heap implementation.
+/// 
+/// This is an internal structure  used by the Min/Max Heap implementations.
 struct Heap<T: Ord + Copy> {
     pq: Vec<T>,
     n: usize,
 }
 
+/// MaxHeap implementation.
+/// 
+/// # Examples:
+/// 
+/// ```rust
+/// use rust_algorithms::data_structures::MaxHeap;
+/// 
+/// let mut heap = MaxHeap::<i32>::new();
+/// heap.insert(1);
+/// heap.insert(2);
+/// heap.insert(3);
+/// heap.insert(4);
+/// heap.insert(5);
+/// 
+/// assert_eq!(heap.is_empty(), false);
+/// assert_eq!(heap.size(), 5);
+/// assert_eq!(heap.del_max(), 5);
+/// assert_eq!(heap.del_max(), 4);
+/// assert_eq!(heap.del_max(), 3);
+/// assert_eq!(heap.del_max(), 2);
+/// assert_eq!(heap.del_max(), 1);
+/// assert_eq!(heap.is_empty(), true);
+/// ```
 pub struct MaxHeap<T: Ord + Copy> {
     heap: Heap<T>,
 }
@@ -157,25 +179,7 @@ fn less_min<T: Ord + Copy>(i: T, j: T) -> bool {
 #[cfg(test)]
 mod tests {
     use crate::data_structures::heap;
-    #[test]
-    fn max_heap() {
-        let mut heap = heap::MaxHeap::<i32>::new();
-        assert_eq!(heap.is_empty(), true);
-        heap.insert(1);
-        heap.insert(2);
-        heap.insert(3);
-        heap.insert(4);
-        heap.insert(5);
-        assert_eq!(heap.is_empty(), false);
-        assert_eq!(heap.size(), 5);
-        assert_eq!(heap.del_max(), 5);
-        assert_eq!(heap.del_max(), 4);
-        assert_eq!(heap.del_max(), 3);
-        assert_eq!(heap.del_max(), 2);
-        assert_eq!(heap.del_max(), 1);
-        assert_eq!(heap.is_empty(), true);
-    }
-
+    
     #[test]
     fn min_heap_iter() {
         let mut heap = heap::MinHeap::<i32>::new();

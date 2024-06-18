@@ -1,5 +1,5 @@
 /// Heap implementation.
-/// 
+///
 /// This is an internal structure  used by the Min/Max Heap implementations.
 struct Heap<T: Ord + Copy> {
     pq: Vec<T>,
@@ -7,19 +7,19 @@ struct Heap<T: Ord + Copy> {
 }
 
 /// MaxHeap implementation.
-/// 
+///
 /// # Examples:
-/// 
+///
 /// ```rust
 /// use rust_algorithms::data_structures::MaxHeap;
-/// 
+///
 /// let mut heap = MaxHeap::<i32>::new();
 /// heap.insert(1);
 /// heap.insert(2);
 /// heap.insert(3);
 /// heap.insert(4);
 /// heap.insert(5);
-/// 
+///
 /// assert_eq!(heap.is_empty(), false);
 /// assert_eq!(heap.size(), 5);
 /// assert_eq!(heap.del_max(), 5);
@@ -34,19 +34,19 @@ pub struct MaxHeap<T: Ord + Copy> {
 }
 
 /// MinHeap implementation.
-/// 
+///
 /// # Examples:
-/// 
+///
 /// ```rust
 /// use rust_algorithms::data_structures::MinHeap;
-/// 
+///
 /// let mut heap = MinHeap::<i32>::new();
 /// heap.insert(1);
 /// heap.insert(2);
 /// heap.insert(3);
 /// heap.insert(4);
 /// heap.insert(5);
-/// 
+///
 /// assert_eq!(heap.is_empty(), false);
 /// assert_eq!(heap.size(), 5);
 /// assert_eq!(heap.del_min(), 1);
@@ -59,7 +59,6 @@ pub struct MaxHeap<T: Ord + Copy> {
 pub struct MinHeap<T: Ord + Copy> {
     heap: Heap<T>,
 }
-
 
 impl<T: Ord + Copy> Heap<T> {
     fn new() -> Heap<T> {
@@ -134,16 +133,15 @@ impl<T: Ord + Copy> Heap<T> {
 
 /// MaxHeap implementation.
 impl<T: Ord + Copy> MaxHeap<T> {
-
     /// Creates a new `MaxHeap`` instance.
-    /// 
+    ///
     /// # Examples:
-    /// 
+    ///
     /// ```rust
     /// use rust_algorithms::data_structures::MaxHeap;
-    /// 
+    ///
     /// let heap = MaxHeap::<i32>::new();
-    /// 
+    ///
     /// assert_eq!(heap.is_empty(), true);
     /// assert_eq!(heap.size(), 0);
     /// ```
@@ -152,23 +150,23 @@ impl<T: Ord + Copy> MaxHeap<T> {
     }
 
     /// Inserts a new key into the `MaxHeap`.
-    /// 
+    ///
     /// # Arguments:
-    /// 
+    ///
     /// * `key` - The key to be inserted into the `MaxHeap`.
-    /// 
+    ///
     /// # Examples:
-    /// 
+    ///
     /// ```rust
     /// use rust_algorithms::data_structures::MaxHeap;
-    /// 
+    ///
     /// let mut heap = MaxHeap::<i32>::new();
     /// heap.insert(1);
     /// heap.insert(2);
     /// heap.insert(3);
     /// heap.insert(4);
     /// heap.insert(5);
-    /// 
+    ///
     /// assert_eq!(heap.is_empty(), false);
     /// assert_eq!(heap.size(), 5);
     /// ```
@@ -177,18 +175,18 @@ impl<T: Ord + Copy> MaxHeap<T> {
     }
 
     /// Checks if the `MaxHeap` is empty.
-    /// 
+    ///
     /// # Examples:
-    /// 
+    ///
     /// ```rust
     /// use rust_algorithms::data_structures::MaxHeap;
-    /// 
+    ///
     /// let mut heap = MaxHeap::<i32>::new();
-    /// 
+    ///
     /// assert_eq!(heap.is_empty(), true);
-    /// 
+    ///
     /// heap.insert(1);
-    /// 
+    ///
     /// assert_eq!(heap.is_empty(), false);
     /// ```
     pub fn is_empty(&self) -> bool {
@@ -196,19 +194,19 @@ impl<T: Ord + Copy> MaxHeap<T> {
     }
 
     /// Returns the size of the `MaxHeap`.
-    /// 
+    ///
     /// # Examples:
-    /// 
+    ///
     /// ```rust
     /// use rust_algorithms::data_structures::MaxHeap;
-    /// 
-    /// 
+    ///
+    ///
     /// let mut heap = MaxHeap::<i32>::new();
-    /// 
+    ///
     /// assert_eq!(heap.size(), 0);
-    /// 
+    ///
     /// heap.insert(1);
-    /// 
+    ///
     /// assert_eq!(heap.size(), 1);
     /// ```
     pub fn size(&self) -> usize {
@@ -216,23 +214,23 @@ impl<T: Ord + Copy> MaxHeap<T> {
     }
 
     /// Gets the maximum key in the `MaxHeap`.
-    /// 
+    ///
     /// # Returns:
-    /// 
+    ///
     /// The maximum key in the `MaxHeap`.
-    /// 
+    ///
     /// # Examples:
-    /// 
+    ///
     /// ```rust
     /// use rust_algorithms::data_structures::MaxHeap;
-    /// 
+    ///
     /// let mut heap = MaxHeap::<i32>::new();
     /// heap.insert(1);
     /// heap.insert(2);
     /// heap.insert(3);
     /// heap.insert(4);
     /// heap.insert(5);
-    /// 
+    ///
     /// assert_eq!(heap.peek(), 5);
     /// ```
     pub fn peek(&self) -> T {
@@ -240,27 +238,27 @@ impl<T: Ord + Copy> MaxHeap<T> {
     }
 
     /// Deletes the maximum key in the `MaxHeap`.
-    /// 
+    ///
     /// # Returns:
-    /// 
+    ///
     /// The maximum key in the `MaxHeap`.
-    /// 
+    ///
     /// # Panics:
-    /// 
+    ///
     /// If the heap is empty.
-    /// 
+    ///
     /// # Examples:
-    /// 
+    ///
     /// ```rust
     /// use rust_algorithms::data_structures::MaxHeap;
-    /// 
+    ///
     /// let mut heap = MaxHeap::<i32>::new();
     /// heap.insert(1);
     /// heap.insert(2);
     /// heap.insert(3);
     /// heap.insert(4);
     /// heap.insert(5);
-    /// 
+    ///
     /// assert_eq!(heap.del_max(), 5);
     /// assert_eq!(heap.del_max(), 4);
     /// assert_eq!(heap.del_max(), 3);
@@ -272,28 +270,28 @@ impl<T: Ord + Copy> MaxHeap<T> {
     }
 
     /// Returns an iterator over the MaxHeap.
-    /// 
+    ///
     /// # Returns:
-    /// 
+    ///
     /// An iterator over the heap. The iterator will yield the keys in an arbitrary order.
-    /// 
+    ///
     /// # Examples:
-    /// 
-/// ```rust
+    ///
+    /// ```rust
     /// use rust_algorithms::data_structures::MaxHeap;
-    /// 
+    ///
     /// let mut heap = MaxHeap::<i32>::new();
     /// heap.insert(1);
     /// heap.insert(2);
     /// heap.insert(3);
     /// heap.insert(4);
     /// heap.insert(5);
-    /// 
+    ///
     /// let mut heap_iter = heap.iter();
-    /// 
+    ///
     /// heap_iter.sort();
     /// let mut counter = 1;
-    /// 
+    ///
     /// for i in heap_iter.iter() {
     ///    assert_eq!(*i, counter);
     ///   counter += 1;
@@ -305,16 +303,15 @@ impl<T: Ord + Copy> MaxHeap<T> {
 
 /// MinHeap implementation.
 impl<T: Ord + Copy> MinHeap<T> {
-
     /// Creates a new `MinHeap`` instance.
-    /// 
+    ///
     /// # Examples:
-    /// 
+    ///
     /// ```rust
     /// use rust_algorithms::data_structures::MinHeap;
-    /// 
+    ///
     /// let heap = MinHeap::<i32>::new();
-    /// 
+    ///
     /// assert_eq!(heap.is_empty(), true);
     /// assert_eq!(heap.size(), 0);
     /// ```
@@ -323,23 +320,23 @@ impl<T: Ord + Copy> MinHeap<T> {
     }
 
     /// Inserts a new key into the `MinHeap`.
-    /// 
+    ///
     /// # Arguments:
-    /// 
+    ///
     /// * `key` - The key to be inserted into the `MinHeap`.
-    /// 
+    ///
     /// # Examples:
-    /// 
+    ///
     /// ```rust
     /// use rust_algorithms::data_structures::MinHeap;
-    /// 
+    ///
     /// let mut heap = MinHeap::<i32>::new();
     /// heap.insert(1);
     /// heap.insert(2);
     /// heap.insert(3);
     /// heap.insert(4);
     /// heap.insert(5);
-    /// 
+    ///
     /// assert_eq!(heap.is_empty(), false);
     /// assert_eq!(heap.size(), 5);
     /// ```
@@ -348,18 +345,18 @@ impl<T: Ord + Copy> MinHeap<T> {
     }
 
     /// Checks if the `MinHeap` is empty.
-    /// 
+    ///
     /// # Examples:
-    /// 
+    ///
     /// ```rust
     /// use rust_algorithms::data_structures::MinHeap;
-    /// 
+    ///
     /// let mut heap = MinHeap::<i32>::new();
-    /// 
+    ///
     /// assert_eq!(heap.is_empty(), true);
-    /// 
+    ///
     /// heap.insert(1);
-    /// 
+    ///
     /// assert_eq!(heap.is_empty(), false);
     /// ```
     pub fn is_empty(&self) -> bool {
@@ -367,18 +364,18 @@ impl<T: Ord + Copy> MinHeap<T> {
     }
 
     /// Returns the size of the `MinHeap`.
-    /// 
+    ///
     /// # Examples:
-    /// 
+    ///
     /// ```rust
     /// use rust_algorithms::data_structures::MinHeap;
-    /// 
+    ///
     /// let mut heap = MinHeap::<i32>::new();
-    /// 
+    ///
     /// assert_eq!(heap.size(), 0);
-    /// 
+    ///
     /// heap.insert(1);
-    /// 
+    ///
     /// assert_eq!(heap.size(), 1);
     /// ```
     pub fn size(&self) -> usize {
@@ -386,52 +383,52 @@ impl<T: Ord + Copy> MinHeap<T> {
     }
 
     /// Gets the minimum key in the `MinHeap`.
-    /// 
+    ///
     /// # Returns:
-    /// 
+    ///
     /// The minimum key in the `MinHeap`.
-    /// 
+    ///
     /// # Examples:
-    /// 
+    ///
     /// ```rust
     /// use rust_algorithms::data_structures::MinHeap;
-    /// 
+    ///
     /// let mut heap = MinHeap::<i32>::new();
     /// heap.insert(1);
     /// heap.insert(2);
     /// heap.insert(3);
     /// heap.insert(4);
     /// heap.insert(5);
-    /// 
+    ///
     /// assert_eq!(heap.peek(), 1);
-    /// 
+    ///
     /// ```
     pub fn peek(&self) -> T {
         self.heap.peek()
     }
 
     /// Deletes the minimum key in the `MinHeap`.
-    /// 
+    ///
     /// # Returns:
-    /// 
+    ///
     /// The minimum key in the `MinHeap`.
-    /// 
+    ///
     /// # Panics:
-    /// 
+    ///
     /// If the heap is empty.
-    /// 
+    ///
     /// # Examples:
-    /// 
+    ///
     /// ```rust
     /// use rust_algorithms::data_structures::MinHeap;
-    /// 
+    ///
     /// let mut heap = MinHeap::<i32>::new();
     /// heap.insert(1);
     /// heap.insert(2);
     /// heap.insert(3);
     /// heap.insert(4);
     /// heap.insert(5);
-    /// 
+    ///
     /// assert_eq!(heap.del_min(), 1);
     /// assert_eq!(heap.del_min(), 2);
     /// assert_eq!(heap.del_min(), 3);
@@ -443,28 +440,28 @@ impl<T: Ord + Copy> MinHeap<T> {
     }
 
     /// Returns an iterator over the MinHeap.
-    /// 
+    ///
     /// # Returns:
-    /// 
+    ///
     /// An iterator over the heap. The iterator will yield the keys in an arbitrary order.
-    /// 
+    ///
     /// # Examples:
-    /// 
+    ///
     /// ```rust
     /// use rust_algorithms::data_structures::MinHeap;
-    /// 
+    ///
     /// let mut heap = MinHeap::<i32>::new();
     /// heap.insert(1);
     /// heap.insert(2);
     /// heap.insert(3);
     /// heap.insert(4);
     /// heap.insert(5);
-    /// 
+    ///
     /// let mut heap_iter = heap.iter();
-    /// 
+    ///
     /// heap_iter.sort();
     /// let mut counter = 1;
-    /// 
+    ///
     /// for i in heap_iter.iter() {
     ///    assert_eq!(*i, counter);
     ///   counter += 1;
